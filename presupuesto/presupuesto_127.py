@@ -24,16 +24,13 @@ DATOS = {
     "email": "",                                # pendiente
     "web": "www.bravapool.com",
     "iva": 21,
+    "precio_cerrado": 22578.00,                 # base imponible acordada (sin IVA)
     "pagos": [(20, "A la aceptación del presupuesto (reserva de obra y pedido de materiales)"),
               (30, "Al terminar la Fase 3, antes de impermeabilizar"),
               (30, "Al terminar la Fase 4, antes de colocar la cerámica"),
-              (20, "Retención final: tras la Fase 8, con la piscina llena y funcionando")],
+              (20, "Retención final: a la entrega de la obra terminada")],
 }
 
-# código -> precio unitario (€). Solo constan los precios facilitados en el presupuesto 127 original.
-PRECIOS = {"4.1": 97.50, "5.1": 34.48, "5.2": 68.86}
-
-# (código, título, cantidad, unidad, [viñetas])
 FASES = [
  ("1", "Inspección, referencias y vaciado", [
   ("1.1", "Inspección inicial y estado previo", 1, "PA", [
@@ -72,53 +69,39 @@ FASES = [
     "Replanteo con nivel láser de la cota del labio de rebose a partir de las referencias de la Fase 1.",
     "Regularización del muro de rebose para que quede nivelado en los dos tramos del canal (7,50 m y 4,00 m), con una tolerancia máxima de ±2 mm."])]),
  ("4", "Impermeabilización · sistema DryPool de Grupo Puma", [
-  ("4.1", "Suministro de mortero impermeabilizante DryPool", 10, "saco", [
-    "Mortero bicomponente semiflexible de Grupo Puma para impermeabilización de piscinas con presión de agua positiva.",
-    "Producto y consumo definitivos según la ficha técnica del sistema vigente."]),
-  ("4.2", "Aplicación de la impermeabilización", 105, "m²", [
-    "Humectación del soporte.",
-    "Refuerzo de esquinas, juntas y puntos singulares.",
-    "Aplicación en dos capas con malla antialcalina de refuerzo entre ellas, en el vaso, los bancos, la escalera y el canal.",
+  ("4.1", "Suministro y aplicación del sistema de impermeabilización DryPool", 105, "m²", [
+    "Suministro del mortero impermeabilizante bicomponente semiflexible DryPool de Grupo Puma y de la malla antialcalina de refuerzo, según ficha técnica del sistema.",
+    "Humectación del soporte y refuerzo de esquinas, juntas y puntos singulares.",
+    "Aplicación en dos capas con malla entre ellas, en el vaso, los bancos, la escalera y el canal.",
     "Curado según las indicaciones del fabricante antes de pasar a la fase siguiente."])]),
  ("5", "Revestimiento cerámico Rosa Gres", [
-  ("5.1", "Suministro de cerámica Rosa Gres 30 × 60 cm", 112, "m²", [
-    "Porcelánico apto para inmersión permanente.",
-    "Vaso de 7,50 × 4,00 m con paredes de 1,70 m y canal en L con paredes de 80 cm.",
-    "112 m² frente a 105 m² de superficie: incluye reserva por cortes y roturas."]),
-  ("5.2", "Suministro de piezas de peldaño Rosa Gres", 35, "ud", [
-    "Pieza antideslizante a juego con el revestimiento para el banco de 7,50 m, el banco de 4,00 m y la escalera de 6 peldaños."]),
-  ("5.3", "Cemento cola para piscinas", 1, "PA", [
-    "Adhesivo cementoso C2 TE S1 apto para inmersión permanente."]),
-  ("5.4", "Colocación de la cerámica en vaso y canal", 105, "m²", [
-    "Replanteo de piezas y colocación con doble encolado.",
-    "Cortes y remates en focos, boquillas, sumidero y esquinas."]),
-  ("5.5", "Colocación de peldaños en bancos y escalera", 35, "ud", [
-    "Colocación de las piezas de peldaño con cortes y remates."])]),
+  ("5.1", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm y cemento cola para piscinas", 105, "m²", [
+    "Porcelánico apto para inmersión permanente, con reserva por cortes y roturas (112 m² suministrados).",
+    "Cemento cola C2 TE S1 apto para inmersión permanente, con doble encolado.",
+    "Replanteo de piezas y colocación en vaso y canal, con cortes y remates en focos, boquillas, sumidero y esquinas."]),
+  ("5.2", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
+    "Pieza antideslizante a juego con el revestimiento para el banco de 7,50 m, el banco de 4,00 m y la escalera de 6 peldaños.",
+    "Colocación con cortes y remates."])]),
  ("6", "Coronación y labio de rebose", [
-  ("6.1", "Suministro de coronación y piezas de rebose", 37, "ml", [
-    "Coronación para el borde de la piscina y el muro exterior del canal.",
-    "Pieza especial de labio de rebose para los tramos de 7,50 m y 4,00 m.",
-    "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres."]),
-  ("6.2", "Colocación nivelada de la coronación", 37, "ml", [
-    "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo.",
-    "Nivelación pieza a pieza del labio de rebose, con tolerancia máxima de ±2 mm."]),
-  ("6.3", "Prueba de lámina de agua", 1, "PA", [
+  ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
+    "Coronación para el borde de la piscina y el muro exterior del canal, y pieza especial de labio de rebose para los tramos de 7,50 m y 4,00 m.",
+    "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres.",
+    "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm."]),
+  ("6.2", "Prueba de lámina de agua", 1, "PA", [
     "Antes de rejuntar, llenado hasta que la piscina desborda.",
     "Comprobación de que el agua cae de forma uniforme en toda la longitud del rebose.",
     "Corrección de cualquier punto que no desborde igual."])]),
  ("7", "Rejuntado", [
-  ("7.1", "Rejuntado de cerámica, peldaños y coronación", 105, "m²", [
-    "Rejuntado con mortero de juntas apto para inmersión permanente (tipo y color a confirmar por escrito).",
+  ("7.1", "Suministro y aplicación de rejuntado de cerámica, peldaños y coronación", 105, "m²", [
+    "Mortero de juntas apto para inmersión permanente (tipo y color a confirmar por escrito).",
     "Limpieza de restos de junta."])]),
- ("8", "Llenado, pruebas y entrega", [
-  ("8.1", "Prueba de estanqueidad y llenado", 1, "PA", [
-    "Llenado controlado de la piscina.",
-    "Comprobación durante varios días de que el nivel del agua se mantiene estable."]),
-  ("8.2", "Puesta en marcha y entrega", 1, "PA", [
-    "Puesta en marcha de la depuración existente y del rebose del desbordante.",
-    "Limpieza final de obra y retirada de protecciones.",
-    "Entrega de la piscina llena y funcionando."])]),
+ ("8", "Entrega", [
+  ("8.1", "Revisión final y entrega de la obra", 1, "PA", [
+    "Revisión de acabados con el cliente y acta de entrega.",
+    "Limpieza final de obra y retirada de protecciones."])]),
 ]
+
+PROMO = ("Regalo promocional: equipo de electrólisis salina", "Equipo de sal para la piscina, incluido sin coste dentro de esta promoción. Marca, modelo e instalación: a confirmar por escrito.")
 
 e = html.escape
 def n2(x): return f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
@@ -126,14 +109,11 @@ def eur(x): return n2(x) + " €"
 def qty(x): return (f"{x:g}").replace(".", ",")
 
 # ---------- cálculo ----------
-partidas = [(c, t, q, u, b) for _, _, ps in FASES for (c, t, q, u, b) in ps]
-imp = {c: q * PRECIOS[c] for c, _, q, _, _ in partidas if c in PRECIOS}
-sin_precio = [c for c, *_ in partidas if c not in PRECIOS]
-parcial = bool(sin_precio)
-sub = {f: sum(imp.get(c, 0) for c, *_ in ps) for f, _, ps in FASES}
-base = round(sum(sub.values()), 2)
+parcial = False
+base = round(DATOS["precio_cerrado"], 2)
 iva_imp = round(base * DATOS["iva"] / 100, 2)
 total = round(base + iva_imp, 2)
+partidas = [x for _, _, ps in FASES for x in ps]
 
 def pagos():
     out, acc = [], 0.0
@@ -142,7 +122,7 @@ def pagos():
         acc += im; out.append((pct, txt, im))
     return out
 PAGOS = pagos()
-assert abs(sum(p[2] for p in PAGOS) - total) < 0.005 and sum(p[0] for p in DATOS["pagos"]) == 100
+assert abs(sum(x[2] for x in PAGOS) - total) < 0.005 and sum(x[0] for x in DATOS["pagos"]) == 100
 
 # ---------- piezas de página ----------
 paginas = []
@@ -163,7 +143,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <p>Estimado/a cliente:</p>
 <p>Le presentamos nuestra propuesta para la rehabilitación integral de su piscina desbordante en {e(DATOS["direccion"])}. Este documento recoge, por escrito y con claridad, la obra: los trabajos, los materiales, los plazos, la forma de pago y las garantías.</p>
 <p>La piscina pierde agua. Para resolverlo desde el origen retiraremos toda la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos el vaso y el canal desbordante con el sistema DryPool de Grupo Puma, un mortero bicomponente semiflexible pensado para soportar la presión del agua. Después colocamos cerámica nueva Rosa Gres de 30 × 60 cm, piezas de peldaño antideslizantes en los bancos y la escalera, y una coronación nueva con el labio del desbordante perfectamente nivelado.</p>
-<p>Cada fase se revisa antes de empezar la siguiente y le entregamos la piscina llena y funcionando.</p>
+<p>Cada fase se revisa antes de empezar la siguiente y le entregamos la obra terminada.</p>
 <p>Quedamos a su disposición para resolver cualquier duda o ajustar la propuesta a lo que necesite.</p>
 <p class="firma"><b>{e(DATOS["contacto"])}</b><br>Brava Pool</p>
 <h2>Su piscina en cifras</h2><div class="cols">{kv(cifras_i)}{kv(cifras_d)}</div>
@@ -173,7 +153,8 @@ pagina("Gracias por confiar en nosotros", f'''
 <div><b>Plazos por escrito</b>Planificación por fases desde el primer día y plazo de ejecución indicado en este documento.</div>
 <div><b>Pagos por hitos</b>Cada pago se vincula a una fase terminada y el 20 % final queda retenido hasta la entrega.</div>
 <div><b>Garantía por escrito</b>3 años en el revestimiento y 2 años en los trabajos y la mano de obra, además de las garantías legales.</div>
-<div><b>Obra limpia</b>Retiramos todos los escombros a un punto limpio autorizado y entregamos la piscina y su entorno limpios.</div></div>''')
+<div><b>Obra limpia</b>Retiramos todos los escombros a un punto limpio autorizado y entregamos la piscina y su entorno limpios.</div>
+<div><b>Regalo promocional</b>Equipo de electrólisis salina incluido sin coste en este presupuesto.</div></div>''')
 
 fotos = [("foto_terraza.jpg", "Vista general desde la terraza", "Piscina desbordante en ladera, con vistas al valle, coronación de piezas de gran formato y rejilla lineal en el pavimento."),
          ("foto_canal.jpg", "Canal de desbordamiento", "Canal perimetral junto al lado del valle, con su muro exterior y coronación."),
@@ -250,7 +231,7 @@ pagina("Sistema constructivo y materiales", f'''<p class="lead">La estanqueidad 
 sem = 12  # medias semanas
 gantt = [("Fase 1 · Inspección, referencias y vaciado", 1, 1, ""), ("Fase 2 · Demoliciones", 2, 3, ""), ("Fase 3 · Reparación y preparación del soporte", 5, 1, ""),
          ("Fase 4 · Impermeabilización DryPool y curado", 6, 1, "cur"), ("Fase 5 · Revestimiento cerámico", 8, 2, ""), ("Fase 6 · Coronación y labio de rebose", 10, 1, ""),
-         ("Fase 7 · Rejuntado", 11, 1, ""), ("Fase 8 · Llenado, pruebas y entrega", 12, 1, "")]
+         ("Fase 7 · Rejuntado", 11, 1, ""), ("Fase 8 · Entrega", 12, 1, "")]
 # curado de la fase 4: media semana adicional tras la aplicación
 rows = ""
 for n, s, w, k in gantt:
@@ -263,7 +244,7 @@ for n, s, w, k in gantt:
 pm = [("20 %", 1), ("30 %", 5), ("30 %", 6), ("20 %", 12)]
 pagos_row = ''.join(f'<span style="left:{(s-1)/sem*100:.3f}%">{p}</span>' for p, s in pm)
 wk = ''.join(f'<span>S{i}</span>' for i in range(1, 7))
-pagos_tabla = ''.join(f'<tr><td class="pc">{pct} %</td><td>{e(txt)}</td><td class="n">{eur(im) if not parcial else "—"}</td></tr>' for pct, txt, im in PAGOS)
+pagos_tabla = ''.join(f'<tr><td class="pc">{pct} %</td><td>{e(txt)}</td><td class="n">{eur(im)}</td></tr>' for pct, txt, im in PAGOS)
 pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 a 6 semanas desde el inicio de obra, a confirmar tras la inspección inicial. Cada fase se verifica antes de empezar la siguiente.</p>
 <table class="gt"><thead><tr><th style="width:62mm">Fase</th><th><div class="wk">{wk}</div></th></tr></thead><tbody>{rows}
 <tr class="pg"><td>Pagos</td><td class="gc"><div>{pagos_row}</div></td></tr></tbody></table>
@@ -274,40 +255,40 @@ pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 
 
 # 5 · descripción de trabajos (se pagina a mano por fases)
 def fase_html(f, titulo, ps):
-    st = eur(sub[f]) if sub[f] else "—"
-    r = f'<tr class="fase"><td colspan="5"><span>{int(f):02d}</span>FASE {f} · {e(titulo).upper()}</td><td class="n">{st}</td></tr>'
+    r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(titulo).upper()}</td></tr>'
     for c, t, q, u, b in ps:
-        pu = n2(PRECIOS[c]) + " €" if c in PRECIOS else "—"
-        im = n2(imp[c]) + " €" if c in imp else "—"
         lis = ''.join(f'<li>{e(x)}</li>' for x in b)
-        r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(t)}</b><ul>{lis}</ul></td><td class="n">{qty(q)}</td><td class="c">{u}</td><td class="n">{pu}</td><td class="n">{im}</td></tr>'
+        r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(t)}</b><ul>{lis}</ul></td><td class="n">{qty(q)}</td><td class="c">{u}</td></tr>'
     return r
-cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:13mm">Cant.</th><th style="width:11mm">Ud.</th><th style="width:21mm">Precio</th><th style="width:24mm">Importe</th></tr></thead>'
-grupos = [["1", "2"], ["3", "4"], ["5", "6"], ["7", "8"]]
+cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:15mm">Cant.</th><th style="width:12mm">Ud.</th></tr></thead>'
+grupos = [["1", "2"], ["3", "4"], ["5", "6", "7", "8"]]
 fdict = {f: (t, ps) for f, t, ps in FASES}
 for gi, g in enumerate(grupos):
     body = ''.join(fase_html(f, *fdict[f]) for f in g)
-    pagina("Descripción de los trabajos" + ("" if gi == 0 else " (cont.)"), f'<table class="desc">{cab}<tbody>{body}</tbody></table>' + ('<p class="note">PA = partida alzada. Las mediciones son estimadas y se ajustan con las medidas tomadas en obra. «—» indica partida pendiente de valorar.</p>' if gi == len(grupos) - 1 else ''))
+    if gi == len(grupos) - 1:
+        body += f'<tr class="fase promo"><td colspan="4"><span>+</span>PROMOCIÓN</td></tr><tr class="pt"><td class="cod">R.1</td><td><b>{e(PROMO[0])}</b><ul><li>{e(PROMO[1])}</li></ul></td><td class="n">1</td><td class="c">ud</td></tr>'
+    pagina("Descripción de los trabajos" + ("" if gi == 0 else " (cont.)"), f'<table class="desc">{cab}<tbody>{body}</tbody></table>' + ('<p class="note">PA = partida alzada. Las mediciones son estimadas y se ajustan con las medidas tomadas en obra. El precio es cerrado e incluye materiales y mano de obra de todas las partidas.</p>' if gi == len(grupos) - 1 else ''))
 
 # 6 · resumen
-res = ''.join(f'<tr><td class="rn">{int(f):02d}</td><td>Fase {f} · {e(t)}</td><td class="n">{eur(sub[f]) if sub[f] else "—"}</td></tr>' for f, t, _ in FASES)
-aviso = f'''<div class="alert"><b>Valoración parcial.</b> {len(sin_precio)} de {len(partidas)} partidas todavía no tienen precio (mano de obra, adhesivo, coronación, rejuntado y otras). Las cifras de esta página corresponden solo a las partidas valoradas y no constituyen el precio final. El total definitivo se fijará al completar la valoración.</div>''' if parcial else '<p class="lead">Precio cerrado con todos los materiales, la mano de obra, el transporte y la retirada de escombros incluidos.</p>'
-pagina("Resumen de la inversión", f'''{aviso}
-<table class="eco res"><thead><tr><th style="width:14mm">Cap.</th><th>Concepto</th><th style="width:34mm;text-align:right">Importe</th></tr></thead><tbody>{res}
-<tr class="sub"><td colspan="2">Base imponible{" (parcial)" if parcial else ""}</td><td class="n">{eur(base)}</td></tr>
+res = ''.join(f'<tr><td class="rn">{int(f):02d}</td><td>Fase {f} · {e(t)}</td><td class="n">Incluida</td></tr>' for f, t, _ in FASES)
+pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos los materiales, la mano de obra, el transporte y la retirada de escombros incluidos.</p>
+<table class="eco res"><thead><tr><th style="width:14mm">Cap.</th><th>Concepto</th><th style="width:34mm;text-align:right">Estado</th></tr></thead><tbody>{res}
+<tr><td class="rn">+</td><td>{e(PROMO[0])}</td><td class="n">Regalo</td></tr>
+<tr class="sub"><td colspan="2">Base imponible</td><td class="n">{eur(base)}</td></tr>
 <tr><td colspan="2">IVA {DATOS["iva"]} %</td><td class="n">{eur(iva_imp)}</td></tr>
-<tr class="tot"><td colspan="2">{"Total valorado hasta ahora (IVA incl.)" if parcial else "Total presupuesto (IVA incl.)"}</td><td class="n">{eur(total)}</td></tr></tbody></table>
+<tr class="tot"><td colspan="2">Total presupuesto (IVA incl.)</td><td class="n">{eur(total)}</td></tr></tbody></table>
+<div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala un equipo de electrólisis salina para su piscina. Marca, modelo e instalación se confirmarán por escrito.</div>
 <p class="note">El tipo de IVA aplicable depende de las condiciones de la vivienda y de la obra; se confirma al cerrar el presupuesto.</p>''')
 
 # 7 · garantías
 cl = [("Garantía en todos nuestros trabajos", ["Al tratarse de una reforma, Brava Pool garantiza el nuevo revestimiento durante 3 años y todos los trabajos realizados y la mano de obra durante 2 años. Estas garantías comerciales se suman a las garantías legales que correspondan según la normativa vigente.", "El servicio técnico y las reparaciones en garantía se atienden durante todo el año, sin limitación de temporada. Ante cualquier incidencia comunicada por teléfono, WhatsApp o correo electrónico, respondemos por escrito en un plazo máximo de 48 horas."]),
-      ("Control de calidad en cada fase", ["Revisamos y fotografiamos el soporte tras la demolición, la continuidad de la impermeabilización y los puntos singulares, la colocación y el rejuntado de la cerámica. Antes de la entrega hacemos un llenado controlado y comprobamos que el nivel del agua se mantiene estable."]),
+      ("Control de calidad en cada fase", ["Revisamos y fotografiamos el soporte tras la demolición, la continuidad de la impermeabilización y los puntos singulares, la colocación y el rejuntado de la cerámica. Antes de la entrega hacemos una revisión final de acabados con el cliente."]),
       ("Compromiso de obra limpia", ["El precio incluye la retirada de todos los escombros de la obra, su transporte y su depósito en un punto limpio autorizado.", "Durante la obra protegemos las zonas de paso y el jardín, y al terminar retiramos todos los restos de material para entregar la piscina y su entorno limpios."]),
-      ("Pagos por hitos y retención final", ["Los pagos se vinculan al avance de la obra: el primero reserva la obra y el pedido de materiales y los siguientes se abonan al terminar cada hito indicado. El último 20 % queda retenido hasta la entrega de la piscina completamente llena, con el agua tratada y los equipos en marcha."])]
+      ("Pagos por hitos y retención final", ["Los pagos se vinculan al avance de la obra: el primero reserva la obra y el pedido de materiales y los siguientes se abonan al terminar cada hito indicado. El último 20 % queda retenido hasta la entrega de la obra terminada."])]
 pagina("Garantías y compromisos", ''.join(f'<div class="clau"><span>CLÁUSULA {i+1}</span><h3>{e(t)}</h3>{"".join(f"<p>{e(x)}</p>" for x in ps)}</div>' for i, (t, ps) in enumerate(cl)))
 
 # 8 · condiciones y aceptación
-noinc = ["Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
+noinc = ["Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Prueba de estanqueidad y llenado, agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
 cond = ["Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El modelo y el color de la cerámica, de la coronación y de las juntas se confirmarán por escrito antes de su pedido.", "Las mediciones son estimadas y se ajustarán con las medidas tomadas en obra.", "El cliente facilitará el acceso a la obra y el suministro de agua y luz durante los trabajos.", f'Este presupuesto es válido hasta el {DATOS["valido_hasta"]}.']
 imp_acept = f'por un importe total de <b>{eur(total)}</b> IVA incluido' if not parcial else 'por el importe total que se fije en la valoración definitiva: <i class="blk"></i> (IVA incl.)'
 pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in noinc)}</ul></div><div><h2>Condiciones</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in cond)}</ul></div></div>
@@ -360,7 +341,7 @@ table{border-collapse:collapse;width:100%}
 .alert{border-left:1.2mm solid #c9822b;background:#fbf3e6;padding:3mm 4mm;margin-bottom:5mm;font-size:8.8pt;color:#5a3d0f}
 .desc{font-size:8.2pt}.desc th{text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding:1.5mm 1mm;border-bottom:.35mm solid var(--ln)}
 .desc td{padding:1.8mm 1mm;vertical-align:top}.desc .fase td{background:var(--navy);color:#fff;font-weight:700;letter-spacing:.06em;padding:2.2mm 2.5mm;font-size:7.8pt}.desc .fase td.n{font-size:8.4pt}
-.desc .fase span{color:#8fd0e8;margin-right:3mm}.desc .pt td{border-bottom:.2mm solid var(--ln)}.desc .cod{color:var(--mut)}
+.desc .fase.promo td{background:#c9822b}.desc .fase span{color:#8fd0e8;margin-right:3mm}.desc .pt td{border-bottom:.2mm solid var(--ln)}.desc .cod{color:var(--mut)}
 .desc ul{margin-top:.8mm;font-size:7.9pt;color:#44505d}.desc .pt{page-break-inside:avoid}
 .gt{font-size:8pt;margin:3mm 0}.gt th{border-bottom:.35mm solid var(--navy);text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding-bottom:1.5mm}
 .gt td{padding:2.2mm 1.5mm 2.2mm 0;border-bottom:.2mm solid var(--ln);vertical-align:middle}
@@ -395,4 +376,4 @@ chrome = next((p for p in ["/opt/pw-browsers/chromium", "chromium", "google-chro
 if not chrome:
     sys.exit("HTML generado; ábralo en Chrome e imprima a PDF (A4, sin márgenes, gráficos de fondo).")
 subprocess.run([chrome, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={op}", oh.as_uri()], check=True, stderr=subprocess.DEVNULL)
-print("OK", op, "| base", eur(base), "| IVA", eur(iva_imp), "| total", eur(total), "| sin precio:", len(sin_precio), "partidas |", N, "páginas")
+print("OK", op, "| base", eur(base), "| IVA", eur(iva_imp), "| total", eur(total), "|", N, "páginas")
