@@ -574,7 +574,7 @@ if CARTA:
     _cur = ''.join(f'<path d="M{20+k*7} {150-k*10} C{60+k*5} {80-k*6},{150-k*6} {40+k*4},{200-k*9} {110-k*5} S{170-k*8} {190-k*6},{100-k*4} {176-k*8} S{10+k*6} {200-k*4},{20+k*7} {150-k*10}Z" fill="none" stroke="#b8a98a" stroke-width=".9"/>' for k in range(1, 13))
     _svg = urllib.parse.quote(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">{_cur}</svg>')
     CSS += """
-:root{--navy:#0b2a45;--cy:#1f8aa0;--bg:#efe7d6;--mut:#6b6455;--ln:#d9cfb8;--terra:#b8603c;--sand:#f8f3e9}
+:root{--navy:#0b2a45;--cy:#1f8aa0;--bg:#efe7d6;--mut:#6b6455;--ln:#d9cfb8;--terra:#b8603c;--sand:#fff}
 body{color:#2a2f36}
 .page{background:var(--sand)}
 .page>header{left:16mm;right:16mm;top:12mm;border-bottom:.3mm solid var(--navy)}
@@ -611,7 +611,7 @@ h3{color:var(--navy)}
 .kv td:first-child,.leyenda td:first-child{color:var(--terra)}
 .gc i{background:var(--navy)}.pg .gc span{background:var(--terra)}.pg td{color:var(--terra)}
 .mk2,.pin{background:var(--navy)}
-.cover3{background:#f8f3e9;color:#0b2a45}
+.cover3{background:#fff;color:#0b2a45}
 .cover3 .top{position:absolute;left:0;right:0;top:0;height:640px;background:url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 78%,0 100%)}
 .cover3 .top::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35))}
 .cover3 .line{position:absolute;left:0;right:0;top:0;height:660px;background:#b8603c;clip-path:polygon(0 100%,100% 78%,100% 79.4%,0 101.4%);z-index:2}
