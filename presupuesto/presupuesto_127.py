@@ -34,7 +34,7 @@ DATOS = {
 FASES = [
  ("1", "Inspección, referencias y vaciado", [
   ("1.1", "Inspección inicial y estado previo", 1, "PA", [
-    "Revisión del vaso, del canal desbordante en L, de la escalera, de los bancos y de los pasamuros.",
+    "Revisión del vaso, del canal desbordante en L, de la escalera, del banco y de los pasamuros.",
     "Reportaje fotográfico del estado previo, que se entrega al cliente."]),
   ("1.2", "Toma de referencia de la línea de flotación", 1, "PA", [
     "Con la piscina aún llena y desbordando, se marca el nivel real del agua en todo el perímetro.",
@@ -49,7 +49,7 @@ FASES = [
     "Retirada de la coronación del borde de la piscina, del labio de rebose y del muro exterior del canal.",
     "Si es imprescindible para extraer la coronación, levantado y reposición de las piezas de pavimento colindantes y de la rejilla lineal de la terraza (condicionado a la inspección; se valora aparte)."]),
   ("2.2", "Desmontaje de la cerámica", 105, "m²", [
-    "Retirada de toda la cerámica del vaso, los bancos, la escalera y el canal desbordante.",
+    "Retirada de toda la cerámica del vaso, el banco, la escalera y el canal desbordante.",
     "Retirada de los restos de cemento cola hasta dejar el soporte limpio."]),
   ("2.3", "Eliminación de la impermeabilización antigua", 105, "m²", [
     "Picado y retirada de la impermeabilización deteriorada hasta llegar a una base sana."]),
@@ -59,7 +59,7 @@ FASES = [
   ("3.1", "Saneado y lijado del vaso y del canal", 1, "PA", [
     "Limpieza a fondo y eliminación de partes sueltas.",
     "Lijado del soporte y reparación de fisuras y coqueras con el mortero tixotrópico de alta resistencia Morcemseal Todo 1 R4 de Grupo Puma.",
-    "Regularización de paredes, fondo, bancos y peldaños."]),
+    "Regularización de paredes, fondo, banco y peldaños."]),
   ("3.2", "Revisión de pasamuros y puntos singulares", 1, "PA", [
     "Revisión y sellado de los focos, las boquillas de impulsión, el sumidero de fondo y los desagües del canal, que son los puntos donde suelen producirse las fugas, con banda butílica Bandtec de Grupo Puma en los puntos críticos.",
     "Número y posición de cada elemento: se confirman en la inspección inicial."]),
@@ -75,8 +75,8 @@ FASES = [
     "Aplicación en dos capas con malla entre ellas. Curado según las indicaciones del fabricante antes de pasar a la fase siguiente."]),
   ("4.2", "Suministro y aplicación del sistema DryPool en el canal desbordante", 27, "m²", [
     "Mismo sistema, en dos capas con malla, en el fondo y las paredes del canal, con refuerzo en el encuentro con el vaso y en la coronación."]),
-  ("4.3", "Suministro y aplicación del sistema DryPool en bancos y escalera", 9, "m²", [
-    "Mismo sistema, en dos capas con malla, en bancos, peldaños y encuentros con el vaso."])]),
+  ("4.3", "Suministro y aplicación del sistema DryPool en banco y escalera", 9, "m²", [
+    "Mismo sistema, en dos capas con malla, en el banco, los peldaños y los encuentros con el vaso."])]),
  ("5", "Revestimiento cerámico Rosa Gres", [
   ("5.1", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en solera y paredes del vaso", 69, "m²", [
     "Porcelánico apto para inmersión permanente, con reserva por cortes y roturas (112 m² suministrados en total para toda la obra).",
@@ -84,10 +84,10 @@ FASES = [
     "Replanteo de piezas y colocación, con cortes y remates en focos, boquillas, sumidero y esquinas."]),
   ("5.2", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en el canal desbordante", 27, "m²", [
     "Misma cerámica y cemento cola, en el fondo y las paredes del canal, con las pendientes definidas en la fase 3."]),
-  ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en bancos y escalera", 9, "m²", [
-    "Misma cerámica y cemento cola, en bancos y huellas y contrahuellas de la escalera."]),
+  ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en banco y escalera", 9, "m²", [
+    "Misma cerámica y cemento cola, en el banco y en huellas y contrahuellas de la escalera."]),
   ("5.4", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
-    "Pieza Rosa Gres ref. L98, de porcelánico antideslizante (97,9 × 31,7 × 3,8 cm), a juego con el revestimiento: forma la huella y el canto de los peldaños y del borde de los bancos de 7,50 m y 4,00 m y de la escalera de 6 peldaños, y da agarre en zona mojada.",
+    "Pieza Rosa Gres ref. L98, de porcelánico antideslizante (97,9 × 31,7 × 3,8 cm), a juego con el revestimiento: forma la huella y el canto de los 6 peldaños de la escalera y del borde del banco de 4,00 m, y da agarre en zona mojada.",
     "Colocación con cortes y remates."])]),
  ("6", "Coronación y labio de rebose", [
   ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
@@ -163,7 +163,7 @@ def head(titulo):
 cifras_i = [("Dimensiones interiores", "7,50 × 4,00 m"), ("Superficie de lámina", "30 m²"),
             ("Profundidad", "1,70 m constante"), ("Volumen máximo aprox.", "51 m³")]
 cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · ancho ≈ 80 cm"),
-            ("Bancos y escalera", "2 bancos (7,50 y 4,00 m) · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
+            ("Banco y escalera", "Banco de 4,00 m · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
 pagina("Gracias por confiar en nosotros", f'''
@@ -185,7 +185,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <div><b>Regalo promocional</b>Cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada sin coste.</div></div>''')
 
 fotos = [("foto_terraza.jpg", "Vista general desde la terraza", "Piscina desbordante en ladera, con vistas al valle, coronación de piezas de gran formato y rejilla lineal en el pavimento."),
-         ("foto_planta.jpg", "Vaso completo", "Vaso rectangular con bancos y escalera en el extremo, y revestimiento cerámico rectangular en el fondo."),
+         ("foto_planta.jpg", "Vaso completo", "Vaso rectangular con banco y escalera en el extremo, y revestimiento cerámico rectangular en el fondo."),
          ("foto_canal.jpg", "Canal de desbordamiento, exterior", "Canal perimetral junto al lado del valle, con su muro exterior y coronación."),
          ("foto_canal_interior.jpg", "Interior del canal", "Fondo y paredes revestidos, sumidero del canal, zonas húmedas en el fondo y manchas verdosas en la pared."),
          ("foto_escalera_banco.jpg", "Escalera y banco interior", "Escalera de acceso, banco, foco y boquilla de impulsión en pared."),
@@ -205,12 +205,11 @@ def plano_svg():
 <text x="271" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#1f4e79">Canal desbordante en L · 12,5 ml</text>
 <text transform="translate(512,200) rotate(90)" text-anchor="middle" font-size="11" fill="#1f4e79">Canal</text>
 <rect x="60" y="82" width="422" height="252" fill="#3a8fbf" stroke="#1f4e79" stroke-width="2"/>
-<rect x="60" y="82" width="46" height="252" fill="#a9d8ec"/><rect x="60" y="290" width="422" height="44" fill="#a9d8ec"/>
-<g stroke="#8fb9d0" stroke-width="1.2" fill="#d7ebf5"><rect x="106" y="226" width="78" height="64"/>
-<line x1="106" y1="242" x2="184" y2="242"/><line x1="106" y1="258" x2="184" y2="258"/><line x1="106" y1="274" x2="184" y2="274"/></g>
+<rect x="60" y="82" width="46" height="252" fill="#a9d8ec"/>
+<g stroke="#8fb9d0" stroke-width="1.2" fill="#d7ebf5"><rect x="106" y="270" width="78" height="64"/>
+<line x1="106" y1="286" x2="184" y2="286"/><line x1="106" y1="302" x2="184" y2="302"/><line x1="106" y1="318" x2="184" y2="318"/></g>
 <text transform="translate(88,150) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="#1f4e79">Banco 4,00 m</text>
-<text x="330" y="317" text-anchor="middle" font-size="12" font-weight="700" fill="#1f4e79">Banco 7,50 m</text>
-<text x="145" y="216" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">Escalera</text>
+<text x="145" y="262" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">Escalera</text>
 <text x="300" y="170" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Vaso 7,50 × 4,00 m</text>
 <text x="300" y="190" text-anchor="middle" font-size="12" fill="#e8f4fa">Profundidad 1,70 m</text>
 <g stroke="#5b6b7b" stroke-width="1" fill="none"><line x1="60" y1="352" x2="482" y2="352"/><line x1="60" y1="346" x2="60" y2="358"/><line x1="482" y1="346" x2="482" y2="358"/>
@@ -235,7 +234,7 @@ def plano_svg():
 
 pagina("Plano de la piscina", f'''<p class="lead">Distribución de la piscina de 7,50 × 4 m y situación de los elementos principales.</p>
 <div class="plano">{plano_svg()}</div>
-<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad</td></tr><tr><td><b>Bancos</b></td><td>2 (7,50 m y 4,00 m)</td></tr><tr><td><b>Escalera</b></td><td>1 · 6 peldaños</td></tr><tr><td><b>Canal desbordante</b></td><td>En L · 12,5 ml · ancho ≈ 80 cm</td></tr></table>
+<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad</td></tr><tr><td><b>Banco</b></td><td>4,00 m en el extremo del vaso</td></tr><tr><td><b>Escalera</b></td><td>1 · 6 peldaños</td></tr><tr><td><b>Canal desbordante</b></td><td>En L · 12,5 ml · ancho ≈ 80 cm</td></tr></table>
 <p class="note">Plano orientativo, sin escala. Las medidas y la posición definitiva de cada elemento se confirman con el cliente en el replanteo.</p>''')
 
 # 3 · sistema constructivo y materiales
