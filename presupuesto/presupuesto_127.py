@@ -93,7 +93,7 @@ FASES = [
     "Misma cerámica y cemento cola, en el fondo y las paredes del canal, con las pendientes definidas en la fase 3."]),
   ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en banco y escalera", 9, "m²", [
     "Misma cerámica y cemento cola, en el banco y en huellas y contrahuellas de la escalera."]),
-  ("5.4", "Suministro y colocación de piezas de peldaño y borde de banco Rosa Gres", 35, "ud", [
+  ("5.4", "Suministro y colocación de piezas de peldaño y borde de banco Rosa Gres", 28, "ud", [
     "Piezas Rosa Gres antideslizantes L98 (97,8 × 31,7 × 3,8 cm) y L62 (62,6 × 31,7 × 3,8 cm), según despiece: forman la huella y el canto de los 6 peldaños (4 de 1,20 m y 2 más estrechos) y del borde del banco de 4,00 m × 40 cm, y dan agarre en zona mojada.",
     "Colocación con cortes y remates.",
     "No incluye piezas especiales (esquinas, piezas laterales y similares): se valoran aparte si el cliente las desea."])]),
@@ -365,7 +365,7 @@ if MUESTRA:
 <h2>Pendiente de confirmar</h2>{lista([
 ("Escalera y banco. ", "Anchos exactos de los 2 peldaños estrechos y ancho real del banco (≈ 40 cm)."),
 ("Aparatos en pared. ", "Número y posición de focos y boquillas; altura de las paredes del canal."),
-("Piezas Rosa Gres. ", "Combinación exacta, serie, color y número de piezas de peldaño (el presupuesto lleva 35; el despiece indica unas 20)."),
+("Piezas Rosa Gres. ", "Combinación exacta, serie y color; el presupuesto lleva 28 piezas de peldaño y borde de banco."),
 ("Coronación. ", "Precio y modelo reales; el reparto usa 60 €/ml como supuesto."),
 ("Piezas especiales. ", "Esquinas, borde desbordante y otras piezas especiales de Rosa Gres no están incluidas; se valoran aparte si el cliente las quiere."),
 ("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),

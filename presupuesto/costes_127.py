@@ -38,7 +38,7 @@ P = {
  "5.1": (MAT_CE * 69, MO_CE * 69, "critica", "CYPE UPT020; cerámica a tu precio de 34,48 €/m² (112 m² para 105)"),
  "5.2": (MAT_CE * 27, MO_CE * 27, "critica", "idem, canal"),
  "5.3": (MAT_CE * 9, MO_CE * 9, "critica", "idem, bancos y escalera"),
- "5.4": (35 * 68.86, 35 * 0.35 * OF, "normal", "peldaño a tu precio de 68,86 €/ud + 0,35 h por pieza"),
+ "5.4": (28 * 68.86, 28 * 0.35 * OF, "normal", "28 piezas a tu precio de 68,86 €/ud + 0,35 h por pieza"),
  "6.1": (37 * 60, 37 * 0.6 * EQ, "critica", "SUPUESTO: pieza de coronación a 60 €/ml, sin fuente; pedir precio al proveedor"),
  "6.2": (0, 4 * EQ, "normal", "4 h de equipo"),
  "7.1": (105 * 0.35 * 15.88, 105 * 0.05 * AY, "critica", "mortero de juntas RG 0,35 kg/m² (CYPE UPT020)"),
