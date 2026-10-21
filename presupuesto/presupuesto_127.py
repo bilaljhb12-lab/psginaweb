@@ -124,12 +124,8 @@ def eur(x): return n2(x) + " €"
 def qty(x): return (f"{x:g}").replace(".", ",")
 
 # ---------- cálculo ----------
-# Reparto orientativo del precio cerrado: pesos a partir de la valoración orientativa (punto medio).
-PESOS = {"1.1":225,"1.2":225,"1.3":450,"2.1":832.5,"2.2":1680,"2.3":1207.5,"2.4":650,
-         "3.1":1050,"3.2":500,"3.3":468.75,"3.4":650,
-         "4.1":3495*69/105,"4.2":3495*27/105,"4.3":3495*9/105,
-         "5.1":9186.76*69/105,"5.2":9186.76*27/105,"5.3":9186.76*9/105,"5.4":3110.10,
-         "6.1":4255,"6.2":250,"7.1":1785,"7.2":400,"8.1":150,"8.2":200}
+# Reparto del precio cerrado en proporción al coste estándar de cada partida.
+from costes_127 import PESOS   # coste estándar por partida (CYPE + tus precios de material), ver costes_127.py
 parcial = False
 base = round(DATOS["precio_cerrado"], 2)
 partidas = [x for _, _, ps in FASES for x in ps]
