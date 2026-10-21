@@ -88,11 +88,12 @@ FASES = [
   ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en banco y escalera", 9, "m²", [
     "Misma cerámica y cemento cola, en el banco y en huellas y contrahuellas de la escalera."]),
   ("5.4", "Suministro y colocación de piezas de peldaño y borde de banco Rosa Gres", 35, "ud", [
-    "Piezas Rosa Gres antideslizantes L98 (97,8 × 31,7 × 3,8 cm) y L62 (62,6 × 31,7 × 3,8 cm), más esquinas ED9/EI9, según despiece: forman la huella y el canto de los 6 peldaños (4 de 1,20 m y 2 más estrechos) y del borde del banco de 4,00 m × 40 cm, y dan agarre en zona mojada.",
-    "Colocación con cortes y remates."])]),
+    "Piezas Rosa Gres antideslizantes L98 (97,8 × 31,7 × 3,8 cm) y L62 (62,6 × 31,7 × 3,8 cm), según despiece: forman la huella y el canto de los 6 peldaños (4 de 1,20 m y 2 más estrechos) y del borde del banco de 4,00 m × 40 cm, y dan agarre en zona mojada.",
+    "Colocación con cortes y remates.",
+    "No incluye piezas especiales (esquinas, piezas laterales y similares): se valoran aparte si el cliente las desea."])]),
  ("6", "Coronación y labio de rebose", [
   ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
-    "Coronación para el borde de la piscina y el muro exterior del canal, y pieza especial de labio de rebose (borde desbordante Rosa Gres ref. 647 o equivalente, a confirmar con el despiece) para los tramos de 7,50 m y 4,00 m.",
+    "Coronación para el borde de la piscina y el muro exterior del canal, con pieza de coronación estándar para los tramos de 7,50 m y 4,00 m del labio de rebose. No incluye piezas especiales de rebose ni de esquina: se valoran aparte si el cliente las desea.",
     "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres.",
     "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm."]),
   ("6.2", "Prueba de lámina de agua", 1, "PA", [
@@ -162,21 +163,21 @@ def head(titulo):
 
 # 1 · carta
 cifras_i = [("Dimensiones interiores", "7,50 × 4,00 m"), ("Superficie de lámina", "30 m²"),
-            ("Profundidad", "1,70 m constante"), ("Volumen máximo aprox.", "51 m³")]
-cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · 80 cm (lado largo) y 30 cm (lado corto)"),
-            ("Banco y escalera", "Banco de 4,00 m × 40 cm · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
+            ("Profundidad", "1,70 m constante"), ("Volumen aprox.", "51 m³")]
+cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · 80 y 30 cm de ancho"),
+            ("Banco y escalera", "Banco 4 m × 40 cm · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
 pagina("Gracias por confiar en nosotros", f'''
 <p>Estimado/a cliente:</p>
 <p>Le presentamos nuestra propuesta para la rehabilitación integral de su piscina desbordante en {e(DATOS["direccion"])}. Este documento recoge, por escrito y con claridad, la obra: los trabajos, los materiales, los plazos, la forma de pago y las garantías.</p>
 <p>La piscina pierde agua. Para resolverlo desde el origen retiraremos toda la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos el vaso y el canal desbordante con el sistema DryPool de Grupo Puma, un mortero bicomponente semiflexible pensado para soportar la presión del agua. Después colocamos cerámica nueva Rosa Gres de 31 × 62,6 cm, piezas de peldaño antideslizantes en los bancos y la escalera, y una coronación nueva con el labio del desbordante perfectamente nivelado.</p>
-<p>Reparación, impermeabilización, mortero-cola y juntas son de una misma marca, Grupo Puma, y forman el sistema DryPool, específico para piscinas, de modo que todos los materiales trabajan como un único sistema compatible.</p>
+<p>Reparación, impermeabilización, mortero-cola y juntas son de una misma marca, Grupo Puma: el sistema DryPool, específico para piscinas. El presupuesto incluye la cerámica, las piezas de coronación y los peldaños; las piezas especiales de Rosa Gres, de mayor coste, se valoran aparte si usted lo desea.</p>
 <p>Cada fase se revisa antes de empezar la siguiente y le entregamos la obra terminada.</p>
 <p>Quedamos a su disposición para resolver cualquier duda o ajustar la propuesta a lo que necesite.</p>
 <p class="firma"><b>{e(DATOS["contacto"])}</b><br>Brava Pool</p>
 <h2>Su piscina en cifras</h2><div class="cols">{kv(cifras_i)}{kv(cifras_d)}</div>
-<div class="kv-wide">{kv([("Plazo estimado", "5 a 6 semanas desde el inicio de obra, a confirmar tras la inspección inicial")])}</div>
+<div class="kv-wide">{kv([("Plazo estimado", "5 a 6 semanas desde el inicio de obra, a confirmar")])}</div>
 <h2>Nuestro compromiso</h2>
 <div class="cards">
 <div><b>Plazos por escrito</b>Planificación por fases desde el primer día y plazo de ejecución indicado en este documento.</div>
@@ -219,16 +220,22 @@ pagina("Cómo desborda el agua", f'''<p class="lead">El agua rebosa por el borde
 <p class="note">Secciones orientativas, sin escala. El desnivel está dibujado exagerado para que se aprecie; su valor real se mide con nivel láser antes de empezar (fases 1 y 3).</p>''')
 
 # piezas Rosa Gres
-piezas = [("Baldosa de revestimiento", "serie del vaso (a confirmar)", "31 × 62,6 cm", "Solera, paredes del vaso y canal desbordante. Es la superficie principal de la piscina."),
-          ("Peldaño-borde antideslizante", "L98", "97,8 × 31,7 × 3,8 cm", "Huella y canto de los peldaños anchos, y borde del banco. El acabado antideslizante da agarre en zona mojada."),
-          ("Peldaño-borde antideslizante", "L62", "62,6 × 31,7 × 3,8 cm", "Peldaños más estrechos de la parte baja de la escalera."),
-          ("Esquinas derecha / izquierda", "ED9 / EI9", "97,8 × 31,7 × 3,8 cm", "Remate de los extremos de peldaños y banco, donde el borde gira."),
-          ("Borde desbordante", "647", "62,6 × 31 × 2,6 cm", "Labio de rebose de los lados valle y este, por donde cae el agua al canal.")]
+piezas_inc = [("Baldosa de revestimiento", "serie del vaso (a confirmar)", "31 × 62,6 cm", "Solera, paredes del vaso y canal desbordante. Es la superficie principal de la piscina."),
+              ("Peldaño-borde antideslizante", "L98", "97,8 × 31,7 × 3,8 cm", "Huella y canto de los peldaños anchos, y borde del banco. El acabado antideslizante da agarre en zona mojada."),
+              ("Peldaño-borde antideslizante", "L62", "62,6 × 31,7 × 3,8 cm", "Peldaños más estrechos de la parte baja de la escalera."),
+              ("Pieza de coronación", "modelo a confirmar", "—", "Borde de la piscina, labio de rebose y muro exterior del canal.")]
+piezas_esp = [("Esquinas derecha / izquierda", "ED9 / EI9", "97,8 × 31,7 × 3,8 cm", "Remate de los extremos de peldaños y banco, donde el borde gira."),
+              ("Borde desbordante", "647", "62,6 × 31 × 2,6 cm", "Pieza especial para el labio de rebose de los lados valle y este."),
+              ("Otras piezas especiales", "según catálogo", "—", "Piezas laterales de peldaño y remates especiales, si el diseño las requiere.")]
+def tabla_piezas(rows):
+    return '<table class="eco ph"><thead><tr><th style="width:44mm">Pieza</th><th style="width:25mm">Referencia</th><th style="width:34mm">Medida</th><th>Dónde y para qué</th></tr></thead><tbody>' + ''.join(f'<tr><td><b>{e(a)}</b></td><td>{e(b)}</td><td>{e(c)}</td><td>{e(d)}</td></tr>' for a,b,c,d in rows) + '</tbody></table>'
 pagina("Piezas Rosa Gres de su piscina", f'''<p class="lead">Una piscina así no se reviste con un solo tipo de pieza. Cada zona lleva la suya, y todas son de Rosa Gres para que el conjunto tenga el mismo color y acabado.</p>
-<table class="eco ph"><thead><tr><th style="width:44mm">Pieza</th><th style="width:25mm">Referencia</th><th style="width:34mm">Medida</th><th>Dónde y para qué</th></tr></thead><tbody>{"".join(f'<tr><td><b>{e(a)}</b></td><td>{e(b)}</td><td>{e(c)}</td><td>{e(d)}</td></tr>' for a,b,c,d in piezas)}</tbody></table>
+<h2>Incluidas en el presupuesto</h2>{tabla_piezas(piezas_inc)}
+<h2>Piezas especiales · no incluidas</h2>{tabla_piezas(piezas_esp)}
+<div class="box"><b>Piezas especiales.</b> Por ser piezas de mayor coste, no están incluidas en el precio. Se valorarán aparte, con su presupuesto independiente, si el cliente desea incorporarlas.</div>
 <h3>Cómo se reparten en su piscina</h3>
 <ul><li><b>Escalera:</b> 6 peldaños. Los 4 primeros miden 1,20 m y los 2 últimos son más estrechos, por lo que se combinan piezas de distinta anchura.</li><li><b>Banco:</b> 4,00 m de largo por unos 40 cm de ancho, en todo el ancho del extremo oeste.</li><li><b>Canal:</b> 80 cm de ancho en el lado valle y 30 cm en el lado este, revestido con la misma baldosa del vaso.</li></ul>
-<div class="box"><b>A confirmar con el proveedor.</b> Las referencias proceden del catálogo de piscinas de Rosa Gres y de distribuidores. La combinación exacta de piezas, la cantidad de cada una, la serie y el color se fijan con el despiece, antes del pedido.</div>''')
+<p class="note">Las referencias proceden del catálogo de piscinas de Rosa Gres y de distribuidores. La combinación exacta de piezas, la cantidad de cada una, la serie y el color se fijan con el despiece, antes del pedido.</p>''')
 
 # 3 · sistema constructivo y materiales
 capas = [("Soporte saneado y reparado (Morcemseal Todo 1 R4)", "#d9d4cb", "#2b3440"), ("Impermeabilización DryPool · 1.ª capa", "#2e6f9e", "#fff"),
@@ -240,7 +247,7 @@ capas_svg = '<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-
 mats = [("Reparación del soporte", "Grupo Puma", "Morcemseal Todo 1 R4 · mortero tixotrópico de alta resistencia"),
         ("Impermeabilización", "Grupo Puma", "Sistema DryPool · Morcem Dry SF Plus, malla Drypool y banda Bandtec"),
         ("Revestimiento", "Rosa Gres", "Porcelánico 31 × 62,6 cm apto para inmersión (modelo y color a confirmar)"),
-        ("Bancos y escalera", "Rosa Gres", "Peldaño-borde antideslizante L98 y L62, con esquinas ED9/EI9 (ver página de piezas; color a confirmar)"),
+        ("Bancos y escalera", "Rosa Gres", "Peldaño-borde antideslizante L98 y L62 (ver página de piezas; color a confirmar)"),
         ("Mortero-cola", "Grupo Puma", "Pegoland Flex C2 TE S1 (sistema DryPool)"),
         ("Rejuntado", "Grupo Puma", "Morcemcolor Epoxi RG/R2T, apto para piscinas con cloración salina (color a confirmar)"),
         ("Coronación", "Por definir", "Modelo y acabado a confirmar por escrito"),
@@ -301,7 +308,7 @@ pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos 
 <tr class="sub"><td colspan="2">Base imponible</td><td class="n">{eur(base)}</td></tr>
 <tr><td colspan="2">IVA {DATOS["iva"]} %</td><td class="n">{eur(iva_imp)}</td></tr>
 <tr class="tot"><td colspan="2">Total presupuesto (IVA incl.)</td><td class="n">{eur(total)}</td></tr></tbody></table>
-<p class="note">Precio total cerrado. El reparto entre fases y partidas es orientativo y no modifica el total.</p>
+<p class="note">Precio total cerrado. El reparto entre fases y partidas es orientativo y no modifica el total. Incluye cerámica, piezas de coronación y peldaños; no incluye piezas especiales, que se valoran aparte si el cliente las desea.</p>
 <div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala el equipo de cloración salina Bright Blue Pluma WP 15 con regulador de pH automático Sanus NG, instalado y sin ningún coste adicional.</div>
 <p class="note">El tipo de IVA aplicable depende de las condiciones de la vivienda y de la obra; se confirma al cerrar el presupuesto.</p>''')
 
@@ -313,7 +320,7 @@ cl = [("Garantía en todos nuestros trabajos", ["Al tratarse de una reforma, Bra
 pagina("Garantías y compromisos", ''.join(f'<div class="clau"><span>CLÁUSULA {i+1}</span><h3>{e(t)}</h3>{"".join(f"<p>{e(x)}</p>" for x in ps)}</div>' for i, (t, ps) in enumerate(cl)))
 
 # 8 · condiciones y aceptación
-noinc = ["Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Prueba de estanqueidad y llenado, agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
+noinc = ["Piezas especiales de Rosa Gres (esquinas, piezas laterales y de borde desbordante): se valoran aparte si el cliente las desea, por ser piezas de mayor coste.", "Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Prueba de estanqueidad y llenado, agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
 cond = ["Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El modelo y el color de la cerámica, de la coronación y de las juntas se confirmarán por escrito antes de su pedido.", "Las mediciones son estimadas y se ajustarán con las medidas tomadas en obra.", "El cliente facilitará el acceso a la obra y el suministro de agua y luz durante los trabajos.", f'Este presupuesto es válido hasta el {DATOS["valido_hasta"]}.']
 imp_acept = f'por un importe total de <b>{eur(total)}</b> IVA incluido' if not parcial else 'por el importe total que se fije en la valoración definitiva: <i class="blk"></i> (IVA incl.)'
 pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in noinc)}</ul></div><div><h2>Condiciones</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in cond)}</ul></div></div>
@@ -355,6 +362,7 @@ if MUESTRA:
 ("Aparatos en pared. ", "Número y posición de focos y boquillas; altura de las paredes del canal."),
 ("Piezas Rosa Gres. ", "Combinación exacta, serie, color y número de piezas de peldaño (el presupuesto lleva 35; el despiece indica unas 20)."),
 ("Coronación. ", "Precio y modelo reales; el reparto usa 60 €/ml como supuesto."),
+("Piezas especiales. ", "Esquinas, borde desbordante y otras piezas especiales de Rosa Gres no están incluidas; se valoran aparte si el cliente las quiere."),
 ("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),
 ("Junta. ", "Epoxi propuesto (apto para cloración salina) y color."),
 ("Cliente. ", "Nombre, teléfono, datos de pago e IVA aplicable.")])}''')
@@ -383,16 +391,16 @@ body{margin:0;font-family:Inter,Arial,sans-serif;color:#2b3440;font-size:9.4pt;l
 .page>header img{height:17mm;margin-top:-2mm}
 .eyebrow{font-size:7pt;letter-spacing:.2em;color:var(--cy);font-weight:600}
 h1{margin:.5mm 0 0;font-size:19pt;color:var(--navy);font-weight:700;letter-spacing:-.01em}
-h2{font-size:7.8pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin:6mm 0 2mm;font-weight:700}
+h2{font-size:7.8pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin:4.5mm 0 1.5mm;font-weight:700}
 h3{font-size:10.5pt;color:var(--navy);margin:0 0 1.5mm}
 .body{position:absolute;top:40mm;bottom:17mm;left:16mm;right:16mm}
 .page>footer{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--mut)}
 p{margin:0 0 2.6mm}ul{margin:0;padding-left:4mm}li{margin-bottom:.6mm}
 .lead{font-size:10pt;color:var(--ink)}.note{font-size:7.6pt;color:var(--mut)}.firma{margin-top:4mm}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:8mm}.cols2{display:grid;grid-template-columns:1fr 1fr;gap:9mm}.cols2 h2{margin-top:0}
-.kv{width:100%;border-collapse:collapse;font-size:8.6pt}.kv td{padding:1.9mm 0;border-bottom:.2mm solid var(--ln);vertical-align:top}.kv td:first-child{color:var(--mut);width:40%}.kv td:last-child{text-align:right;font-weight:600;color:var(--ink)}
+.kv{width:100%;border-collapse:collapse;font-size:8.6pt}.kv td{padding:1.3mm 0;border-bottom:.2mm solid var(--ln);vertical-align:top}.kv td:first-child{color:var(--mut);width:40%}.kv td:last-child{text-align:right;font-weight:600;color:var(--ink)}
 .kv-wide{margin-top:1mm}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:3mm 4mm;font-size:8.4pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:2.2mm 3.5mm;font-size:8.1pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.gal figure{margin:0}.gal img{width:100%;height:52mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
 .ann{display:grid;grid-template-columns:82mm 1fr;gap:7mm;margin-top:3mm}.phw{position:relative}.phw img{width:100%;display:block}.pin{position:absolute;transform:translate(-50%,-50%);width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;border:.45mm solid #fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 .3mm 1mm rgba(0,0,0,.4)}.lg{margin:0;padding:0;list-style:none}.lg li{display:flex;gap:3mm;margin-bottom:4mm;font-size:8.6pt}.lg b{display:block;color:var(--navy);font-size:9.4pt}.mk2{flex:none;width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center}
 .plano{border:.25mm solid var(--ln);padding:3mm;margin:3mm 0}.plano svg{width:100%;height:auto;display:block}
