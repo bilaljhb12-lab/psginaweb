@@ -13,6 +13,7 @@ from pathlib import Path
 
 AQUI = Path(__file__).parent
 MUESTRA = "--muestra" in sys.argv
+MOVIL = "--movil" in sys.argv
 CARTA = "--carta" in sys.argv            # diseño «Carta de obra»: identidad propia con los colores de la piscina        # versión de muestra: marca de agua y resumen de revisión al final
 
 DATOS = {
@@ -368,6 +369,117 @@ if MUESTRA:
 ("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),
 ("Junta. ", "Epoxi propuesto (apto para cloración salina) y color."),
 ("Cliente. ", "Confirmar la grafía del apellido (Phillipe / Philippe).")])}''')
+
+
+if MOVIL:
+    _t = lambda s: e(s)
+    def _pl():
+        S=40; X0=20; Y0=64
+        o=['<svg viewBox="0 0 372 318" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">']
+        a=o.append
+        a('<rect width="372" height="318" fill="#fff"/>')
+        a(f'<rect x="{X0}" y="{Y0-44}" width="{S*7.5+14}" height="32" fill="#dcecf3" stroke="#0b2a45" stroke-width="1.6"/>')
+        a(f'<rect x="{X0+S*7.5}" y="{Y0-44}" width="14" height="{S*4+44}" fill="#dcecf3" stroke="#0b2a45" stroke-width="1.6"/>')
+        a(f'<text x="{X0+8}" y="{Y0-23}" font-size="12.5" font-weight="700" fill="#0b2a45">Canal 0,80 m</text>')
+        a(f'<text transform="translate({X0+S*7.5+10},{Y0+78}) rotate(90)" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0b2a45">Canal 0,30 m</text>')
+        a(f'<rect x="{X0}" y="{Y0-12}" width="{S*7.5}" height="{S*4+12}" fill="#e9dcc3"/>')
+        a(f'<rect x="{X0+4}" y="{Y0-8}" width="{S*7.5-8}" height="{S*4}" fill="#3a8fbf" stroke="#0b2a45" stroke-width="2"/>')
+        a(f'<rect x="{X0+4}" y="{Y0-8}" width="16" height="{S*4}" fill="#a9d8ec" stroke="#0b2a45"/>')
+        for i,w in enumerate((48,48,48,48,26,26)):
+            a(f'<rect x="{X0+20}" y="{Y0-8+S*4-11.2*(i+1)}" width="{w}" height="11.2" fill="#d7ebf5" stroke="#0b2a45" stroke-width="1"/>')
+        a(f'<text x="{X0+160}" y="{Y0+52}" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Vaso 7,50 × 4,00 m</text>')
+        a(f'<text x="{X0+160}" y="{Y0+70}" text-anchor="middle" font-size="11.5" fill="#e8f4fa">1,70 m de profundidad</text>')
+        a(f'<circle cx="{X0+190}" cy="{Y0+92}" r="6" fill="#fff" stroke="#0b2a45" stroke-width="1.6"/>')
+        for xm in (140,190,240): a(f'<path d="M{X0+xm} {Y0-6} L{X0+xm} {Y0-36}" stroke="#fff" stroke-width="2" marker-end="url(#m)"/>')
+        a('<defs><marker id="m" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#0b2a45"/></marker></defs>')
+        a(f'<text x="{X0+4}" y="{Y0+S*4+20}" font-size="12" font-weight="700" fill="#b8603c">Escalera · 6 peldaños</text>')
+        a(f'<text x="{X0+4}" y="{Y0+S*4+38}" font-size="12" font-weight="700" fill="#0b2a45">Banco 4 m × 40 cm</text>')
+        a(f'<text x="{X0+4}" y="{Y0+S*4+56}" font-size="12" fill="#0b2a45">↑ El agua rebosa hacia el valle</text>')
+        a(f'<text x="{X0+4}" y="{Y0+S*4+74}" font-size="10" fill="#6b7280">Planta orientativa · medidas a confirmar en el replanteo</text>')
+        a('</svg>')
+        return ''.join(o)
+    def _card_p(c, t, q, u, b):
+        return (f'<div class="pt"><div class="r1"><span class="cd">{c}</span><b class="tt2">{_t(t)}</b></div>'
+                f'<div class="r2"><span>{qty(q)} {u} · {n2(PU[c])} €/{u}</span><b>{n2(IMP[c])} €</b></div>'
+                f'<ul>{"".join(f"<li>{_t(x)}</li>" for x in b)}</ul></div>')
+    _fases = ''.join(f'<div class="fh"><span>FASE {f}</span><b>{_t(t)}</b><i>{eur(sub[f])}</i></div>' + ''.join(_card_p(*pp) for pp in ps) for f, t, ps in FASES)
+    _pag = ''.join(f'<div class="pg"><b>{pct} %</b><span>{_t(txt)}</span><i>{eur(im)}</i></div>' for pct, txt, im in PAGOS)
+    _mat = ''.join(f'<div class="mt"><small>{_t(a_)}</small><b>{_t(b_)}</b><span>{_t(c_)}</span></div>' for a_, b_, c_ in mats)
+    _pi = ''.join(f'<div class="mt"><small>{_t(b_)} · {_t(c_)}</small><b>{_t(a_)}</b><span>{_t(d_)}</span></div>' for a_, b_, c_, d_ in piezas_inc)
+    _pe = ''.join(f'<div class="mt no"><small>{_t(b_)}</small><b>{_t(a_)}</b><span>{_t(d_)}</span></div>' for a_, b_, c_, d_ in piezas_esp)
+    _mk = ''.join(f'<span class="pn" style="left:{x}%;top:{y}%">{n}</span>' for n, x, y, _, _ in marks)
+    _lg = ''.join(f'<li><span class="pn2">{n}</span><div><b>{_t(t)}</b>{_t(d)}</div></li>' for n, _, _, t, d in marks)
+    _ex = ''.join(f'<li>{_t(x)}</li>' for x in noinc)
+    _co = ''.join(f'<li>{_t(x)}</li>' for x in cond)
+    _gr = ''.join(f'<div class="gr"><b>{_t(t_)}</b>{"".join(f"<p>{_t(x)}</p>" for x in ps_)}</div>' for t_, ps_ in cl)
+    CSSM = """
+@page{size:103mm 183mm;margin:0}*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:#1b2430;background:#fff;font-size:11.5pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+:root{--n:#0b2a45;--t:#b8603c;--c:#1f8aa0;--g:#6b7280;--l:#e5e7eb}
+.cv{width:103mm;height:183mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.cv .top{position:absolute;left:0;right:0;top:0;height:92mm;background:url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 80%,0 100%)}
+.cv .top::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,26,48,.74),rgba(31,78,121,.3))}
+.cv .ln{position:absolute;left:0;right:0;top:0;height:96mm;background:var(--t);clip-path:polygon(0 100%,100% 80%,100% 81.6%,0 101.6%);z-index:2}
+.cv .lg{position:absolute;left:7mm;top:7mm;z-index:3}.cv .lg img{height:22mm}
+.cv .nn{position:absolute;right:7mm;top:8mm;z-index:3;color:#fff;text-align:right}.cv .nn small{display:block;font-size:6.5pt;letter-spacing:.3em;color:#8fd0e8}.cv .nn b{font-size:34pt;font-weight:900;line-height:.95}
+.cv h1{position:absolute;left:7mm;right:7mm;top:104mm;margin:0;font-size:25pt;line-height:1.05;font-weight:800;letter-spacing:-.02em;color:var(--n)}.cv h1 em{font-style:normal;color:var(--c)}
+.cv .sb{position:absolute;left:7mm;right:7mm;top:133mm;font-size:10.5pt;color:#4b5563}
+.cv .pr{position:absolute;left:7mm;right:7mm;bottom:30mm;background:var(--n);color:#fff;border-radius:3mm;padding:4mm 5mm}.cv .pr small{display:block;font-size:6.5pt;letter-spacing:.2em;color:#8fd0e8}.cv .pr b{font-size:21pt;letter-spacing:-.01em}.cv .pr span{font-size:9pt;opacity:.85;margin-left:1mm}
+.cv .cl{position:absolute;left:7mm;right:7mm;bottom:9mm;border-top:.3mm solid var(--l);padding-top:3mm;font-size:9.5pt}.cv .cl small{display:block;font-size:6.5pt;letter-spacing:.2em;color:var(--t)}
+.doc{padding:8mm 7mm 6mm}
+h2{font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:var(--t);margin:7mm 0 2.5mm;font-weight:700;border-top:.3mm solid var(--n);padding-top:3mm;page-break-after:avoid}
+h2:first-child{margin-top:0}
+.big{font-size:22pt;font-weight:300;color:var(--n);letter-spacing:-.02em;margin:0 0 3mm;line-height:1.1}
+p{margin:0 0 3mm}.mut{color:var(--g);font-size:9.5pt}
+.tot{background:var(--n);color:#fff;border-radius:3mm;padding:4mm 5mm;margin-bottom:3mm}.tot small{display:block;font-size:6.5pt;letter-spacing:.2em;color:#8fd0e8}.tot b{font-size:23pt}.tot span{display:block;font-size:9pt;opacity:.85}
+.av{border:.4mm solid var(--t);background:#fff7f2;border-radius:2mm;padding:3mm 4mm;font-size:10pt;color:#5b2a14;margin:3mm 0}.av b{color:var(--t);text-transform:uppercase;letter-spacing:.06em}
+.pg{display:grid;grid-template-columns:11mm 1fr auto;gap:2mm;padding:2.6mm 0;border-bottom:.2mm solid var(--l);font-size:10pt;align-items:start;page-break-inside:avoid}.pg b{color:var(--t)}.pg i{font-style:normal;font-weight:700;white-space:nowrap}
+.pgo{border:.3mm solid var(--l);border-radius:2mm;padding:3mm 4mm;font-size:10pt;margin-top:3mm;page-break-inside:avoid}.pgo div{display:flex;justify-content:space-between;gap:3mm;padding:.8mm 0}.pgo span{color:var(--g)}.pgo b{text-align:right}
+.fh{background:#f3f4f6;border-left:1.2mm solid var(--t);border-radius:1mm;padding:2.5mm 3.5mm;margin:5mm 0 1mm;page-break-inside:avoid;page-break-after:avoid}.fh span{display:block;font-size:6.5pt;letter-spacing:.2em;color:var(--t);font-weight:700}.fh b{display:block;font-size:11pt;color:var(--n)}.fh i{display:block;font-style:normal;font-size:10pt;color:var(--g)}
+.pt{padding:3mm 0;border-bottom:.2mm solid var(--l);page-break-inside:avoid}.pt .r1{display:flex;gap:2.5mm}.cd{flex:none;font-size:9pt;color:var(--t);font-weight:700;padding-top:.4mm}.tt2{font-size:10.5pt;line-height:1.3;color:var(--n)}
+.pt .r2{display:flex;justify-content:space-between;margin:1mm 0 1mm 8mm;font-size:9.5pt;color:var(--g)}.pt .r2 b{color:#111;font-size:11pt}
+.pt ul{margin:0 0 0 8mm;padding-left:4mm;font-size:9pt;color:#4b5563}.pt li{margin-bottom:.8mm}
+svg{width:100%;height:auto;display:block;page-break-inside:avoid}.ph{position:relative;margin-bottom:3mm}.ph img{width:100%;display:block;border-radius:2mm}.pn{position:absolute;transform:translate(-50%,-50%);width:6.4mm;height:6.4mm;border-radius:50%;background:var(--n);color:#fff;border:.45mm solid #fff;font-size:8.5pt;font-weight:700;display:flex;align-items:center;justify-content:center}
+.lg2{list-style:none;margin:0;padding:0}.lg2 li{display:flex;gap:3mm;margin-bottom:2.5mm;font-size:9.5pt;page-break-inside:avoid}.lg2 b{display:block;color:var(--n)}.pn2{flex:none;width:6.4mm;height:6.4mm;border-radius:50%;background:var(--n);color:#fff;font-size:8.5pt;font-weight:700;display:flex;align-items:center;justify-content:center}
+.mt{border:.3mm solid var(--l);border-radius:2mm;padding:2.5mm 3.5mm;margin-bottom:2mm;page-break-inside:avoid}.mt small{display:block;font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--c);font-weight:700}.mt b{display:block;color:var(--n);font-size:10.5pt}.mt span{font-size:9.3pt;color:#4b5563}.mt.no{border-style:dashed;background:#fafafa}.mt.no small{color:var(--g)}
+ul.tx{margin:0;padding-left:4.5mm;font-size:10pt}ul.tx li{margin-bottom:1.6mm}
+.gr{border-left:1mm solid var(--t);padding-left:3.5mm;margin-bottom:4mm;page-break-inside:avoid}.gr b{display:block;color:var(--n);margin-bottom:1mm;font-size:10.5pt}.gr p{font-size:9.5pt;color:#4b5563;margin:0 0 1.5mm}
+.ac{border:.4mm solid var(--n);border-radius:3mm;padding:4mm 5mm;margin-top:4mm;page-break-inside:avoid}.ac .ln2{border-bottom:.3mm solid #9ca3af;height:11mm}.ac small{font-size:7.5pt;color:var(--g);display:block;margin-bottom:2mm}
+.who{font-size:9.5pt;color:#4b5563;margin-top:4mm;border-top:.3mm solid var(--l);padding-top:3mm}
+"""
+    _doc = f"""<section class="cv"><div class="top"></div><div class="ln"></div>
+<div class="lg"><img src="assets/logo_blanco.png" alt="Brava Pool"></div><div class="nn"><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div>
+<h1>Rehabilitación integral <em>de piscina</em></h1>
+<div class="sb">Piscina desbordante 7,50 × 4 m en Calonge: impermeabilización, cerámica y coronación.</div>
+<div class="pr"><small>PRECIO TOTAL</small><b>{eur(base)}</b><span>IVA no incluido</span></div>
+<div class="cl"><small>PREPARADO PARA</small><b>{e(DATOS["cliente"])}</b><br>{e(DATOS["direccion"])} · {DATOS["fecha"]}</div></section>
+<div class="doc">
+<h2>Resumen</h2><div class="tot"><small>TOTAL PRESUPUESTO</small><b>{eur(base)}</b><span>IVA no incluido · válido hasta {DATOS["valido_hasta"]}</span></div>
+<div class="av"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
+<p>Retiramos la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos vaso y canal con el sistema DryPool de Grupo Puma. Después colocamos cerámica Rosa Gres de 31 × 62,6 cm, peldaños antideslizantes y coronación nueva, con el labio de rebose nivelado.</p>
+<p><b>Incluye</b> materiales, mano de obra, transporte y retirada de escombros, más el regalo del equipo de sal. <b>No incluye</b> piezas especiales de Rosa Gres: se valoran aparte si usted las desea.</p>
+<h2>Forma de pago</h2>{_pag}
+<div class="pgo"><div><span>Titular</span><b>{e(DATOS["emisor"])}</b></div><div><span>Banco</span><b>{e(DATOS["banco"])}</b></div><div><span>IBAN</span><b>{e(DATOS["iban"])}</b></div><div><span>Concepto</span><b>Presupuesto {DATOS["numero"]}</b></div></div>
+<h2>Regalo</h2><div class="mt"><small>Incluido sin coste</small><b>{e(PROMO[0].replace("Regalo promocional: ",""))}</b><span>Bright Blue Pluma WP 15 con regulador de pH automático Sanus NG, instalado.</span></div>
+<h2>Su piscina</h2><div class="ph"><img src="assets/foto_planta.jpg" alt="">{_mk}</div><ul class="lg2">{_lg}</ul>
+<h2>Plano</h2>{_pl()}
+<h2>Cómo desborda el agua</h2><p>El agua rebosa por el lado del valle y cae a un canal de 0,80 m. En el lado este el canal es de 0,30 m y el labio tiene un ligero desnivel que se regulariza durante la obra con nivel láser, con una tolerancia de ±2 mm.</p>
+<h2>Trabajos y precios</h2><p class="mut">El precio es cerrado, con materiales y mano de obra. El reparto por partidas es orientativo.</p>{_fases}
+<div class="mt no" style="margin-top:4mm"><small>Regalo</small><b>R.1 · Equipo de cloración salina y pH automático</b><span>Incluido sin coste.</span></div>
+<h2>Materiales</h2>{_mat}
+<h2>Piezas Rosa Gres incluidas</h2>{_pi}
+<h2>Piezas especiales · no incluidas</h2>{_pe}<p class="mut">Se valoran aparte si el cliente las desea, por ser piezas de mayor coste.</p>
+<h2>No incluye</h2><ul class="tx">{_ex}</ul>
+<h2>Condiciones</h2><ul class="tx">{_co}</ul>
+<h2>Garantías</h2>{_gr}
+<h2>Aceptación</h2><div class="ac"><p style="font-size:10pt">El cliente acepta el presupuesto n.º {DATOS["numero"]}, por un importe total de <b>{eur(base)}</b>, IVA no incluido, con sus condiciones y la forma de pago indicada.</p><div class="ln2"></div><small>Nombre y apellidos · DNI / NIF</small><div class="ln2"></div><small>Lugar y fecha</small><div class="ln2"></div><small>Firma del cliente</small></div>
+<div class="av" style="margin-top:4mm"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
+<div class="who"><b>Brava Pool</b> · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}<br>{e(DATOS["dir_emisor"])}<br>{e(DATOS["telefono"])} · {e(DATOS["web"])}</div></div>"""
+    _h = AQUI / "presupuesto_127_movil.html"; _o = AQUI / "Presupuesto_127_MOVIL.pdf"
+    _h.write_text(f'<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Presupuesto 127 · Brava Pool</title><style>{CSSM}</style></head><body>{_doc}</body></html>', encoding="utf-8")
+    _ch = next((x for x in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(x).exists()), None)
+    subprocess.run([_ch, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={_o}", _h.as_uri()], check=True, stderr=subprocess.DEVNULL)
+    print("OK", _o); sys.exit(0)
 
 N = len(paginas) + 1
 corpo = ""
