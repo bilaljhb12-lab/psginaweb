@@ -78,13 +78,13 @@ FASES = [
   ("4.3", "Suministro y aplicación del sistema DryPool en bancos y escalera", 9, "m²", [
     "Mismo sistema, en dos capas con malla, en bancos, peldaños y encuentros con el vaso."])]),
  ("5", "Revestimiento cerámico Rosa Gres", [
-  ("5.1", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en solera y paredes del vaso", 69, "m²", [
+  ("5.1", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en solera y paredes del vaso", 69, "m²", [
     "Porcelánico apto para inmersión permanente, con reserva por cortes y roturas (112 m² suministrados en total para toda la obra).",
     "Mortero-cola Pegoland Flex C2 TE S1 de Grupo Puma (sistema DryPool), con doble encolado.",
     "Replanteo de piezas y colocación, con cortes y remates en focos, boquillas, sumidero y esquinas."]),
-  ("5.2", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en el canal desbordante", 27, "m²", [
+  ("5.2", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en el canal desbordante", 27, "m²", [
     "Misma cerámica y cemento cola, en el fondo y las paredes del canal, con las pendientes definidas en la fase 3."]),
-  ("5.3", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en bancos y escalera", 9, "m²", [
+  ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en bancos y escalera", 9, "m²", [
     "Misma cerámica y cemento cola, en bancos y huellas y contrahuellas de la escalera."]),
   ("5.4", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
     "Pieza Rosa Gres ref. L98, de porcelánico antideslizante (97,9 × 31,7 × 3,8 cm), a juego con el revestimiento: forma la huella y el canto de los peldaños y del borde de los bancos de 7,50 m y 4,00 m y de la escalera de 6 peldaños, y da agarre en zona mojada.",
@@ -163,13 +163,13 @@ def head(titulo):
 cifras_i = [("Dimensiones interiores", "7,50 × 4,00 m"), ("Superficie de lámina", "30 m²"),
             ("Profundidad", "1,70 m constante"), ("Volumen máximo aprox.", "51 m³")]
 cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · paredes de 80 cm"),
-            ("Bancos y escalera", "2 bancos (7,50 y 4,00 m) · 6 peldaños"), ("Revestimiento", "Rosa Gres 30 × 60 cm · ≈ 105 m²"),
+            ("Bancos y escalera", "2 bancos (7,50 y 4,00 m) · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
 pagina("Gracias por confiar en nosotros", f'''
 <p>Estimado/a cliente:</p>
 <p>Le presentamos nuestra propuesta para la rehabilitación integral de su piscina desbordante en {e(DATOS["direccion"])}. Este documento recoge, por escrito y con claridad, la obra: los trabajos, los materiales, los plazos, la forma de pago y las garantías.</p>
-<p>La piscina pierde agua. Para resolverlo desde el origen retiraremos toda la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos el vaso y el canal desbordante con el sistema DryPool de Grupo Puma, un mortero bicomponente semiflexible pensado para soportar la presión del agua. Después colocamos cerámica nueva Rosa Gres de 30 × 60 cm, piezas de peldaño antideslizantes en los bancos y la escalera, y una coronación nueva con el labio del desbordante perfectamente nivelado.</p>
+<p>La piscina pierde agua. Para resolverlo desde el origen retiraremos toda la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos el vaso y el canal desbordante con el sistema DryPool de Grupo Puma, un mortero bicomponente semiflexible pensado para soportar la presión del agua. Después colocamos cerámica nueva Rosa Gres de 31 × 62,6 cm, piezas de peldaño antideslizantes en los bancos y la escalera, y una coronación nueva con el labio del desbordante perfectamente nivelado.</p>
 <p>Reparación, impermeabilización, mortero-cola y juntas son de una misma marca, Grupo Puma, y forman el sistema DryPool, específico para piscinas, de modo que todos los materiales trabajan como un único sistema compatible.</p>
 <p>Cada fase se revisa antes de empezar la siguiente y le entregamos la obra terminada.</p>
 <p>Quedamos a su disposición para resolver cualquier duda o ajustar la propuesta a lo que necesite.</p>
@@ -241,13 +241,13 @@ pagina("Plano de la piscina", f'''<p class="lead">Distribución de la piscina de
 # 3 · sistema constructivo y materiales
 capas = [("Soporte saneado y reparado (Morcemseal Todo 1 R4)", "#d9d4cb", "#2b3440"), ("Impermeabilización DryPool · 1.ª capa", "#2e6f9e", "#fff"),
          ("Malla antialcalina de refuerzo", "#7fb6d3", "#0a2540"), ("Impermeabilización DryPool · 2.ª capa", "#2e6f9e", "#fff"),
-         ("Mortero-cola Pegoland Flex C2 TE S1 (Puma)", "#b9c2cc", "#0a2540"), ("Cerámica Rosa Gres 30 × 60 cm", "#e9eef3", "#0a2540"),
+         ("Mortero-cola Pegoland Flex C2 TE S1 (Puma)", "#b9c2cc", "#0a2540"), ("Cerámica Rosa Gres 31 × 62,6 cm", "#e9eef3", "#0a2540"),
          ("Junta Morcemcolor Epoxi RG/R2T (Puma)", "#8a97a5", "#fff")]
 capas_svg = '<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">' + ''.join(
     f'<rect x="20" y="{10 + i * 33}" width="600" height="29" fill="{c}" stroke="#fff"/><text x="40" y="{29 + i * 33}" font-size="12.5" fill="{t}" font-weight="600">{i + 1}.  {e(n)}</text>' for i, (n, c, t) in enumerate(capas)) + '<text x="610" y="245" text-anchor="end" font-size="10" fill="#5b6b7b">Esquema de capas, de dentro hacia el agua · sin escala</text></svg>'
 mats = [("Reparación del soporte", "Grupo Puma", "Morcemseal Todo 1 R4 · mortero tixotrópico de alta resistencia"),
         ("Impermeabilización", "Grupo Puma", "Sistema DryPool · Morcem Dry SF Plus, malla Drypool y banda Bandtec"),
-        ("Revestimiento", "Rosa Gres", "Porcelánico 30 × 60 cm apto para inmersión (modelo y color a confirmar)"),
+        ("Revestimiento", "Rosa Gres", "Porcelánico 31 × 62,6 cm apto para inmersión (modelo y color a confirmar)"),
         ("Bancos y escalera", "Rosa Gres", "Pieza L98 de porcelánico antideslizante, 97,9 × 31,7 × 3,8 cm (color a confirmar)"),
         ("Mortero-cola", "Grupo Puma", "Pegoland Flex C2 TE S1 (sistema DryPool)"),
         ("Rejuntado", "Grupo Puma", "Morcemcolor Epoxi RG/R2T, apto para piscinas con cloración salina (color a confirmar)"),
