@@ -321,11 +321,14 @@ for i, (t, c, _) in enumerate(paginas, start=2):
     corpo += f'''<section class="page"><header><div><div class="eyebrow">PRESUPUESTO {DATOS["numero"]}</div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">{c}</div>
 <footer><span>Brava Pool · {e(DATOS["web"])}</span><span>Presupuesto {DATOS["numero"]} · Página {i} de {N}</span></footer></section>'''
 
-portada = f'''<section class="page cover"><img class="ph" src="assets/foto_planta.jpg" alt=""><div class="shade"></div>
-<div class="top"><div class="band"><img src="assets/logo.png" alt="Brava Pool"><div class="meta"><div><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div></div></div>
-<div class="tt"><div class="bar"></div><small>PROPUESTA DE REFORMA</small><h1>Rehabilitación integral de piscina desbordante 7,50 × 4&nbsp;m</h1><p>Profundidad de 1,70 m · {e(DATOS["direccion"].split(" · ")[0])} · Calonge (Girona)</p>
-<div class="for"><small>PREPARADO PARA</small><b>{e(DATOS["cliente"]) if DATOS["cliente"] else "Propietario/a"}</b><span>{e(DATOS["direccion"])}</span></div></div>
-<div class="foot"><div><b>Brava Pool</b><span>Girona</span></div><div><b>Contacto</b><span>{e(DATOS["contacto"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}</span></div><div><b>Web</b><span>{e(DATOS["web"])}</span></div></div></section>'''
+portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jpg" alt=""><div class="duo"></div>
+<svg class="waves" viewBox="0 0 210 297" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#fff" stroke-opacity=".10" stroke-width=".25">{''.join(f'<path d="M-10 {200+i*6} C 40 {180+i*6}, 90 {225+i*6}, 130 {203+i*6} S 200 {185+i*6}, 230 {208+i*6}"/>' for i in range(16))}</g></svg>
+<div class="slash"></div><div class="slash2"></div>
+<div class="logo"><img src="assets/logo_blanco.png" alt="Brava Pool"></div>
+<div class="num"><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div>
+<div class="tt"><div class="chip">PROPUESTA DE REFORMA</div><h1>Rehabilitación<br>integral<br><em>de piscina</em></h1><div class="rule"></div><p>Desmontaje, impermeabilización y nueva cerámica,<br>con control de calidad en cada fase.</p></div>
+<div class="glass"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"]) if DATOS["cliente"] else "Propietario/a"}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div>
+<div class="foot"><span>Brava Pool · Girona</span><span>{e(DATOS["web"])}</span><span>La teva piscina sempre a punt</span></div></section>'''
 
 CSS = '''
 @page{size:A4;margin:0}*{box-sizing:border-box}
@@ -371,17 +374,19 @@ table{border-collapse:collapse;width:100%}
 .line{border-bottom:.3mm solid #44505d;height:9mm}.line.big{height:13mm}.sig small{font-size:7pt;color:var(--mut);display:block;margin-bottom:1mm}
 .blk{display:inline-block;width:34mm;border-bottom:.25mm solid #6b7785;height:4mm;vertical-align:bottom}
 .duda{background:var(--bg);padding:3mm 4mm;margin-top:6mm;font-size:8.6pt}
-.cover{background:#0a2540;color:#fff}.cover .ph{position:absolute;left:0;right:0;top:48mm;width:210mm;height:249mm;object-fit:cover;object-position:50% 30%}
-.cover .shade{position:absolute;left:0;right:0;top:48mm;bottom:0;background:linear-gradient(180deg,rgba(10,37,64,.15) 0%,rgba(10,37,64,.15) 30%,rgba(10,37,64,.92) 78%,#0a2540 100%)}
-.cover .top{position:absolute;top:0;left:0;right:0;height:48mm;background:#fff}
-.cover .band{display:flex;justify-content:space-between;align-items:center;padding:7mm 16mm 0;color:var(--ink)}.cover .band img{height:30mm}
-.cover .meta{display:flex;gap:9mm;text-align:right}.cover .meta small{display:block;font-size:6.6pt;letter-spacing:.18em;color:var(--mut)}.cover .meta b{font-size:10.5pt;color:var(--navy)}
-.cover .tt{position:absolute;left:16mm;right:16mm;top:158mm}.cover .bar{width:22mm;height:.9mm;background:var(--cy);margin-bottom:5mm}
-.cover small{font-size:7.4pt;letter-spacing:.24em;color:#8fd0e8;display:block}
-.cover h1{color:#fff;font-size:32pt;line-height:1.08;margin:3mm 0 4mm;font-weight:700;max-width:165mm}.cover .tt p{font-size:10.5pt;opacity:.9}
-.cover .for{margin-top:9mm}.cover .for b{display:block;font-size:14pt;margin:1.5mm 0 .5mm}.cover .for span{font-size:9pt;opacity:.85}
-.cover .foot{position:absolute;bottom:12mm;left:16mm;right:16mm;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8mm;border-top:.25mm solid rgba(255,255,255,.35);padding-top:4mm;font-size:8pt}
-.cover .foot b{display:block;font-size:8pt}.cover .foot span{opacity:.8}
+.cover{background:#071a30;color:#fff}.cover .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(1.15)}
+.cover .duo{position:absolute;inset:0;background:linear-gradient(160deg,rgba(7,26,48,.92) 0%,rgba(14,60,100,.55) 45%,rgba(7,26,48,.95) 100%)}
+.cover .waves{position:absolute;inset:0;width:100%;height:100%}
+.cover .slash{position:absolute;left:-30mm;top:178mm;width:290mm;height:3mm;background:#3fa4c8;transform:rotate(-14deg);box-shadow:0 0 18mm rgba(63,164,200,.7)}
+.cover .slash2{position:absolute;left:-30mm;top:186mm;width:290mm;height:.7mm;background:#8fd0e8;transform:rotate(-14deg);opacity:.7}
+.cover .logo{position:absolute;top:16mm;left:16mm}.cover .logo img{height:36mm}
+.cover .num{position:absolute;top:18mm;right:16mm;text-align:right}.cover .num small{display:block;font-size:7pt;letter-spacing:.3em;color:#8fd0e8}.cover .num b{display:block;font-size:54pt;line-height:1;font-weight:800;letter-spacing:-.03em;background:linear-gradient(180deg,#fff,#8fd0e8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .tt{position:absolute;left:16mm;right:16mm;top:86mm}.cover .chip{display:inline-block;border:.3mm solid #3fa4c8;color:#8fd0e8;font-size:7.6pt;letter-spacing:.3em;padding:1.6mm 4mm;border-radius:6mm;margin-bottom:7mm;background:rgba(63,164,200,.12)}
+.cover h1{color:#fff;font-size:50pt;line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0}.cover h1 em{font-style:normal;color:#5cc0e0}
+.cover .rule{width:26mm;height:1.2mm;background:#3fa4c8;margin:8mm 0 6mm}.cover .tt p{font-size:11.5pt;font-weight:300;opacity:.92;line-height:1.5}
+.cover .glass{position:absolute;left:16mm;right:16mm;bottom:30mm;display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:6mm;padding:6mm 7mm;background:rgba(255,255,255,.10);border:.25mm solid rgba(255,255,255,.28);border-radius:3mm;backdrop-filter:blur(4px)}
+.cover .glass small{display:block;font-size:6.6pt;letter-spacing:.24em;color:#8fd0e8;margin-bottom:1.5mm}.cover .glass b{display:block;font-size:12pt}.cover .glass span{font-size:8.4pt;opacity:.85}
+.cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;font-size:7.6pt;letter-spacing:.14em;opacity:.8;text-transform:uppercase}
 '''
 doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto {DATOS["numero"]} · Brava Pool</title><style>{CSS}</style></head><body>{portada}{corpo}</body></html>'
 oh, op = AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf"
