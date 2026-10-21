@@ -101,11 +101,8 @@ FASES = [
   ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
     "Coronación para el borde de la piscina y el muro exterior del canal, con pieza de coronación estándar para los tramos de 7,50 m y 4,00 m del labio de rebose. No incluye piezas especiales de rebose ni de esquina: se valoran aparte si el cliente las desea.",
     "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres.",
-    "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm."]),
-  ("6.2", "Prueba de lámina de agua", 1, "PA", [
-    "Antes de rejuntar, llenado hasta que la piscina desborda.",
-    "Comprobación de que el agua cae de forma uniforme en toda la longitud del rebose.",
-    "Corrección de cualquier punto que no desborde igual."])]),
+    "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm.",
+    "Revisión final del nivel del labio de rebose a lo largo de todo el perímetro, con ajuste de cualquier pieza que lo requiera antes del rejuntado."])]),
  ("7", "Rejuntado y sellados", [
   ("7.1", "Suministro y aplicación de rejuntado de cerámica, peldaños y coronación", 105, "m²", [
     "Mortero de juntas epoxi Morcemcolor Epoxi RG/R2T de Grupo Puma, apto para piscinas con cloración salina (color a confirmar por escrito).",
@@ -122,7 +119,7 @@ FASES = [
 PROMO = ("Regalo promocional: cloración salina y pH automático", [
     "Equipo de cloración salina Bright Blue Pluma WP 15, con la célula de electrólisis instalada en bypass.",
     "Regulador de pH automático Sanus NG, con sonda, bomba peristáltica, punto de inyección y depósito.",
-    "Suministro e instalación incluidos, sin ningún coste adicional. Puesta en marcha con la piscina llena, una vez realizado el llenado, y explicación del funcionamiento de los equipos.",
+    "Suministro e instalación incluidos, sin ningún coste adicional. Puesta en marcha y explicación del funcionamiento de los equipos.",
     "Garantía del fabricante: 5 años la electrónica y 4 años la célula del clorador; 2 años el regulador de pH.",
     "La instalación se realiza sobre la depuración existente, previa comprobación en la inspección inicial."])
 
@@ -324,7 +321,7 @@ cl = [("Garantía en todos nuestros trabajos", ["Al tratarse de una reforma, Bra
 pagina("Garantías y compromisos", ''.join(f'<div class="clau"><span>CLÁUSULA {i+1}</span><h3>{e(t)}</h3>{"".join(f"<p>{e(x)}</p>" for x in ps)}</div>' for i, (t, ps) in enumerate(cl)))
 
 # 8 · condiciones y aceptación
-noinc = ["Piezas especiales de Rosa Gres (esquinas, piezas laterales y de borde desbordante): se valoran aparte si el cliente las desea, por ser piezas de mayor coste.", "Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Prueba de estanqueidad y llenado, agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
+noinc = ["Piezas especiales de Rosa Gres (esquinas, piezas laterales y de borde desbordante): se valoran aparte si el cliente las desea, por ser piezas de mayor coste.", "Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Agua y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
 cond = ["Los importes de este presupuesto no incluyen IVA, que se añadirá a la factura al tipo vigente.", "Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El modelo y el color de la cerámica, de la coronación y de las juntas se confirmarán por escrito antes de su pedido.", "Las mediciones son estimadas y se ajustarán con las medidas tomadas en obra.", "El cliente facilitará el acceso a la obra y el suministro de agua y luz durante los trabajos.", f'Este presupuesto es válido hasta el {DATOS["valido_hasta"]}.']
 imp_acept = f'por un importe total de <b>{eur(base)}</b>, IVA no incluido' if not parcial else 'por el importe total que se fije en la valoración definitiva: <i class="blk"></i> (IVA incl.)'
 pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in noinc)}</ul></div><div><h2>Condiciones</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in cond)}</ul></div></div>
@@ -337,7 +334,7 @@ if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
     pagina("Resumen de revisión · fallos corregidos", f'''<p class="lead">Fallos detectados en el presupuesto original y cómo se han corregido en esta versión.</p>
 <h2>Importes y precio</h2>{lista([
-("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € (IVA no incluido) repartidos en 24 partidas."),
+("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € (IVA no incluido) repartidos en 23 partidas."),
 ("Reparto sin criterio. ", "Ahora cada partida lleva su material a coste y la mano de obra se reparte según su importancia, con datos del generador de precios CYPE. Los peldaños no bajan de su precio de compra."),
 ("DryPool mal calculado. ", "10 sacos eran unos 1,9 kg/m²; la ficha indica 4,4 kg/m² (unos 24 sacos de 20 kg)."),
 ("Reserva de cerámica corta. ", "112 m² sobre 105 m² (6,7 %); con formato grande suele hacer falta más."),
@@ -359,7 +356,7 @@ if MUESTRA:
 ("Datos erróneos. ", "«Profundidad de 1,70 a 1,70 m» y cifras duplicadas."),
 ("Plazo y cronograma. ", "«Plazo de Orientativo 5 a 6 semanas»; rejuntado y llenado coincidían en la misma semana."),
 ("Pagos contradictorios. ", "«Nunca adelanta más de lo que ya puede ver construido» frente a un 20 % a la aceptación. Reescrito por hitos."),
-("Prueba de llenado. ", "Quitada, y eliminadas las frases de «piscina llena y funcionando»."),
+("Pruebas con agua. ", "Quitadas la prueba de llenado y la de lámina de agua (su nivelación pasa a la colocación de la coronación), y eliminadas las frases de «piscina llena y funcionando»."),
 ("Forma. ", "Cliente genérico, contacto vacío, numeración desfasada y páginas casi vacías. Portada de marca en lugar de foto de archivo."),
 ("Terraza. ", "Faltaban el mobiliario y la rejilla lineal y el pavimento colindante, ahora como partida condicionada.")])}
 <h2>Pendiente de confirmar</h2>{lista([
