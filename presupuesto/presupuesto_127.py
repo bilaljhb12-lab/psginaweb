@@ -185,12 +185,14 @@ pagina("Gracias por confiar en nosotros", f'''
 <div><b>Regalo promocional</b>Cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada sin coste.</div></div>''')
 
 fotos = [("foto_terraza.jpg", "Vista general desde la terraza", "Piscina desbordante en ladera, con vistas al valle, coronación de piezas de gran formato y rejilla lineal en el pavimento."),
-         ("foto_canal.jpg", "Canal de desbordamiento", "Canal perimetral junto al lado del valle, con su muro exterior y coronación."),
+         ("foto_planta.jpg", "Vaso completo", "Vaso rectangular con bancos y escalera en el extremo, y revestimiento cerámico rectangular en el fondo."),
+         ("foto_canal.jpg", "Canal de desbordamiento, exterior", "Canal perimetral junto al lado del valle, con su muro exterior y coronación."),
+         ("foto_canal_interior.jpg", "Interior del canal", "Fondo y paredes revestidos, sumidero del canal, zonas húmedas en el fondo y manchas verdosas en la pared."),
          ("foto_escalera_banco.jpg", "Escalera y banco interior", "Escalera de acceso, banco, foco y boquilla de impulsión en pared."),
          ("foto_solera.jpg", "Fondo y sumidero", "Revestimiento cerámico rectangular y sumidero de fondo.")]
 pagina("Estado actual de la piscina", f'''<p class="lead">Fotografías de la piscina antes de la obra. Sirven de referencia para el replanteo y para comprobar, al terminar, que se respeta su geometría y su aspecto.</p>
 <div class="gal">{"".join(f'<figure><img src="assets/{f}" alt=""><figcaption><b>{e(t)}</b>{e(d)}</figcaption></figure>' for f,t,d in fotos)}</div>
-<p class="note">Fotografías del cliente tomadas antes de la intervención. Su estado real (fisuras, filtraciones, desprendimientos) se determina en la inspección técnica inicial.</p>''')
+<p class="note" style="margin-top:5mm">Fotografías del cliente tomadas antes de la intervención. Su estado real (fisuras, filtraciones, desprendimientos) se determina en la inspección técnica inicial.</p>''')
 
 # 2 · plano
 def plano_svg():
@@ -361,7 +363,7 @@ p{margin:0 0 2.6mm}ul{margin:0;padding-left:4mm}li{margin-bottom:.6mm}
 .kv{width:100%;border-collapse:collapse;font-size:8.6pt}.kv td{padding:1.9mm 0;border-bottom:.2mm solid var(--ln);vertical-align:top}.kv td:first-child{color:var(--mut);width:40%}.kv td:last-child{text-align:right;font-weight:600;color:var(--ink)}
 .kv-wide{margin-top:1mm}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:3mm 4mm;font-size:8.4pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
-.gal{display:grid;grid-template-columns:1fr 1fr;gap:5mm}.gal figure{margin:0}.gal img{width:100%;height:80mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.gal figure{margin:0}.gal img{width:100%;height:52mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
 .plano{border:.25mm solid var(--ln);padding:3mm;margin:3mm 0}.plano svg{width:100%;height:auto;display:block}
 .leyenda{width:100%;border-collapse:collapse;font-size:8.4pt;margin:3mm 0}.leyenda td{padding:1.4mm 0;border-bottom:.2mm solid var(--ln)}.leyenda td:first-child{width:38mm;color:var(--navy)}
 table{border-collapse:collapse;width:100%}
