@@ -5,7 +5,8 @@ vaso 7,50 × 4,00 m, profundidad 1,70 m, canal en L de 12,5 ml (80 cm de ancho e
 Medidas a confirmar en el replanteo: ancho del banco, nº y ancho de peldaños, aparatos en pared, altura del canal.
 """
 NAVY, CY, INK, MUT = "#1f4e79", "#3fa4c8", "#2b3440", "#5b6b7b"
-BENCH_W, STAIR_W, STEPS, CANAL_H = 0.65, 1.20, 6, 0.80     # a confirmar
+BENCH_W, STAIR_W, STEPS, CANAL_H = 0.40, 1.20, 6, 0.80     # banco ≈ 40 cm (cliente); resto a confirmar
+STEP_W = [1.20, 1.20, 1.20, 1.20, 0.65, 0.65]               # los 2/3 primeros de 1,20 m y el resto más estrechos (cliente)
 
 def planta_svg():
     S = 56.3                    # px por metro
@@ -42,13 +43,13 @@ def planta_svg():
     # banco oeste (ancho completo)
     a(f'<rect x="{X(0)}" y="{Y(0)}" width="{S*BENCH_W}" height="{S*4.0}" fill="#a9d8ec" stroke="{NAVY}"/>')
     a(f'<text transform="translate({X(BENCH_W/2)+4},{Y(1.2)}) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="{NAVY}">Banco · 4,00 m</text>')
-    # escalera desde la terraza (esquina noroeste)
-    sx, sy = X(BENCH_W), Y(4.0 - 0.28 * STEPS)
-    a(f'<rect x="{sx}" y="{sy}" width="{S*STAIR_W}" height="{S*0.28*STEPS}" fill="#d7ebf5" stroke="{NAVY}" stroke-width="1.6"/>')
-    for i in range(1, STEPS):
-        yy = sy + S * 0.28 * i
-        a(f'<line x1="{sx}" y1="{yy}" x2="{sx+S*STAIR_W}" y2="{yy}" stroke="#8fb9d0" stroke-width="1.2"/>')
-    a(f'<text x="{sx+S*STAIR_W/2}" y="{sy-6}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">Escalera · {STEPS} peldaños</text>')
+    # escalera desde la terraza (esquina noroeste): peldaños más anchos arriba y más estrechos abajo
+    sx = X(BENCH_W)
+    for i, w in enumerate(STEP_W):
+        y_n = 4.0 - 0.28 * i
+        a(f'<rect x="{sx}" y="{Y(y_n - 0.28)}" width="{S*w}" height="{S*0.28}" fill="#d7ebf5" stroke="{NAVY}" stroke-width="1.4"/>')
+    a(f'<text x="{sx + S*STAIR_W + 8}" y="{Y(4.0 - 0.28*4.6)}" font-size="10" font-weight="700" fill="#fff">Escalera · 6 peldaños</text>')
+    a(f'<text x="{sx + S*STAIR_W + 8}" y="{Y(4.0 - 0.28*4.6) + 13}" font-size="9" fill="#e8f4fa">4 de 1,20 m y 2 más estrechos</text>')
     a(f'<path d="M{sx+S*STAIR_W/2} {Y(4.0)+36} L{sx+S*STAIR_W/2} {Y(4.0)+6}" stroke="{NAVY}" stroke-width="1.6" fill="none"/><path d="M{sx+S*STAIR_W/2-5} {Y(4.0)+13} L{sx+S*STAIR_W/2} {Y(4.0)+4} L{sx+S*STAIR_W/2+5} {Y(4.0)+13}" fill="none" stroke="{NAVY}" stroke-width="1.6"/>')
     a(f'<text x="{sx+S*STAIR_W/2+10}" y="{Y(4.0)+36}" font-size="9" fill="#33698f">entrada desde la terraza</text>')
     # sumidero de fondo y del canal

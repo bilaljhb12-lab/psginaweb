@@ -86,12 +86,12 @@ FASES = [
     "Misma cerámica y cemento cola, en el fondo y las paredes del canal, con las pendientes definidas en la fase 3."]),
   ("5.3", "Suministro y colocación de cerámica Rosa Gres 31 × 62,6 cm en banco y escalera", 9, "m²", [
     "Misma cerámica y cemento cola, en el banco y en huellas y contrahuellas de la escalera."]),
-  ("5.4", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
-    "Pieza Rosa Gres ref. L98, de porcelánico antideslizante (97,9 × 31,7 × 3,8 cm), a juego con el revestimiento: forma la huella y el canto de los 6 peldaños de la escalera y del borde del banco de 4,00 m, y da agarre en zona mojada.",
+  ("5.4", "Suministro y colocación de piezas de peldaño y borde de banco Rosa Gres", 35, "ud", [
+    "Piezas Rosa Gres antideslizantes L98 (97,8 × 31,7 × 3,8 cm) y L62 (62,6 × 31,7 × 3,8 cm), más esquinas ED9/EI9, según despiece: forman la huella y el canto de los 6 peldaños (4 de 1,20 m y 2 más estrechos) y del borde del banco de 4,00 m × 40 cm, y dan agarre en zona mojada.",
     "Colocación con cortes y remates."])]),
  ("6", "Coronación y labio de rebose", [
   ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
-    "Coronación para el borde de la piscina y el muro exterior del canal, y pieza especial de labio de rebose para los tramos de 7,50 m y 4,00 m.",
+    "Coronación para el borde de la piscina y el muro exterior del canal, y pieza especial de labio de rebose (borde desbordante Rosa Gres ref. 647 o equivalente, a confirmar con el despiece) para los tramos de 7,50 m y 4,00 m.",
     "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres.",
     "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm."]),
   ("6.2", "Prueba de lámina de agua", 1, "PA", [
@@ -163,7 +163,7 @@ def head(titulo):
 cifras_i = [("Dimensiones interiores", "7,50 × 4,00 m"), ("Superficie de lámina", "30 m²"),
             ("Profundidad", "1,70 m constante"), ("Volumen máximo aprox.", "51 m³")]
 cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · 80 cm (lado largo) y 30 cm (lado corto)"),
-            ("Banco y escalera", "Banco de 4,00 m · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
+            ("Banco y escalera", "Banco de 4,00 m × 40 cm · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
 pagina("Gracias por confiar en nosotros", f'''
@@ -198,13 +198,13 @@ pagina("Estado actual de la piscina", f'''<p class="lead">Fotografías de la pis
 from plano_127 import planta_svg, secciones_svg
 pagina("Plano de la piscina", f'''<p class="lead">Planta de la piscina deducida de sus fotografías: dónde rebosa el agua, el canal, el banco, la escalera y los elementos principales.</p>
 <div class="plano">{planta_svg()}</div>
-<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad · cerámica rectangular</td></tr><tr><td><b>Canal en L</b></td><td>12,5 ml · 80 cm de ancho en el lado largo (valle) y 30 cm en el lado corto (este)</td></tr><tr><td><b>Banco</b></td><td>4,00 m, ocupa todo el ancho del extremo oeste</td></tr><tr><td><b>Escalera</b></td><td>6 peldaños, junto al banco, con acceso desde la terraza</td></tr><tr><td><b>Sumidero</b></td><td>1 de fondo y 1 en el canal</td></tr></table>
+<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad · cerámica rectangular</td></tr><tr><td><b>Canal en L</b></td><td>12,5 ml · 80 cm de ancho en el lado largo (valle) y 30 cm en el lado corto (este)</td></tr><tr><td><b>Banco</b></td><td>4,00 m de largo por ≈ 40 cm de ancho, en todo el ancho del extremo oeste</td></tr><tr><td><b>Escalera</b></td><td>6 peldaños junto al banco, con acceso desde la terraza: los 4 primeros de 1,20 m y los 2 últimos más estrechos</td></tr><tr><td><b>Sumidero</b></td><td>1 de fondo y 1 en el canal</td></tr></table>
 <p class="note">Plano orientativo, sin escala. Banco, escalera y aparatos en pared: posición y medidas a confirmar con el cliente en el replanteo.</p>''')
 
 marks = [(1, 9.0, 36.0, "Canal del lado valle", "80 cm de ancho, con fondo y paredes cerámicos. El agua rebosa hacia él por el borde largo."),
          (2, 48.0, 14.3, "Canal del lado este", "30 cm de ancho. Aquí hay un ligero desnivel en el labio, que se regulariza en la obra."),
-         (3, 37.3, 82.7, "Banco", "4,00 m, a todo el ancho del extremo de la piscina."),
-         (4, 85.3, 69.0, "Escalera", "Con acceso desde un hueco de la coronación de la terraza."),
+         (3, 37.3, 82.7, "Banco", "4,00 m de largo por unos 40 cm de ancho, a todo el ancho del extremo."),
+         (4, 85.3, 69.0, "Escalera", "Los peldaños de arriba miden 1,20 m y los de abajo son más estrechos. Entrada desde un hueco de la coronación."),
          (5, 51.6, 38.1, "Sumidero de fondo", "Uno solo, en el centro del vaso."),
          (6, 87.6, 54.7, "Aparatos en pared", "Focos y boquillas del lado de la terraza."),
          (7, 93.0, 34.7, "Rejilla lineal", "En el pavimento de la terraza, junto a la piscina.")]
@@ -217,6 +217,18 @@ pagina("Cómo desborda el agua", f'''<p class="lead">El agua rebosa por el borde
 <div class="plano">{secciones_svg()}</div>
 <p class="note">Secciones orientativas, sin escala. El desnivel está dibujado exagerado para que se aprecie; su valor real se mide con nivel láser antes de empezar (fases 1 y 3).</p>''')
 
+# piezas Rosa Gres
+piezas = [("Baldosa de revestimiento", "serie del vaso (a confirmar)", "31 × 62,6 cm", "Solera, paredes del vaso y canal desbordante. Es la superficie principal de la piscina."),
+          ("Peldaño-borde antideslizante", "L98", "97,8 × 31,7 × 3,8 cm", "Huella y canto de los peldaños anchos, y borde del banco. El acabado antideslizante da agarre en zona mojada."),
+          ("Peldaño-borde antideslizante", "L62", "62,6 × 31,7 × 3,8 cm", "Peldaños más estrechos de la parte baja de la escalera."),
+          ("Esquinas derecha / izquierda", "ED9 / EI9", "97,8 × 31,7 × 3,8 cm", "Remate de los extremos de peldaños y banco, donde el borde gira."),
+          ("Borde desbordante", "647", "62,6 × 31 × 2,6 cm", "Labio de rebose de los lados valle y este, por donde cae el agua al canal.")]
+pagina("Piezas Rosa Gres de su piscina", f'''<p class="lead">Una piscina así no se reviste con un solo tipo de pieza. Cada zona lleva la suya, y todas son de Rosa Gres para que el conjunto tenga el mismo color y acabado.</p>
+<table class="eco ph"><thead><tr><th style="width:44mm">Pieza</th><th style="width:25mm">Referencia</th><th style="width:34mm">Medida</th><th>Dónde y para qué</th></tr></thead><tbody>{"".join(f'<tr><td><b>{e(a)}</b></td><td>{e(b)}</td><td>{e(c)}</td><td>{e(d)}</td></tr>' for a,b,c,d in piezas)}</tbody></table>
+<h3>Cómo se reparten en su piscina</h3>
+<ul><li><b>Escalera:</b> 6 peldaños. Los 4 primeros miden 1,20 m y los 2 últimos son más estrechos, por lo que se combinan piezas de distinta anchura.</li><li><b>Banco:</b> 4,00 m de largo por unos 40 cm de ancho, en todo el ancho del extremo oeste.</li><li><b>Canal:</b> 80 cm de ancho en el lado valle y 30 cm en el lado este, revestido con la misma baldosa del vaso.</li></ul>
+<div class="box"><b>A confirmar con el proveedor.</b> Las referencias proceden del catálogo de piscinas de Rosa Gres y de distribuidores. La combinación exacta de piezas, la cantidad de cada una, la serie y el color se fijan con el despiece, antes del pedido.</div>''')
+
 # 3 · sistema constructivo y materiales
 capas = [("Soporte saneado y reparado (Morcemseal Todo 1 R4)", "#d9d4cb", "#2b3440"), ("Impermeabilización DryPool · 1.ª capa", "#2e6f9e", "#fff"),
          ("Malla antialcalina de refuerzo", "#7fb6d3", "#0a2540"), ("Impermeabilización DryPool · 2.ª capa", "#2e6f9e", "#fff"),
@@ -227,7 +239,7 @@ capas_svg = '<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-
 mats = [("Reparación del soporte", "Grupo Puma", "Morcemseal Todo 1 R4 · mortero tixotrópico de alta resistencia"),
         ("Impermeabilización", "Grupo Puma", "Sistema DryPool · Morcem Dry SF Plus, malla Drypool y banda Bandtec"),
         ("Revestimiento", "Rosa Gres", "Porcelánico 31 × 62,6 cm apto para inmersión (modelo y color a confirmar)"),
-        ("Bancos y escalera", "Rosa Gres", "Pieza L98 de porcelánico antideslizante, 97,9 × 31,7 × 3,8 cm (color a confirmar)"),
+        ("Bancos y escalera", "Rosa Gres", "Peldaño-borde antideslizante L98 y L62, con esquinas ED9/EI9 (ver página de piezas; color a confirmar)"),
         ("Mortero-cola", "Grupo Puma", "Pegoland Flex C2 TE S1 (sistema DryPool)"),
         ("Rejuntado", "Grupo Puma", "Morcemcolor Epoxi RG/R2T, apto para piscinas con cloración salina (color a confirmar)"),
         ("Coronación", "Por definir", "Modelo y acabado a confirmar por escrito"),
