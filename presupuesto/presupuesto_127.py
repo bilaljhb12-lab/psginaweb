@@ -152,11 +152,11 @@ total = round(base + iva_imp, 2)
 def pagos():
     out, acc = [], 0.0
     for i, (pct, txt) in enumerate(DATOS["pagos"]):
-        im = round(total * pct / 100, 2) if i < len(DATOS["pagos"]) - 1 else round(total - acc, 2)
+        im = round(base * pct / 100, 2) if i < len(DATOS["pagos"]) - 1 else round(base - acc, 2)
         acc += im; out.append((pct, txt, im))
     return out
 PAGOS = pagos()
-assert abs(sum(x[2] for x in PAGOS) - total) < 0.005 and sum(x[0] for x in DATOS["pagos"]) == 100
+assert abs(sum(x[2] for x in PAGOS) - base) < 0.005 and sum(x[0] for x in DATOS["pagos"]) == 100
 
 # ---------- piezas de página ----------
 paginas = []
@@ -286,7 +286,7 @@ pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 
 <tr class="pg"><td>Pagos</td><td class="gc"><div>{pagos_row}</div></td></tr></tbody></table>
 <p class="note"><span class="sw"></span> Tiempo de curado del mortero según ficha técnica del fabricante. Planificación orientativa: puede variar según el tipo de terreno, la meteorología y la entrega de materiales; cualquier cambio se comunicará con antelación.</p>
 <h2>Forma de pago</h2>
-<table class="eco"><thead><tr><th style="width:16mm">Pago</th><th>Hito</th><th style="width:34mm;text-align:right">Importe con IVA</th></tr></thead><tbody>{pagos_tabla}</tbody></table>
+<table class="eco"><thead><tr><th style="width:16mm">Pago</th><th>Hito</th><th style="width:48mm;text-align:right">Importe (IVA no incluido)</th></tr></thead><tbody>{pagos_tabla}</tbody></table>
 <table class="kv pago"><tr><td>Forma de pago</td><td>Transferencia bancaria</td></tr><tr><td>Titular</td><td>{e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</td></tr><tr><td>Banco</td><td>{e(DATOS["banco"])}</td></tr><tr><td>IBAN</td><td><b>{e(DATOS["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {DATOS["numero"]}</td></tr></table>''')
 
 # 5 · descripción de trabajos (se pagina a mano por fases)
@@ -310,12 +310,10 @@ res = ''.join(f'<tr><td class="rn">{int(f):02d}</td><td>Fase {f} · {e(t)}</td><
 pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos los materiales, la mano de obra, el transporte y la retirada de escombros incluidos.</p>
 <table class="eco res"><thead><tr><th style="width:14mm">Cap.</th><th>Concepto</th><th style="width:34mm;text-align:right">Importe</th></tr></thead><tbody>{res}
 <tr><td class="rn">+</td><td>{e(PROMO[0])}</td><td class="n">Regalo</td></tr>
-<tr class="sub"><td colspan="2">Base imponible</td><td class="n">{eur(base)}</td></tr>
-<tr><td colspan="2">IVA {DATOS["iva"]} %</td><td class="n">{eur(iva_imp)}</td></tr>
-<tr class="tot"><td colspan="2">Total presupuesto (IVA incl.)</td><td class="n">{eur(total)}</td></tr></tbody></table>
+<tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="n">{eur(base)}</td></tr></tbody></table>
 <p class="note">Precio total cerrado. El reparto entre fases y partidas es orientativo y no modifica el total. Incluye cerámica, piezas de coronación y peldaños; no incluye piezas especiales, que se valoran aparte si el cliente las desea.</p>
 <div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala el equipo de cloración salina Bright Blue Pluma WP 15 con regulador de pH automático Sanus NG, instalado y sin ningún coste adicional.</div>
-<p class="note">El tipo de IVA aplicable depende de las condiciones de la vivienda y de la obra; se confirma al cerrar el presupuesto.</p>''')
+<div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>''')
 
 # 7 · garantías
 cl = [("Garantía en todos nuestros trabajos", ["Al tratarse de una reforma, Brava Pool garantiza el nuevo revestimiento durante 3 años y todos los trabajos realizados y la mano de obra durante 2 años. Estas garantías comerciales se suman a las garantías legales que correspondan según la normativa vigente.", "El servicio técnico y las reparaciones en garantía se atienden durante todo el año, sin limitación de temporada. Ante cualquier incidencia comunicada por teléfono, WhatsApp o correo electrónico, respondemos por escrito en un plazo máximo de 48 horas."]),
@@ -326,22 +324,23 @@ pagina("Garantías y compromisos", ''.join(f'<div class="clau"><span>CLÁUSULA {
 
 # 8 · condiciones y aceptación
 noinc = ["Piezas especiales de Rosa Gres (esquinas, piezas laterales y de borde desbordante): se valoran aparte si el cliente las desea, por ser piezas de mayor coste.", "Reparación de daños estructurales, tuberías o pasamuros ocultos que aparezcan al desmontar (se presupuestarán aparte).", "Equipos de filtración y depuración, salvo el equipo de sal de la promoción.", "Pavimento exterior de la terraza, salvo las piezas colindantes que sea imprescindible levantar y reponer (se valoran tras la inspección).", "Prueba de estanqueidad y llenado, agua para el llenado y productos químicos de puesta en marcha.", "Licencia o permiso de obra y tasas municipales, si fueran necesarios."]
-cond = ["Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El modelo y el color de la cerámica, de la coronación y de las juntas se confirmarán por escrito antes de su pedido.", "Las mediciones son estimadas y se ajustarán con las medidas tomadas en obra.", "El cliente facilitará el acceso a la obra y el suministro de agua y luz durante los trabajos.", f'Este presupuesto es válido hasta el {DATOS["valido_hasta"]}.']
-imp_acept = f'por un importe total de <b>{eur(total)}</b> IVA incluido' if not parcial else 'por el importe total que se fije en la valoración definitiva: <i class="blk"></i> (IVA incl.)'
+cond = ["Los importes de este presupuesto no incluyen IVA, que se añadirá a la factura al tipo vigente.", "Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El modelo y el color de la cerámica, de la coronación y de las juntas se confirmarán por escrito antes de su pedido.", "Las mediciones son estimadas y se ajustarán con las medidas tomadas en obra.", "El cliente facilitará el acceso a la obra y el suministro de agua y luz durante los trabajos.", f'Este presupuesto es válido hasta el {DATOS["valido_hasta"]}.']
+imp_acept = f'por un importe total de <b>{eur(base)}</b>, IVA no incluido' if not parcial else 'por el importe total que se fije en la valoración definitiva: <i class="blk"></i> (IVA incl.)'
 pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in noinc)}</ul></div><div><h2>Condiciones</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in cond)}</ul></div></div>
 <div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente declara conocer y aceptar el presente presupuesto n.º {DATOS["numero"]}, {imp_acept}, sus condiciones y la forma de pago indicada.</p>
 <div class="sig"><div><div class="line"></div><small>Nombre y apellidos</small><div class="line"></div><small>DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma del cliente</small><div class="line big"></div><small>Por Brava Pool</small></div></div></div>
+<div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <div class="duda"><b>Brava Pool</b> · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])} · {e(DATOS["dir_emisor"])}<br><b>¿Alguna duda?</b> {e(DATOS["contacto"])} · {e(DATOS["web"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}{(" · " + e(DATOS["email"])) if DATOS["email"] else ""}</div>''')
 
 if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
     pagina("Resumen de revisión · fallos corregidos", f'''<p class="lead">Fallos detectados en el presupuesto original y cómo se han corregido en esta versión.</p>
 <h2>Importes y precio</h2>{lista([
-("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € sin IVA repartidos en 24 partidas."),
+("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € (IVA no incluido) repartidos en 24 partidas."),
 ("Reparto sin criterio. ", "Ahora cada partida lleva su material a coste y la mano de obra se reparte según su importancia, con datos del generador de precios CYPE. Los peldaños no bajan de su precio de compra."),
 ("DryPool mal calculado. ", "10 sacos eran unos 1,9 kg/m²; la ficha indica 4,4 kg/m² (unos 24 sacos de 20 kg)."),
 ("Reserva de cerámica corta. ", "112 m² sobre 105 m² (6,7 %); con formato grande suele hacer falta más."),
-("IVA sin comprobar. ", "Se mantiene el 21 %; el 10 % de rehabilitación exige que los materiales sean menos del 40 % de la base.")])}
+("IVA. ", "Los importes se presentan sin IVA, con aviso expreso: se añade a la factura al tipo vigente.")])}
 <h2>Materiales</h2>{lista([
 ("Producto no verificable. ", "«Morcem Dry F» no consta; el mortero del sistema DryPool es Morcem Dry SF Plus."),
 ("Sistema incompleto. ", "Ahora es el sistema DryPool de Grupo Puma completo: Morcemseal Todo 1 R4, Morcem Dry SF Plus, malla Drypool, Bandtec, Pegoland Flex C2 TE S1 y Morcemcolor Epoxi."),
@@ -370,7 +369,7 @@ if MUESTRA:
 ("Piezas especiales. ", "Esquinas, borde desbordante y otras piezas especiales de Rosa Gres no están incluidas; se valoran aparte si el cliente las quiere."),
 ("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),
 ("Junta. ", "Epoxi propuesto (apto para cloración salina) y color."),
-("Cliente. ", "Nombre, teléfono, datos de pago e IVA aplicable.")])}''')
+("Cliente. ", "Confirmar la grafía del apellido (Phillipe / Philippe).")])}''')
 
 N = len(paginas) + 1
 corpo = ""
@@ -405,6 +404,7 @@ p{margin:0 0 2.6mm}ul{margin:0;padding-left:4mm}li{margin-bottom:.6mm}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:8mm}.cols2{display:grid;grid-template-columns:1fr 1fr;gap:9mm}.cols2 h2{margin-top:0}
 .kv{width:100%;border-collapse:collapse;font-size:8.6pt}.kv td{padding:1.3mm 0;border-bottom:.2mm solid var(--ln);vertical-align:top}.kv td:first-child{color:var(--mut);width:40%}.kv td:last-child{text-align:right;font-weight:600;color:var(--ink)}
 .kv-wide{margin-top:1mm}
+.aviso{margin:5mm 0 3mm;border:.4mm solid #c9822b;background:#fbf3e6;padding:3mm 4mm;font-size:9pt;color:#5a3d0f}.aviso b{color:#8a5a14;letter-spacing:.06em;text-transform:uppercase}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:2.2mm 3.5mm;font-size:8.1pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.gal figure{margin:0}.gal img{width:100%;height:52mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
 .ann{display:grid;grid-template-columns:82mm 1fr;gap:7mm;margin-top:3mm}.phw{position:relative}.phw img{width:100%;display:block}.pin{position:absolute;transform:translate(-50%,-50%);width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;border:.45mm solid #fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 .3mm 1mm rgba(0,0,0,.4)}.lg{margin:0;padding:0;list-style:none}.lg li{display:flex;gap:3mm;margin-bottom:4mm;font-size:8.6pt}.lg b{display:block;color:var(--navy);font-size:9.4pt}.mk2{flex:none;width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center}
