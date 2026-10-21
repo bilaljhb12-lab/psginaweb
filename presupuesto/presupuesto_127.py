@@ -392,10 +392,10 @@ portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jp
 <div class="glass"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"]) if DATOS["cliente"] else "Propietario/a"}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div>
 <div class="foot"><span>Brava Pool · Sant Feliu de Guíxols</span><span>{e(DATOS["telefono"])} · {e(DATOS["web"])}</span><span>La teva piscina sempre a punt</span></div></section>'''
 
-portada_carta = f'''<section class="page cover2"><div class="ph"></div><div class="sh"></div><div class="num">{DATOS["numero"]}</div>
-<div class="lg"><img src="assets/logo_blanco.png" alt="Brava Pool"></div><div class="tg">PRESUPUESTO Nº {DATOS["numero"]}</div>
-<div class="tt"><div class="chip">PROPUESTA DE REFORMA</div><h1>Rehabilitación<br>integral<br><em>de piscina</em></h1><div class="bar"></div><div class="sb">Piscina desbordante 7,50 × 4 m · Calonge<br>Impermeabilización, cerámica y coronación, con control de calidad en cada fase.</div></div>
-<div class="sello">SISTEMA<b>100 %</b>PARA PISCINA<br>Puma · Rosa Gres</div>
+portada_carta = f'''<section class="page cover3"><div class="top"></div><div class="line"></div>
+<div class="lg"><img src="assets/logo_blanco.png" alt="Brava Pool"></div><div class="n"><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div><div class="chip">PROPUESTA DE REFORMA</div>
+<h1>Rehabilitación integral<br><em>de piscina</em></h1><div class="sb">Piscina desbordante 7,50 × 4 m en Calonge. Impermeabilización, cerámica y coronación, con control de calidad en cada fase.</div>
+<div class="sello">SISTEMA<b>100 %</b>PARA PISCINA</div>
 <div class="ft"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"])}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div></section>'''
 if CARTA:
     portada = portada_carta
@@ -502,6 +502,18 @@ h3{color:var(--navy)}
 .kv td:first-child,.leyenda td:first-child{color:var(--terra)}
 .gc i{background:var(--navy)}.pg .gc span{background:var(--terra)}.pg td{color:var(--terra)}
 .mk2,.pin{background:var(--navy)}
+.cover3{background:#f8f3e9;color:#0b2a45}
+.cover3 .top{position:absolute;left:0;right:0;top:0;height:640px;background:url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 78%,0 100%)}
+.cover3 .top::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35))}
+.cover3 .line{position:absolute;left:0;right:0;top:0;height:660px;background:#b8603c;clip-path:polygon(0 100%,100% 78%,100% 79.4%,0 101.4%);z-index:2}
+.cover3 .lg{position:absolute;left:56px;top:48px;z-index:3}.cover3 .lg img{height:128px}
+.cover3 .n{position:absolute;right:56px;top:56px;z-index:3;text-align:right;color:#fff}.cover3 .n small{display:block;font-size:11px;letter-spacing:.32em;color:#8fd0e8}.cover3 .n b{font-size:96px;font-weight:900;line-height:.95;letter-spacing:-3px}
+.cover3 .chip{position:absolute;left:56px;top:560px;z-index:3;border:1px solid #fff;color:#fff;font-size:11px;letter-spacing:.32em;padding:7px 16px;border-radius:30px}
+.cover3 h1{position:absolute;left:56px;top:690px;margin:0;font-size:58px;line-height:1;font-weight:800;letter-spacing:-2px;color:#0b2a45}.cover3 h1 em{font-style:normal;color:#1f8aa0}
+.cover3 .sb{position:absolute;left:56px;top:880px;width:520px;font-size:16.5px;line-height:1.5;color:#4a4a42;font-weight:300}
+.cover3 .sello{position:absolute;right:56px;top:860px;width:124px;height:124px;border-radius:50%;background:#0b2a45;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:10px;letter-spacing:.14em;box-shadow:0 8px 24px rgba(11,42,69,.3)}.cover3 .sello b{font-size:26px;letter-spacing:0;margin:2px 0;color:#e7b79e}
+.cover3 .ft{position:absolute;left:56px;right:56px;bottom:46px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;border-top:1px solid #d9cfb8;padding-top:18px}
+.cover3 .ft small{display:block;font-size:9.5px;letter-spacing:.24em;color:#b8603c;margin-bottom:5px}.cover3 .ft b{font-size:17px}.cover3 .ft span{display:block;font-size:12px;color:#6b6455;margin-top:2px}
 .cover2{background:#061a30;color:#fff}
 .cover2 .ph{position:absolute;inset:0;background:url(assets/portada.jpg) center/cover;opacity:.6;filter:saturate(1.2) contrast(1.1)}
 .cover2 .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,26,48,.55) 0%,rgba(10,48,84,.15) 38%,rgba(6,26,48,.88) 72%,#061a30 100%)}
