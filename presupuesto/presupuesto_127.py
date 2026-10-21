@@ -329,6 +329,10 @@ pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</
 <div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <div class="duda"><b>Brava Pool</b> · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])} · {e(DATOS["dir_emisor"])}<br><b>¿Alguna duda?</b> {e(DATOS["contacto"])} · {e(DATOS["web"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}{(" · " + e(DATOS["email"])) if DATOS["email"] else ""}</div>''')
 
+# Planificación y forma de pago: penúltima página (los importes no se ven al principio)
+_i = next(i for i, (t, c, _) in enumerate(paginas) if t == "Planificación de la obra")
+paginas.insert(len(paginas) - 1, paginas.pop(_i))
+
 if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
     pagina("Resumen de revisión · fallos corregidos", f'''<p class="lead">Fallos detectados en el presupuesto original y cómo se han corregido en esta versión.</p>
