@@ -25,6 +25,8 @@ DATOS = {
     "emisor": "Bilal El Jouhari El Bahraoui",
     "nif_emisor": "42366327M",
     "dir_emisor": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
+    "banco": "CaixaBank (La Caixa)",
+    "iban": "ES49 2100 0597 1701 0079 4886",
     "email": "",                                # pendiente
     "web": "www.bravapool.com",
     "iva": 21,
@@ -285,7 +287,7 @@ pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 
 <p class="note"><span class="sw"></span> Tiempo de curado del mortero según ficha técnica del fabricante. Planificación orientativa: puede variar según el tipo de terreno, la meteorología y la entrega de materiales; cualquier cambio se comunicará con antelación.</p>
 <h2>Forma de pago</h2>
 <table class="eco"><thead><tr><th style="width:16mm">Pago</th><th>Hito</th><th style="width:34mm;text-align:right">Importe con IVA</th></tr></thead><tbody>{pagos_tabla}</tbody></table>
-<p class="note">Forma de pago: transferencia bancaria a nombre de {e(DATOS["emisor"])} (NIF {e(DATOS["nif_emisor"])}).{" Los importes se calcularán al cerrar la valoración completa." if parcial else ""}</p>''')
+<table class="kv pago"><tr><td>Forma de pago</td><td>Transferencia bancaria</td></tr><tr><td>Titular</td><td>{e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</td></tr><tr><td>Banco</td><td>{e(DATOS["banco"])}</td></tr><tr><td>IBAN</td><td><b>{e(DATOS["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {DATOS["numero"]}</td></tr></table>''')
 
 # 5 · descripción de trabajos (se pagina a mano por fases)
 def fase_html(f, titulo, ps):
