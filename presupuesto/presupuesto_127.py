@@ -33,7 +33,7 @@ DATOS = {
     "email": "",                                # pendiente
     "web": "www.bravapool.com",
     "iva": 21,
-    "precio_cerrado": 22578.00,                 # base imponible acordada (sin IVA)
+    "precio_cerrado": 23870.00,                 # base imponible acordada (sin IVA)
     "pagos": [(20, "A la aceptación del presupuesto (reserva de obra y pedido de materiales)"),
               (30, "Al terminar la Fase 3, antes de impermeabilizar"),
               (30, "Al terminar la Fase 4, antes de colocar la cerámica"),
@@ -333,7 +333,7 @@ if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
     pagina("Resumen de revisión · fallos corregidos", f'''<p class="lead">Fallos detectados en el presupuesto original y cómo se han corregido en esta versión.</p>
 <h2>Importes y precio</h2>{lista([
-("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € (IVA no incluido) repartidos en 23 partidas."),
+("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 23.870,00 € (IVA no incluido) repartidos en 23 partidas."),
 ("Reparto sin criterio. ", "Ahora cada partida lleva su material a coste y la mano de obra se reparte según su importancia, con datos del generador de precios CYPE. Los peldaños no bajan de su precio de compra."),
 ("DryPool mal calculado. ", "10 sacos eran unos 1,9 kg/m²; la ficha indica 4,4 kg/m² (unos 24 sacos de 20 kg)."),
 ("Reserva de cerámica corta. ", "112 m² sobre 105 m² (6,7 %); con formato grande suele hacer falta más."),
