@@ -195,47 +195,27 @@ pagina("Estado actual de la piscina", f'''<p class="lead">Fotografías de la pis
 <p class="note" style="margin-top:5mm">Fotografías del cliente tomadas antes de la intervención. Su estado real (fisuras, filtraciones, desprendimientos) se determina en la inspección técnica inicial.</p>''')
 
 # 2 · plano
-def plano_svg():
-    return '''<svg viewBox="0 0 640 560" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
-<rect width="640" height="560" fill="#fff"/>
-<text x="24" y="22" font-size="11" fill="#5b6b7b" letter-spacing="1.6">PLANTA</text>
-<text x="600" y="22" text-anchor="end" font-size="10" fill="#5b6b7b" letter-spacing="1.2">LADO VALLE</text>
-<rect x="60" y="34" width="442" height="48" fill="#cfe7f2" stroke="#1f4e79" stroke-width="2"/>
-<rect x="482" y="34" width="20" height="300" fill="#cfe7f2" stroke="#1f4e79" stroke-width="2"/>
-<text x="271" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#1f4e79">Canal desbordante en L · 12,5 ml · ancho 0,80 m</text>
-<text transform="translate(520,200) rotate(90)" text-anchor="middle" font-size="10" fill="#1f4e79">Canal lado corto · 0,30 m</text>
-<rect x="60" y="82" width="422" height="252" fill="#3a8fbf" stroke="#1f4e79" stroke-width="2"/>
-<rect x="60" y="82" width="46" height="252" fill="#a9d8ec"/>
-<g stroke="#8fb9d0" stroke-width="1.2" fill="#d7ebf5"><rect x="106" y="270" width="78" height="64"/>
-<line x1="106" y1="286" x2="184" y2="286"/><line x1="106" y1="302" x2="184" y2="302"/><line x1="106" y1="318" x2="184" y2="318"/></g>
-<text transform="translate(88,150) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="#1f4e79">Banco 4,00 m</text>
-<text x="145" y="262" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fff">Escalera</text>
-<text x="300" y="170" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Vaso 7,50 × 4,00 m</text>
-<text x="300" y="190" text-anchor="middle" font-size="12" fill="#e8f4fa">Profundidad 1,70 m</text>
-<g stroke="#5b6b7b" stroke-width="1" fill="none"><line x1="60" y1="352" x2="482" y2="352"/><line x1="60" y1="346" x2="60" y2="358"/><line x1="482" y1="346" x2="482" y2="358"/>
-<line x1="36" y1="82" x2="36" y2="334"/><line x1="30" y1="82" x2="42" y2="82"/><line x1="30" y1="334" x2="42" y2="334"/></g>
-<text x="271" y="371" text-anchor="middle" font-size="12" fill="#2b3440">7,50 m</text>
-<text transform="translate(22,208) rotate(-90)" text-anchor="middle" font-size="12" fill="#2b3440">4,00 m</text>
-<text x="271" y="392" text-anchor="middle" font-size="9.5" fill="#5b6b7b" letter-spacing="1.2">LADO TERRAZA Y VIVIENDA</text>
-<text x="24" y="430" font-size="11" fill="#5b6b7b" letter-spacing="1.6">SECCIÓN TRANSVERSAL</text>
-<rect x="92" y="468" width="300" height="70" fill="#eee6d8"/>
-<rect x="100" y="456" width="270" height="68" fill="#3a8fbf" stroke="#1f4e79" stroke-width="3"/>
-<rect x="100" y="456" width="48" height="68" fill="#a9d8ec" stroke="#1f4e79" stroke-width="2"/>
-<rect x="380" y="456" width="54" height="40" fill="#cfe7f2" stroke="#1f4e79" stroke-width="3"/>
-<line x1="100" y1="468" x2="440" y2="468" stroke="#fff" stroke-dasharray="4 3" stroke-width="1.2"/>
-<text x="255" y="452" text-anchor="middle" font-size="10" fill="#5b6b7b">Lámina de agua a nivel del rebose</text>
-<text x="262" y="502" text-anchor="middle" font-size="11" fill="#fff">Cerámica Rosa Gres sobre DryPool</text>
-<text x="124" y="494" text-anchor="middle" font-size="10" fill="#1f4e79">Banco</text>
-<text x="407" y="480" text-anchor="middle" font-size="10" fill="#1f4e79">Canal</text>
-<g stroke="#5b6b7b" stroke-width="1" fill="none"><line x1="78" y1="456" x2="78" y2="524"/><line x1="72" y1="456" x2="84" y2="456"/><line x1="72" y1="524" x2="84" y2="524"/>
-<line x1="380" y1="512" x2="434" y2="512"/><line x1="380" y1="506" x2="380" y2="518"/><line x1="434" y1="506" x2="434" y2="518"/></g>
-<text x="66" y="494" text-anchor="end" font-size="11" fill="#2b3440">1,70</text><text x="407" y="530" text-anchor="middle" font-size="11" fill="#2b3440">≈ 0,80</text>
-</svg>'''
+from plano_127 import planta_svg, secciones_svg
+pagina("Plano de la piscina", f'''<p class="lead">Planta de la piscina deducida de sus fotografías: dónde rebosa el agua, el canal, el banco, la escalera y los elementos principales.</p>
+<div class="plano">{planta_svg()}</div>
+<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad · cerámica rectangular</td></tr><tr><td><b>Canal en L</b></td><td>12,5 ml · 80 cm de ancho en el lado largo (valle) y 30 cm en el lado corto (este)</td></tr><tr><td><b>Banco</b></td><td>4,00 m, ocupa todo el ancho del extremo oeste</td></tr><tr><td><b>Escalera</b></td><td>6 peldaños, junto al banco, con acceso desde la terraza</td></tr><tr><td><b>Sumidero</b></td><td>1 de fondo y 1 en el canal</td></tr></table>
+<p class="note">Plano orientativo, sin escala. Banco, escalera y aparatos en pared: posición y medidas a confirmar con el cliente en el replanteo.</p>''')
 
-pagina("Plano de la piscina", f'''<p class="lead">Distribución de la piscina de 7,50 × 4 m y situación de los elementos principales.</p>
-<div class="plano">{plano_svg()}</div>
-<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad</td></tr><tr><td><b>Banco</b></td><td>4,00 m en el extremo del vaso</td></tr><tr><td><b>Escalera</b></td><td>1 · 6 peldaños</td></tr><tr><td><b>Canal desbordante</b></td><td>En L · 12,5 ml · 80 cm de ancho en el lado largo y 30 cm en el corto</td></tr></table>
-<p class="note">Plano orientativo, sin escala. Las medidas y la posición definitiva de cada elemento se confirman con el cliente en el replanteo.</p>''')
+marks = [(1, 9.0, 36.0, "Canal del lado valle", "80 cm de ancho, con fondo y paredes cerámicos. El agua rebosa hacia él por el borde largo."),
+         (2, 48.0, 14.3, "Canal del lado este", "30 cm de ancho. Aquí hay un ligero desnivel en el labio, que se regulariza en la obra."),
+         (3, 37.3, 82.7, "Banco", "4,00 m, a todo el ancho del extremo de la piscina."),
+         (4, 85.3, 69.0, "Escalera", "Con acceso desde un hueco de la coronación de la terraza."),
+         (5, 51.6, 38.1, "Sumidero de fondo", "Uno solo, en el centro del vaso."),
+         (6, 87.6, 54.7, "Aparatos en pared", "Focos y boquillas del lado de la terraza."),
+         (7, 93.0, 34.7, "Rejilla lineal", "En el pavimento de la terraza, junto a la piscina.")]
+pagina("Su piscina sobre las fotos", f'''<p class="lead">Vista aérea de su piscina con los elementos que intervienen en la obra.</p>
+<div class="ann"><div class="phw"><img src="assets/foto_planta.jpg" alt="">{"".join(f'<span class="pin" style="left:{x}%;top:{y}%">{n}</span>' for n,x,y,_,_ in marks)}</div>
+<ol class="lg">{"".join(f'<li><span class="mk2">{n}</span><div><b>{e(t)}</b>{e(d)}</div></li>' for n,_,_,t,d in marks)}</ol></div>
+<p class="note">Las marcas indican la zona aproximada de cada elemento. La posición y las medidas definitivas se confirman en el replanteo.</p>''')
+
+pagina("Cómo desborda el agua", f'''<p class="lead">El agua rebosa por el borde del lado valle y cae a un canal de 80 cm. En el lado este el canal es más estrecho, de 30 cm, y el labio tiene un ligero desnivel que se corrige durante la obra.</p>
+<div class="plano">{secciones_svg()}</div>
+<p class="note">Secciones orientativas, sin escala. El desnivel está dibujado exagerado para que se aprecie; su valor real se mide con nivel láser antes de empezar (fases 1 y 3).</p>''')
 
 # 3 · sistema constructivo y materiales
 capas = [("Soporte saneado y reparado (Morcemseal Todo 1 R4)", "#d9d4cb", "#2b3440"), ("Impermeabilización DryPool · 1.ª capa", "#2e6f9e", "#fff"),
@@ -363,6 +343,7 @@ p{margin:0 0 2.6mm}ul{margin:0;padding-left:4mm}li{margin-bottom:.6mm}
 .kv-wide{margin-top:1mm}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:3mm 4mm;font-size:8.4pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.gal figure{margin:0}.gal img{width:100%;height:52mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
+.ann{display:grid;grid-template-columns:82mm 1fr;gap:7mm;margin-top:3mm}.phw{position:relative}.phw img{width:100%;display:block}.pin{position:absolute;transform:translate(-50%,-50%);width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;border:.45mm solid #fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 .3mm 1mm rgba(0,0,0,.4)}.lg{margin:0;padding:0;list-style:none}.lg li{display:flex;gap:3mm;margin-bottom:4mm;font-size:8.6pt}.lg b{display:block;color:var(--navy);font-size:9.4pt}.mk2{flex:none;width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center}
 .plano{border:.25mm solid var(--ln);padding:3mm;margin:3mm 0}.plano svg{width:100%;height:auto;display:block}
 .leyenda{width:100%;border-collapse:collapse;font-size:8.4pt;margin:3mm 0}.leyenda td{padding:1.4mm 0;border-bottom:.2mm solid var(--ln)}.leyenda td:first-child{width:38mm;color:var(--navy)}
 table{border-collapse:collapse;width:100%}
