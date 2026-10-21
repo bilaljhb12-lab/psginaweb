@@ -18,10 +18,13 @@ DATOS = {
     "numero": "127",
     "fecha": "21/10/2026",
     "valido_hasta": "20/11/2026",
-    "cliente": "",                              # nombre del cliente (pendiente)
-    "direccion": "C/ Anoia, 14 · 17251 Calonge (Girona)",
+    "cliente": "Sr. Phillipe Tanner",
+    "direccion": "Carrer Anoia, 14 · 17251 Calonge (Girona)",
     "contacto": "Bilal",
-    "telefono": "",                             # pendiente
+    "telefono": "692 490 066",
+    "emisor": "Bilal El Jouhari El Bahraoui",
+    "nif_emisor": "42366327M",
+    "dir_emisor": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
     "email": "",                                # pendiente
     "web": "www.bravapool.com",
     "iva": 21,
@@ -175,7 +178,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <p>Reparación, impermeabilización, mortero-cola y juntas son de una misma marca, Grupo Puma: el sistema DryPool, específico para piscinas. El presupuesto incluye la cerámica, las piezas de coronación y los peldaños; las piezas especiales de Rosa Gres, de mayor coste, se valoran aparte si usted lo desea.</p>
 <p>Cada fase se revisa antes de empezar la siguiente y le entregamos la obra terminada.</p>
 <p>Quedamos a su disposición para resolver cualquier duda o ajustar la propuesta a lo que necesite.</p>
-<p class="firma"><b>{e(DATOS["contacto"])}</b><br>Brava Pool</p>
+<p class="firma"><b>{e(DATOS["emisor"])}</b><br>Brava Pool · {e(DATOS["telefono"])}</p>
 <h2>Su piscina en cifras</h2><div class="cols">{kv(cifras_i)}{kv(cifras_d)}</div>
 <div class="kv-wide">{kv([("Plazo estimado", "5 a 6 semanas desde el inicio de obra, a confirmar")])}</div>
 <h2>Nuestro compromiso</h2>
@@ -282,7 +285,7 @@ pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 
 <p class="note"><span class="sw"></span> Tiempo de curado del mortero según ficha técnica del fabricante. Planificación orientativa: puede variar según el tipo de terreno, la meteorología y la entrega de materiales; cualquier cambio se comunicará con antelación.</p>
 <h2>Forma de pago</h2>
 <table class="eco"><thead><tr><th style="width:16mm">Pago</th><th>Hito</th><th style="width:34mm;text-align:right">Importe con IVA</th></tr></thead><tbody>{pagos_tabla}</tbody></table>
-<p class="note">Forma de pago: transferencia bancaria a nombre de Brava Pool.{" Los importes se calcularán al cerrar la valoración completa." if parcial else ""}</p>''')
+<p class="note">Forma de pago: transferencia bancaria a nombre de {e(DATOS["emisor"])} (NIF {e(DATOS["nif_emisor"])}).{" Los importes se calcularán al cerrar la valoración completa." if parcial else ""}</p>''')
 
 # 5 · descripción de trabajos (se pagina a mano por fases)
 def fase_html(f, titulo, ps):
@@ -326,7 +329,7 @@ imp_acept = f'por un importe total de <b>{eur(total)}</b> IVA incluido' if not p
 pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in noinc)}</ul></div><div><h2>Condiciones</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in cond)}</ul></div></div>
 <div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente declara conocer y aceptar el presente presupuesto n.º {DATOS["numero"]}, {imp_acept}, sus condiciones y la forma de pago indicada.</p>
 <div class="sig"><div><div class="line"></div><small>Nombre y apellidos</small><div class="line"></div><small>DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma del cliente</small><div class="line big"></div><small>Por Brava Pool</small></div></div></div>
-<div class="duda"><b>¿Alguna duda?</b> {e(DATOS["contacto"])} · {e(DATOS["web"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}{(" · " + e(DATOS["email"])) if DATOS["email"] else ""}</div>''')
+<div class="duda"><b>Brava Pool</b> · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])} · {e(DATOS["dir_emisor"])}<br><b>¿Alguna duda?</b> {e(DATOS["contacto"])} · {e(DATOS["web"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}{(" · " + e(DATOS["email"])) if DATOS["email"] else ""}</div>''')
 
 if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
@@ -371,7 +374,7 @@ N = len(paginas) + 1
 corpo = ""
 for i, (t, c, _) in enumerate(paginas, start=2):
     corpo += f'''<section class="page"><header><div><div class="eyebrow">PRESUPUESTO {DATOS["numero"]}</div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">{c}</div>
-<footer><span>Brava Pool · {e(DATOS["web"])}</span><span>Presupuesto {DATOS["numero"]} · Página {i} de {N}</span></footer></section>'''
+<footer><span>Brava Pool · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</span><span>Presupuesto {DATOS["numero"]} · Página {i} de {N}</span></footer></section>'''
 
 portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jpg" alt=""><div class="duo"></div>
 <svg class="waves" viewBox="0 0 210 297" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#fff" stroke-opacity=".10" stroke-width=".25">{''.join(f'<path d="M-10 {200+i*6} C 40 {180+i*6}, 90 {225+i*6}, 130 {203+i*6} S 200 {185+i*6}, 230 {208+i*6}"/>' for i in range(16))}</g></svg>
@@ -380,7 +383,7 @@ portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jp
 <div class="num"><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div>
 <div class="tt"><div class="chip">PROPUESTA DE REFORMA</div><h1>Rehabilitación<br>integral<br><em>de piscina</em></h1><div class="rule"></div><p>Desmontaje, impermeabilización y nueva cerámica,<br>con control de calidad en cada fase.</p></div>
 <div class="glass"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"]) if DATOS["cliente"] else "Propietario/a"}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div>
-<div class="foot"><span>Brava Pool · Girona</span><span>{e(DATOS["web"])}</span><span>La teva piscina sempre a punt</span></div></section>'''
+<div class="foot"><span>Brava Pool · Sant Feliu de Guíxols</span><span>{e(DATOS["telefono"])} · {e(DATOS["web"])}</span><span>La teva piscina sempre a punt</span></div></section>'''
 
 CSS = '''
 @page{size:A4;margin:0}*{box-sizing:border-box}
@@ -439,7 +442,7 @@ table{border-collapse:collapse;width:100%}
 .cover .rule{width:26mm;height:1.2mm;background:#3fa4c8;margin:8mm 0 6mm}.cover .tt p{font-size:11.5pt;font-weight:300;opacity:.92;line-height:1.5}
 .cover .glass{position:absolute;left:16mm;right:16mm;bottom:30mm;display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:6mm;padding:6mm 7mm;background:rgba(255,255,255,.10);border:.25mm solid rgba(255,255,255,.28);border-radius:3mm;backdrop-filter:blur(4px)}
 .cover .glass small{display:block;font-size:6.6pt;letter-spacing:.24em;color:#8fd0e8;margin-bottom:1.5mm}.cover .glass b{display:block;font-size:12pt}.cover .glass span{font-size:8.4pt;opacity:.85}
-.cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;font-size:7.6pt;letter-spacing:.14em;opacity:.8;text-transform:uppercase}
+.cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;gap:4mm;font-size:6.8pt;letter-spacing:.06em;opacity:.8;text-transform:uppercase;white-space:nowrap}
 '''
 CSS += ".rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}\n"
 if MUESTRA:
