@@ -162,7 +162,7 @@ def head(titulo):
 # 1 · carta
 cifras_i = [("Dimensiones interiores", "7,50 × 4,00 m"), ("Superficie de lámina", "30 m²"),
             ("Profundidad", "1,70 m constante"), ("Volumen máximo aprox.", "51 m³")]
-cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · paredes de 80 cm"),
+cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 ml · ancho ≈ 80 cm"),
             ("Bancos y escalera", "2 bancos (7,50 y 4,00 m) · 6 peldaños"), ("Revestimiento", "Rosa Gres 31 × 62,6 cm · ≈ 105 m²"),
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
@@ -222,20 +222,20 @@ def plano_svg():
 <rect x="92" y="468" width="300" height="70" fill="#eee6d8"/>
 <rect x="100" y="456" width="270" height="68" fill="#3a8fbf" stroke="#1f4e79" stroke-width="3"/>
 <rect x="100" y="456" width="48" height="68" fill="#a9d8ec" stroke="#1f4e79" stroke-width="2"/>
-<rect x="380" y="456" width="60" height="40" fill="#cfe7f2" stroke="#1f4e79" stroke-width="3"/>
+<rect x="380" y="456" width="54" height="40" fill="#cfe7f2" stroke="#1f4e79" stroke-width="3"/>
 <line x1="100" y1="468" x2="440" y2="468" stroke="#fff" stroke-dasharray="4 3" stroke-width="1.2"/>
 <text x="255" y="452" text-anchor="middle" font-size="10" fill="#5b6b7b">Lámina de agua a nivel del rebose</text>
 <text x="262" y="502" text-anchor="middle" font-size="11" fill="#fff">Cerámica Rosa Gres sobre DryPool</text>
 <text x="124" y="494" text-anchor="middle" font-size="10" fill="#1f4e79">Banco</text>
-<text x="410" y="480" text-anchor="middle" font-size="10" fill="#1f4e79">Canal</text>
+<text x="407" y="480" text-anchor="middle" font-size="10" fill="#1f4e79">Canal</text>
 <g stroke="#5b6b7b" stroke-width="1" fill="none"><line x1="78" y1="456" x2="78" y2="524"/><line x1="72" y1="456" x2="84" y2="456"/><line x1="72" y1="524" x2="84" y2="524"/>
-<line x1="458" y1="456" x2="458" y2="496"/><line x1="452" y1="456" x2="464" y2="456"/><line x1="452" y1="496" x2="464" y2="496"/></g>
-<text x="66" y="494" text-anchor="end" font-size="11" fill="#2b3440">1,70</text><text x="470" y="480" font-size="11" fill="#2b3440">0,80</text>
+<line x1="380" y1="512" x2="434" y2="512"/><line x1="380" y1="506" x2="380" y2="518"/><line x1="434" y1="506" x2="434" y2="518"/></g>
+<text x="66" y="494" text-anchor="end" font-size="11" fill="#2b3440">1,70</text><text x="407" y="530" text-anchor="middle" font-size="11" fill="#2b3440">≈ 0,80</text>
 </svg>'''
 
 pagina("Plano de la piscina", f'''<p class="lead">Distribución de la piscina de 7,50 × 4 m y situación de los elementos principales.</p>
 <div class="plano">{plano_svg()}</div>
-<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad</td></tr><tr><td><b>Bancos</b></td><td>2 (7,50 m y 4,00 m)</td></tr><tr><td><b>Escalera</b></td><td>1 · 6 peldaños</td></tr><tr><td><b>Canal desbordante</b></td><td>En L · 12,5 ml · paredes de 80 cm</td></tr></table>
+<table class="leyenda"><tr><td><b>Vaso</b></td><td>7,50 × 4,00 m · 1,70 m de profundidad</td></tr><tr><td><b>Bancos</b></td><td>2 (7,50 m y 4,00 m)</td></tr><tr><td><b>Escalera</b></td><td>1 · 6 peldaños</td></tr><tr><td><b>Canal desbordante</b></td><td>En L · 12,5 ml · ancho ≈ 80 cm</td></tr></table>
 <p class="note">Plano orientativo, sin escala. Las medidas y la posición definitiva de cada elemento se confirman con el cliente en el replanteo.</p>''')
 
 # 3 · sistema constructivo y materiales
