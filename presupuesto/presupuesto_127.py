@@ -12,7 +12,8 @@ import html, subprocess, sys
 from pathlib import Path
 
 AQUI = Path(__file__).parent
-MUESTRA = "--muestra" in sys.argv        # versión de muestra: marca de agua y resumen de revisión al final
+MUESTRA = "--muestra" in sys.argv
+CARTA = "--carta" in sys.argv            # diseño «Carta de obra»: identidad propia con los colores de la piscina        # versión de muestra: marca de agua y resumen de revisión al final
 
 DATOS = {
     "numero": "127",
@@ -374,7 +375,12 @@ if MUESTRA:
 N = len(paginas) + 1
 corpo = ""
 for i, (t, c, _) in enumerate(paginas, start=2):
-    corpo += f'''<section class="page"><header><div><div class="eyebrow">PRESUPUESTO {DATOS["numero"]}</div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">{c}</div>
+    if CARTA:
+        corpo += f'''<section class="page"><div class="rail">PRESUPUESTO {DATOS["numero"]} · REHABILITACIÓN INTEGRAL DE PISCINA · CALONGE</div><div class="topo"></div>
+<header><div><div class="eyebrow"><span>41°51′ N · 3°05′ E</span><span>CALONGE · COSTA BRAVA</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">{c}</div>
+<footer><span class="fol"><b>{i:02d}</b> / {N:02d}</span><span>Brava Pool · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</span></footer></section>'''
+    else:
+        corpo += f'''<section class="page"><header><div><div class="eyebrow">PRESUPUESTO {DATOS["numero"]}</div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">{c}</div>
 <footer><span>Brava Pool · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</span><span>Presupuesto {DATOS["numero"]} · Página {i} de {N}</span></footer></section>'''
 
 portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jpg" alt=""><div class="duo"></div>
@@ -385,6 +391,14 @@ portada = f'''<section class="page cover"><img class="ph" src="assets/portada.jp
 <div class="tt"><div class="chip">PROPUESTA DE REFORMA</div><h1>Rehabilitación<br>integral<br><em>de piscina</em></h1><div class="rule"></div><p>Desmontaje, impermeabilización y nueva cerámica,<br>con control de calidad en cada fase.</p></div>
 <div class="glass"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"]) if DATOS["cliente"] else "Propietario/a"}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div>
 <div class="foot"><span>Brava Pool · Sant Feliu de Guíxols</span><span>{e(DATOS["telefono"])} · {e(DATOS["web"])}</span><span>La teva piscina sempre a punt</span></div></section>'''
+
+portada_carta = f'''<section class="page cover2"><div class="ph"></div><div class="sh"></div><div class="num">{DATOS["numero"]}</div>
+<div class="lg"><img src="assets/logo_blanco.png" alt="Brava Pool"></div><div class="tg">PRESUPUESTO Nº {DATOS["numero"]}</div>
+<div class="tt"><div class="chip">PROPUESTA DE REFORMA</div><h1>Rehabilitación<br>integral<br><em>de piscina</em></h1><div class="bar"></div><div class="sb">Piscina desbordante 7,50 × 4 m · Calonge<br>Impermeabilización, cerámica y coronación, con control de calidad en cada fase.</div></div>
+<div class="sello">SISTEMA<b>100 %</b>PARA PISCINA<br>Puma · Rosa Gres</div>
+<div class="ft"><div><small>PREPARADO PARA</small><b>{e(DATOS["cliente"])}</b><span>{e(DATOS["direccion"])}</span></div><div><small>FECHA</small><b>{DATOS["fecha"]}</b></div><div><small>VÁLIDO HASTA</small><b>{DATOS["valido_hasta"]}</b></div></div></section>'''
+if CARTA:
+    portada = portada_carta
 
 CSS = '''
 @page{size:A4;margin:0}*{box-sizing:border-box}
@@ -446,11 +460,71 @@ table{border-collapse:collapse;width:100%}
 .cover .glass small{display:block;font-size:6.6pt;letter-spacing:.24em;color:#8fd0e8;margin-bottom:1.5mm}.cover .glass b{display:block;font-size:12pt}.cover .glass span{font-size:8.4pt;opacity:.85}
 .cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;gap:4mm;font-size:6.8pt;letter-spacing:.06em;opacity:.8;text-transform:uppercase;white-space:nowrap}
 '''
+if CARTA:
+    import urllib.parse
+    _cur = ''.join(f'<path d="M{20+k*7} {150-k*10} C{60+k*5} {80-k*6},{150-k*6} {40+k*4},{200-k*9} {110-k*5} S{170-k*8} {190-k*6},{100-k*4} {176-k*8} S{10+k*6} {200-k*4},{20+k*7} {150-k*10}Z" fill="none" stroke="#b8a98a" stroke-width=".9"/>' for k in range(1, 13))
+    _svg = urllib.parse.quote(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">{_cur}</svg>')
+    CSS += """
+:root{--navy:#0b2a45;--cy:#1f8aa0;--bg:#efe7d6;--mut:#6b6455;--ln:#d9cfb8;--terra:#b8603c;--sand:#f8f3e9}
+body{color:#2a2f36}
+.page{background:var(--sand)}
+.page>header{left:16mm;right:16mm;top:12mm;border-bottom:.3mm solid var(--navy)}
+.eyebrow{display:flex;gap:6mm;color:var(--terra);font-size:6.6pt;letter-spacing:.22em;font-weight:600}
+h1{font-family:"Inter Display",Inter,Arial,sans-serif;font-weight:300;font-size:25pt;letter-spacing:-.03em;color:var(--navy)}
+h2{color:var(--terra);letter-spacing:.2em}
+h3{color:var(--navy)}
+.rail{position:absolute;left:7mm;top:0;bottom:0;width:6mm;display:flex;align-items:center;justify-content:center}
+.rail{writing-mode:vertical-rl;transform:rotate(180deg);font-size:6pt;letter-spacing:.34em;color:#a39a82;white-space:nowrap}
+.topo{position:absolute;right:-30mm;bottom:-24mm;width:120mm;height:120mm;background:url("data:image/svg+xml,"""+_svg+"""") center/contain no-repeat;opacity:.36;pointer-events:none}
+.page>footer{border-top:.3mm solid var(--ln)}
+.fol b{font-size:15pt;font-weight:200;color:var(--navy);letter-spacing:-.02em;margin-right:1mm}
+.page>footer{align-items:flex-end}
+.eco th{background:none;color:var(--navy);border-top:.45mm solid var(--navy);border-bottom:.2mm solid var(--navy)}
+.eco td{border-bottom:.2mm solid var(--ln)}
+.eco td:nth-child(n+4):not(.c){background:none}
+.sub td{background:#e7dcc4!important;color:var(--navy)}
+.tot td{background:var(--navy)!important}
+.res .rn,.pc,.desc .cod{color:var(--terra)}
+.desc .fase td{background:#e7dcc4;color:var(--navy);border-top:.45mm solid var(--navy)}
+.desc .fase span{color:var(--terra)}
+.desc .fase.promo td{background:var(--terra);color:#fff}.desc .fase.promo span{color:#f6d9c9}
+.desc th{color:var(--mut);border-bottom:.3mm solid var(--navy)}
+.cards div{background:#efe7d6;border-top:0;border-left:.9mm solid var(--terra)}
+.cards b{color:var(--navy)}
+.box{background:#efe7d6;border-left:1mm solid var(--terra)}
+.plano,.gal img{border-color:#cdbf9f}
+.plano{background:#fff}
+.clau{border-left:.9mm solid var(--terra)}.clau span{color:var(--terra)}
+.acc{border:.4mm solid var(--navy);background:#fff}
+.duda{background:#efe7d6}
+.aviso{border-color:var(--terra);background:#f6e4d9;color:#5b2a14}.aviso b{color:var(--terra)}
+.alert{border-left-color:var(--terra)}
+.kv td:first-child,.leyenda td:first-child{color:var(--terra)}
+.gc i{background:var(--navy)}.pg .gc span{background:var(--terra)}.pg td{color:var(--terra)}
+.mk2,.pin{background:var(--navy)}
+.cover2{background:#061a30;color:#fff}
+.cover2 .ph{position:absolute;inset:0;background:url(assets/portada.jpg) center/cover;opacity:.6;filter:saturate(1.2) contrast(1.1)}
+.cover2 .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,26,48,.55) 0%,rgba(10,48,84,.15) 38%,rgba(6,26,48,.88) 72%,#061a30 100%)}
+.cover2 .num{position:absolute;right:-30px;top:120px;font-size:520px;font-weight:900;line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(143,208,232,.28);letter-spacing:-20px}
+.cover2 .lg{position:absolute;left:56px;top:50px}.cover2 .lg img{height:128px}
+.cover2 .tg{position:absolute;right:56px;top:62px;font-size:11px;letter-spacing:.32em;color:#8fd0e8}
+.cover2 .tt{position:absolute;left:56px;right:56px;top:500px}
+.cover2 .chip{display:inline-block;border:1px solid #d08a68;color:#e7b79e;font-size:11px;letter-spacing:.32em;padding:7px 16px;border-radius:30px;background:rgba(184,96,60,.14)}
+.cover2 h1{margin:22px 0 0;font-size:84px;line-height:.98;font-weight:800;letter-spacing:-2.5px;color:#fff}.cover2 h1 em{font-style:normal;color:#5cc0e0}
+.cover2 .sb{margin-top:22px;font-size:17px;font-weight:300;opacity:.92;line-height:1.45;max-width:560px}
+.cover2 .bar{width:92px;height:4px;background:#d08a68;margin:28px 0 0}
+.cover2 .sello{position:absolute;right:56px;top:440px;width:128px;height:128px;border-radius:50%;border:1.5px solid rgba(231,183,158,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:10px;letter-spacing:.14em;color:#e7b79e;background:rgba(184,96,60,.12)}
+.cover2 .sello b{font-size:22px;color:#fff;letter-spacing:0;margin:3px 0}
+.cover2 .ft{position:absolute;left:56px;right:56px;bottom:52px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;border-top:1px solid rgba(255,255,255,.3);padding-top:22px}
+.cover2 .ft small{display:block;font-size:9.5px;letter-spacing:.24em;color:#8fd0e8;margin-bottom:6px}.cover2 .ft b{font-size:18px}.cover2 .ft span{display:block;font-size:12px;opacity:.85;margin-top:3px}
+"""
 CSS += ".rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}\n"
 if MUESTRA:
     CSS += ".page::before{content:'MUESTRA';position:absolute;top:118mm;left:0;right:0;text-align:center;font-size:110pt;font-weight:800;letter-spacing:.12em;color:rgba(31,78,121,.07);transform:rotate(-30deg);z-index:50;pointer-events:none}\n"
 doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto {DATOS["numero"]} · Brava Pool</title><style>{CSS}</style></head><body>{portada}{corpo}</body></html>'
 oh, op = (AQUI / "presupuesto_127_muestra.html", AQUI / "Presupuesto_127_MUESTRA.pdf") if MUESTRA else (AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf")
+if CARTA:
+    oh, op = AQUI / "presupuesto_127_carta.html", AQUI / "Presupuesto_127_CARTA.pdf"
 oh.write_text(doc, encoding="utf-8")
 chrome = next((p for p in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(p).exists() or subprocess.call(["which", p], stdout=subprocess.DEVNULL) == 0), None)
 if not chrome:
