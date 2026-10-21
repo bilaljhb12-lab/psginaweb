@@ -47,14 +47,23 @@ P = {
  "8.2": (0, 4 * OF, "baja", "4 h de oficial"),
 }
 
-def pesos(precio):
-    mat = sum(v[0] for v in P.values())
-    mo_pond = sum(v[1] * IMPORTANCIA[v[2]] for v in P.values())
-    c = (precio - mat) / mo_pond          # factor de mano de obra: fracción de la tarifa CYPE que se cobra
-    return {k: v[0] + v[1] * IMPORTANCIA[v[2]] * c for k, v in P.items()}, c
+# Peso de cada fase sobre el precio cerrado, según su importancia en el resultado (suman 100 %)
+PCT_FASE = {"1": 3.0, "2": 14.0, "3": 8.5, "4": 14.5, "5": 40.0, "6": 15.0, "7": 4.0, "8": 1.0}
+assert abs(sum(PCT_FASE.values()) - 100) < 1e-9
 
-def resumen(precio):
-    w, c = pesos(precio)
-    mat = sum(v[0] for v in P.values()); mo = sum(v[1] for v in P.values())
-    return {"material": mat, "mo_estandar": mo, "factor_mo": c, "mo_cobrada": precio - mat,
-            "horas": mo / ((OF + AY) / 2), "eur_hora": (precio - mat) / (mo / ((OF + AY) / 2))}
+def pesos(precio):
+    """Importe de cada partida = su material a coste + la parte de mano de obra que le toca de su fase,
+    repartida por mano de obra estándar × importancia. Ninguna partida baja de su material."""
+    out = {}
+    for f, pct in PCT_FASE.items():
+        ks = [k for k in P if k.split(".")[0] == f]
+        fase = precio * pct / 100
+        mat = sum(P[k][0] for k in ks)
+        lw = {k: P[k][1] * IMPORTANCIA[P[k][2]] for k in ks}
+        assert fase > mat, (f, fase, mat)
+        for k in ks:
+            out[k] = P[k][0] + (fase - mat) * lw[k] / sum(lw.values())
+    return out, PCT_FASE
+
+def horas(k):
+    return P[k][1] / ((OF + AY) / 2)
