@@ -186,7 +186,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <div class="cards">
 <div><b>Plazos por escrito</b>Planificación por fases desde el primer día y plazo de ejecución indicado en este documento.</div>
 <div><b>Pagos por hitos</b>Cada pago se vincula a una fase terminada y el 20 % final queda retenido hasta la entrega.</div>
-<div><b>Garantía por escrito</b>3 años en el revestimiento y 2 años en los trabajos y la mano de obra, además de las garantías legales.</div>
+<div><b>Garantía por escrito</b>Brava Pool garantiza su trabajo, el revestimiento y la mano de obra, además de las garantías legales.</div>
 <div><b>Obra limpia</b>Retiramos todos los escombros a un punto limpio autorizado y entregamos la piscina y su entorno limpios.</div>
 <div><b>Regalo promocional</b>Cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada sin coste.</div></div>''')
 
@@ -313,7 +313,7 @@ pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos 
 <div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>''')
 
 # 7 · garantías
-cl = [("Garantía en todos nuestros trabajos", ["Al tratarse de una reforma, Brava Pool garantiza el nuevo revestimiento durante 3 años y todos los trabajos realizados y la mano de obra durante 2 años. Estas garantías comerciales se suman a las garantías legales que correspondan según la normativa vigente.", "El servicio técnico y las reparaciones en garantía se atienden durante todo el año, sin limitación de temporada. Ante cualquier incidencia comunicada por teléfono, WhatsApp o correo electrónico, respondemos por escrito en un plazo máximo de 48 horas."]),
+cl = [("Garantía en todos nuestros trabajos", ["Brava Pool garantiza su trabajo: el nuevo revestimiento, todos los trabajos realizados y la mano de obra. Esta garantía se suma a las garantías legales que correspondan según la normativa vigente.", "El servicio técnico y las reparaciones en garantía se atienden durante todo el año, sin limitación de temporada. Ante cualquier incidencia comunicada por teléfono, WhatsApp o correo electrónico, respondemos por escrito en un plazo máximo de 48 horas."]),
       ("Control de calidad en cada fase", ["Revisamos y fotografiamos el soporte tras la demolición, la continuidad de la impermeabilización y los puntos singulares, la colocación y el rejuntado de la cerámica. Antes de la entrega hacemos una revisión final de acabados con el cliente."]),
       ("Compromiso de obra limpia", ["El precio incluye la retirada de todos los escombros de la obra, su transporte y su depósito en un punto limpio autorizado.", "Durante la obra protegemos las zonas de paso y el jardín, y al terminar retiramos todos los restos de material para entregar la piscina y su entorno limpios."]),
       ("Pagos por hitos y retención final", ["Los pagos se vinculan al avance de la obra: el primero reserva la obra y el pedido de materiales y los siguientes se abonan al terminar cada hito indicado. El último 20 % queda retenido hasta la entrega de la obra terminada."])]
