@@ -173,7 +173,7 @@ cifras_d = [("Tipo", "Desbordante con canal en L"), ("Canal desbordante", "12,5 
             ("Impermeabilización", "Sistema DryPool · Grupo Puma"), ("Coronación", "Nueva · ≈ 37 ml")]
 def kv(rows): return '<table class="kv">' + ''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td></tr>' for a, b in rows) + '</table>'
 pagina("Gracias por confiar en nosotros", f'''
-<p>Estimado/a cliente:</p>
+<p>Estimado Sr. Tanner:</p>
 <p>Le presentamos nuestra propuesta para la rehabilitación integral de su piscina desbordante en {e(DATOS["direccion"])}. Este documento recoge, por escrito y con claridad, la obra: los trabajos, los materiales, los plazos, la forma de pago y las garantías.</p>
 <p>La piscina pierde agua. Para resolverlo desde el origen retiraremos toda la cerámica, la coronación y la impermeabilización antiguas, saneamos el soporte e impermeabilizamos el vaso y el canal desbordante con el sistema DryPool de Grupo Puma, un mortero bicomponente semiflexible pensado para soportar la presión del agua. Después colocamos cerámica nueva Rosa Gres de 31 × 62,6 cm, piezas de peldaño antideslizantes en los bancos y la escalera, y una coronación nueva con el labio del desbordante perfectamente nivelado.</p>
 <p>Reparación, impermeabilización, mortero-cola y juntas son de una misma marca, Grupo Puma: el sistema DryPool, específico para piscinas. El presupuesto incluye la cerámica, las piezas de coronación y los peldaños.</p>
@@ -181,7 +181,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <p>Quedamos a su disposición para resolver cualquier duda o ajustar la propuesta a lo que necesite.</p>
 <p class="firma"><b>{e(DATOS["emisor"])}</b><br>Brava Pool · {e(DATOS["telefono"])}</p>
 <h2>Su piscina en cifras</h2><div class="cols">{kv(cifras_i)}{kv(cifras_d)}</div>
-<div class="kv-wide">{kv([("Plazo estimado", "5 a 6 semanas desde el inicio de obra, a confirmar")])}</div>
+<div class="kv-wide">{kv([("Plazo de ejecución", "5 a 6 semanas desde el inicio de obra")])}</div>
 <h2>Nuestro compromiso</h2>
 <div class="cards">
 <div><b>Plazos por escrito</b>Planificación por fases desde el primer día y plazo de ejecución indicado en este documento.</div>
@@ -278,10 +278,10 @@ pm = [("20 %", 1), ("30 %", 5), ("30 %", 6), ("20 %", 12)]
 pagos_row = ''.join(f'<span style="left:{(s-1)/sem*100:.3f}%">{p}</span>' for p, s in pm)
 wk = ''.join(f'<span>S{i}</span>' for i in range(1, 7))
 pagos_tabla = ''.join(f'<tr><td class="pc">{pct} %</td><td>{e(txt)}</td><td class="n">{eur(im)}</td></tr>' for pct, txt, im in PAGOS)
-pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 a 6 semanas desde el inicio de obra, a confirmar tras la inspección inicial. Cada fase se verifica antes de empezar la siguiente.</p>
+pagina("Planificación de la obra", f'''<p class="lead">Plazo de ejecución: 5 a 6 semanas desde el inicio de obra, salvo causas climatológicas adversas. Cada fase se verifica antes de empezar la siguiente.</p>
 <table class="gt"><thead><tr><th style="width:62mm">Fase</th><th><div class="wk">{wk}</div></th></tr></thead><tbody>{rows}
 <tr class="pg"><td>Pagos</td><td class="gc"><div>{pagos_row}</div></td></tr></tbody></table>
-<p class="note"><span class="sw"></span> Tiempo de curado del mortero según ficha técnica del fabricante. Planificación orientativa: puede variar según el tipo de terreno, la meteorología y la entrega de materiales; cualquier cambio se comunicará con antelación.</p>
+<p class="note"><span class="sw"></span> Tiempo de curado del mortero según ficha técnica del fabricante. Cualquier cambio por causas climatológicas o de entrega de materiales se comunicará con antelación.</p>
 <h2>Forma de pago</h2>
 <table class="eco"><thead><tr><th style="width:16mm">Pago</th><th>Hito</th><th style="width:48mm;text-align:right">Importe (IVA no incluido)</th></tr></thead><tbody>{pagos_tabla}</tbody></table>
 <table class="kv pago"><tr><td>Forma de pago</td><td>Transferencia bancaria</td></tr><tr><td>Titular</td><td>{e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</td></tr><tr><td>Banco</td><td>{e(DATOS["banco"])}</td></tr><tr><td>IBAN</td><td><b>{e(DATOS["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {DATOS["numero"]}</td></tr></table>''')
