@@ -69,17 +69,24 @@ FASES = [
     "Replanteo con nivel láser de la cota del labio de rebose a partir de las referencias de la Fase 1.",
     "Regularización del muro de rebose para que quede nivelado en los dos tramos del canal (7,50 m y 4,00 m), con una tolerancia máxima de ±2 mm."])]),
  ("4", "Impermeabilización · sistema DryPool de Grupo Puma", [
-  ("4.1", "Suministro y aplicación del sistema de impermeabilización DryPool", 105, "m²", [
+  ("4.1", "Suministro y aplicación del sistema DryPool en solera y paredes del vaso", 69, "m²", [
     "Suministro del mortero impermeabilizante bicomponente semiflexible DryPool de Grupo Puma y de la malla antialcalina de refuerzo, según ficha técnica del sistema.",
     "Humectación del soporte y refuerzo de esquinas, juntas y puntos singulares.",
-    "Aplicación en dos capas con malla entre ellas, en el vaso, los bancos, la escalera y el canal.",
-    "Curado según las indicaciones del fabricante antes de pasar a la fase siguiente."])]),
+    "Aplicación en dos capas con malla entre ellas. Curado según las indicaciones del fabricante antes de pasar a la fase siguiente."]),
+  ("4.2", "Suministro y aplicación del sistema DryPool en el canal desbordante", 27, "m²", [
+    "Mismo sistema, en dos capas con malla, en el fondo y las paredes del canal, con refuerzo en el encuentro con el vaso y en la coronación."]),
+  ("4.3", "Suministro y aplicación del sistema DryPool en bancos y escalera", 9, "m²", [
+    "Mismo sistema, en dos capas con malla, en bancos, peldaños y encuentros con el vaso."])]),
  ("5", "Revestimiento cerámico Rosa Gres", [
-  ("5.1", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm y cemento cola para piscinas", 105, "m²", [
-    "Porcelánico apto para inmersión permanente, con reserva por cortes y roturas (112 m² suministrados).",
+  ("5.1", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en solera y paredes del vaso", 69, "m²", [
+    "Porcelánico apto para inmersión permanente, con reserva por cortes y roturas (112 m² suministrados en total para toda la obra).",
     "Cemento cola C2 TE S1 apto para inmersión permanente, con doble encolado.",
-    "Replanteo de piezas y colocación en vaso y canal, con cortes y remates en focos, boquillas, sumidero y esquinas."]),
-  ("5.2", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
+    "Replanteo de piezas y colocación, con cortes y remates en focos, boquillas, sumidero y esquinas."]),
+  ("5.2", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en el canal desbordante", 27, "m²", [
+    "Misma cerámica y cemento cola, en el fondo y las paredes del canal, con las pendientes definidas en la fase 3."]),
+  ("5.3", "Suministro y colocación de cerámica Rosa Gres 30 × 60 cm en bancos y escalera", 9, "m²", [
+    "Misma cerámica y cemento cola, en bancos y huellas y contrahuellas de la escalera."]),
+  ("5.4", "Suministro y colocación de piezas de peldaño Rosa Gres", 35, "ud", [
     "Pieza antideslizante a juego con el revestimiento para el banco de 7,50 m, el banco de 4,00 m y la escalera de 6 peldaños.",
     "Colocación con cortes y remates."])]),
  ("6", "Coronación y labio de rebose", [
@@ -91,14 +98,17 @@ FASES = [
     "Antes de rejuntar, llenado hasta que la piscina desborda.",
     "Comprobación de que el agua cae de forma uniforme en toda la longitud del rebose.",
     "Corrección de cualquier punto que no desborde igual."])]),
- ("7", "Rejuntado", [
+ ("7", "Rejuntado y sellados", [
   ("7.1", "Suministro y aplicación de rejuntado de cerámica, peldaños y coronación", 105, "m²", [
     "Mortero de juntas apto para inmersión permanente (tipo y color a confirmar por escrito).",
-    "Limpieza de restos de junta."])]),
+    "Limpieza de restos de junta."]),
+  ("7.2", "Juntas de dilatación y sellados elásticos perimetrales", 1, "PA", [
+    "Sellado elástico en los encuentros y juntas de movimiento entre vaso, canal, escalera y coronación."])]),
  ("8", "Entrega", [
-  ("8.1", "Revisión final y entrega de la obra", 1, "PA", [
-    "Revisión de acabados con el cliente y acta de entrega.",
-    "Limpieza final de obra y retirada de protecciones."])]),
+  ("8.1", "Limpieza final de obra", 1, "PA", [
+    "Limpieza de acabados y de la zona de obra, y retirada de protecciones."]),
+  ("8.2", "Revisión final y entrega de la obra", 1, "PA", [
+    "Revisión de acabados con el cliente y acta de entrega."])]),
 ]
 
 PROMO = ("Regalo promocional: cloración salina y pH automático", [
@@ -113,11 +123,26 @@ def eur(x): return n2(x) + " €"
 def qty(x): return (f"{x:g}").replace(".", ",")
 
 # ---------- cálculo ----------
+# Reparto orientativo del precio cerrado: pesos a partir de la valoración orientativa (punto medio).
+PESOS = {"1.1":225,"1.2":225,"1.3":450,"2.1":832.5,"2.2":1680,"2.3":1207.5,"2.4":650,
+         "3.1":1050,"3.2":500,"3.3":468.75,"3.4":650,
+         "4.1":3495*69/105,"4.2":3495*27/105,"4.3":3495*9/105,
+         "5.1":9186.76*69/105,"5.2":9186.76*27/105,"5.3":9186.76*9/105,"5.4":3110.10,
+         "6.1":4255,"6.2":250,"7.1":1785,"7.2":400,"8.1":150,"8.2":200}
 parcial = False
 base = round(DATOS["precio_cerrado"], 2)
+partidas = [x for _, _, ps in FASES for x in ps]
+assert set(PESOS) == {x[0] for x in partidas}
+_k = base / sum(PESOS.values())
+PU, IMP = {}, {}
+for c_, _, q_, _, _ in partidas:
+    PU[c_] = round(PESOS[c_] * _k / q_, 2); IMP[c_] = round(PU[c_] * q_, 2)
+_res = round(base - sum(IMP.values()), 2)          # ajuste de céntimos en la última partida PA
+IMP["8.2"] = round(IMP["8.2"] + _res, 2); PU["8.2"] = IMP["8.2"]
+assert abs(sum(IMP.values()) - base) < 0.005
+sub = {f: round(sum(IMP[x[0]] for x in ps), 2) for f, _, ps in FASES}
 iva_imp = round(base * DATOS["iva"] / 100, 2)
 total = round(base + iva_imp, 2)
-partidas = [x for _, _, ps in FASES for x in ps]
 
 def pagos():
     out, acc = [], 0.0
@@ -260,28 +285,29 @@ pagina("Planificación de la obra", f'''<p class="lead">Plazo total estimado: 5 
 
 # 5 · descripción de trabajos (se pagina a mano por fases)
 def fase_html(f, titulo, ps):
-    r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(titulo).upper()}</td></tr>'
+    r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(titulo).upper()}</td><td></td><td class="n">{eur(sub[f])}</td></tr>'
     for c, t, q, u, b in ps:
         lis = ''.join(f'<li>{e(x)}</li>' for x in b)
-        r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(t)}</b><ul>{lis}</ul></td><td class="n">{qty(q)}</td><td class="c">{u}</td></tr>'
+        r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(t)}</b><ul>{lis}</ul></td><td class="n">{qty(q)}</td><td class="c">{u}</td><td class="n">{n2(PU[c])} €</td><td class="n"><b>{n2(IMP[c])} €</b></td></tr>'
     return r
-cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:15mm">Cant.</th><th style="width:12mm">Ud.</th></tr></thead>'
-grupos = [["1", "2"], ["3", "4"], ["5", "6", "7", "8"]]
+cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:13mm">Cant.</th><th style="width:11mm">Ud.</th><th style="width:21mm">Precio</th><th style="width:24mm">Importe</th></tr></thead>'
+grupos = [["1", "2"], ["3", "4"], ["5", "6"], ["7", "8"]]
 fdict = {f: (t, ps) for f, t, ps in FASES}
 for gi, g in enumerate(grupos):
     body = ''.join(fase_html(f, *fdict[f]) for f in g)
     if gi == len(grupos) - 1:
-        body += f'<tr class="fase promo"><td colspan="4"><span>+</span>PROMOCIÓN</td></tr><tr class="pt"><td class="cod">R.1</td><td><b>{e(PROMO[0])}</b><ul>{''.join(f'<li>{e(x)}</li>' for x in PROMO[1])}</ul></td><td class="n">1</td><td class="c">ud</td></tr>'
-    pagina("Descripción de los trabajos" + ("" if gi == 0 else " (cont.)"), f'<table class="desc">{cab}<tbody>{body}</tbody></table>' + ('<p class="note">PA = partida alzada. Las mediciones son estimadas y se ajustan con las medidas tomadas en obra. El precio es cerrado e incluye materiales y mano de obra de todas las partidas.</p>' if gi == len(grupos) - 1 else ''))
+        body += f'<tr class="fase promo"><td colspan="6"><span>+</span>PROMOCIÓN</td></tr><tr class="pt"><td class="cod">R.1</td><td><b>{e(PROMO[0])}</b><ul>{''.join(f'<li>{e(x)}</li>' for x in PROMO[1])}</ul></td><td class="n">1</td><td class="c">ud</td><td class="n">—</td><td class="n"><b>REGALO</b></td></tr>'
+    pagina("Descripción de los trabajos" + ("" if gi == 0 else " (cont.)"), f'<table class="desc">{cab}<tbody>{body}</tbody></table>' + ('<p class="note">PA = partida alzada. Las mediciones son estimadas y se ajustan con las medidas tomadas en obra. El precio total es cerrado e incluye materiales y mano de obra. El reparto por partidas es orientativo.</p>' if gi == len(grupos) - 1 else ''))
 
 # 6 · resumen
-res = ''.join(f'<tr><td class="rn">{int(f):02d}</td><td>Fase {f} · {e(t)}</td><td class="n">Incluida</td></tr>' for f, t, _ in FASES)
+res = ''.join(f'<tr><td class="rn">{int(f):02d}</td><td>Fase {f} · {e(t)}</td><td class="n">{eur(sub[f])}</td></tr>' for f, t, _ in FASES)
 pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos los materiales, la mano de obra, el transporte y la retirada de escombros incluidos.</p>
-<table class="eco res"><thead><tr><th style="width:14mm">Cap.</th><th>Concepto</th><th style="width:34mm;text-align:right">Estado</th></tr></thead><tbody>{res}
+<table class="eco res"><thead><tr><th style="width:14mm">Cap.</th><th>Concepto</th><th style="width:34mm;text-align:right">Importe</th></tr></thead><tbody>{res}
 <tr><td class="rn">+</td><td>{e(PROMO[0])}</td><td class="n">Regalo</td></tr>
 <tr class="sub"><td colspan="2">Base imponible</td><td class="n">{eur(base)}</td></tr>
 <tr><td colspan="2">IVA {DATOS["iva"]} %</td><td class="n">{eur(iva_imp)}</td></tr>
 <tr class="tot"><td colspan="2">Total presupuesto (IVA incl.)</td><td class="n">{eur(total)}</td></tr></tbody></table>
+<p class="note">Precio total cerrado. El reparto entre fases y partidas es orientativo y no modifica el total.</p>
 <div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala un equipo de cloración salina Bright Blue de 20 g/h con regulador de pH automático Sanus NG, instalado y sin ningún coste adicional.</div>
 <p class="note">El tipo de IVA aplicable depende de las condiciones de la vivienda y de la obra; se confirma al cerrar el presupuesto.</p>''')
 
@@ -345,7 +371,7 @@ table{border-collapse:collapse;width:100%}
 .res .rn{color:var(--cy);font-weight:700}.res td{padding:2.6mm 1.5mm}.sub td{font-weight:600;background:var(--bg)}.tot td{background:var(--navy);color:#fff;font-weight:700;font-size:10.5pt;padding:3.4mm 3mm}
 .alert{border-left:1.2mm solid #c9822b;background:#fbf3e6;padding:3mm 4mm;margin-bottom:5mm;font-size:8.8pt;color:#5a3d0f}
 .desc{font-size:8.2pt}.desc th{text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding:1.5mm 1mm;border-bottom:.35mm solid var(--ln)}
-.desc td{padding:1.8mm 1mm;vertical-align:top}.desc .fase td{background:var(--navy);color:#fff;font-weight:700;letter-spacing:.06em;padding:2.2mm 2.5mm;font-size:7.8pt}.desc .fase td.n{font-size:8.4pt}
+.desc td{padding:1.8mm 1mm;vertical-align:top}.desc .fase td.n{text-align:right}.desc .fase td{background:var(--navy);color:#fff;font-weight:700;letter-spacing:.06em;padding:2.2mm 2.5mm;font-size:7.8pt}.desc .fase td.n{font-size:8.4pt}
 .desc .fase.promo td{background:#c9822b}.desc .fase span{color:#8fd0e8;margin-right:3mm}.desc .pt td{border-bottom:.2mm solid var(--ln)}.desc .cod{color:var(--mut)}
 .desc ul{margin-top:.8mm;font-size:7.9pt;color:#44505d}.desc .pt{page-break-inside:avoid}
 .gt{font-size:8pt;margin:3mm 0}.gt th{border-bottom:.35mm solid var(--navy);text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding-bottom:1.5mm}
