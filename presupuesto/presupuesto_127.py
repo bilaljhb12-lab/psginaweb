@@ -331,7 +331,8 @@ pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</
 
 # Planificación y forma de pago: penúltima página (los importes no se ven al principio)
 _i = next(i for i, (t, c, _) in enumerate(paginas) if t == "Planificación de la obra")
-paginas.insert(len(paginas) - 1, paginas.pop(_i))
+_pl_pag = paginas.pop(_i)
+paginas.insert(len(paginas) - 1, _pl_pag)
 
 if MUESTRA:
     def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
