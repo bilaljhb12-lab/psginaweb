@@ -12,6 +12,7 @@ import html, subprocess, sys
 from pathlib import Path
 
 AQUI = Path(__file__).parent
+MUESTRA = "--muestra" in sys.argv        # versión de muestra: marca de agua y resumen de revisión al final
 
 DATOS = {
     "numero": "127",
@@ -320,6 +321,44 @@ pagina("Condiciones y aceptación", f'''<div class="cols2"><div><h2>No incluye</
 <div class="sig"><div><div class="line"></div><small>Nombre y apellidos</small><div class="line"></div><small>DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma del cliente</small><div class="line big"></div><small>Por Brava Pool</small></div></div></div>
 <div class="duda"><b>¿Alguna duda?</b> {e(DATOS["contacto"])} · {e(DATOS["web"])}{(" · " + e(DATOS["telefono"])) if DATOS["telefono"] else ""}{(" · " + e(DATOS["email"])) if DATOS["email"] else ""}</div>''')
 
+if MUESTRA:
+    def lista(items): return '<ul class="rv">' + ''.join(f'<li><b>{e(t)}</b>{e(d)}</li>' for t, d in items) + '</ul>'
+    pagina("Resumen de revisión · fallos corregidos", f'''<p class="lead">Fallos detectados en el presupuesto original y cómo se han corregido en esta versión.</p>
+<h2>Importes y precio</h2>{lista([
+("Total sin base real. ", "El original ponía 8.768,70 € como «precio cerrado» con solo 3 de 24 partidas valoradas. Ahora: 22.578,00 € sin IVA repartidos en 24 partidas."),
+("Reparto sin criterio. ", "Ahora cada partida lleva su material a coste y la mano de obra se reparte según su importancia, con datos del generador de precios CYPE. Los peldaños no bajan de su precio de compra."),
+("DryPool mal calculado. ", "10 sacos eran unos 1,9 kg/m²; la ficha indica 4,4 kg/m² (unos 24 sacos de 20 kg)."),
+("Reserva de cerámica corta. ", "112 m² sobre 105 m² (6,7 %); con formato grande suele hacer falta más."),
+("IVA sin comprobar. ", "Se mantiene el 21 %; el 10 % de rehabilitación exige que los materiales sean menos del 40 % de la base.")])}
+<h2>Materiales</h2>{lista([
+("Producto no verificable. ", "«Morcem Dry F» no consta; el mortero del sistema DryPool es Morcem Dry SF Plus."),
+("Sistema incompleto. ", "Ahora es el sistema DryPool de Grupo Puma completo: Morcemseal Todo 1 R4, Morcem Dry SF Plus, malla Drypool, Bandtec, Pegoland Flex C2 TE S1 y Morcemcolor Epoxi."),
+("Marcas mal puestas. ", "«C2TE S1» es una clase, no una marca; la coronación figuraba como «A juego»."),
+("Formato de cerámica. ", "30 × 60 cm no es el de la serie de piscina; es 31 × 62,6 cm."),
+("Peldaño sin referencia. ", "Ahora L98 y L62 con esquinas ED9/EI9, y borde desbordante ref. 647 (a confirmar).")])}
+<h2>Geometría y diseño</h2>{lista([
+("Banco de 7,50 m inexistente. ", "Es un banco de 4,00 m de largo por unos 40 cm de ancho."),
+("Canal mal descrito. ", "«Paredes de 80 cm» era en realidad 80 cm de ancho en el lado valle y 30 cm en el lado este."),
+("Escalera. ", "6 peldaños: los 4 primeros de 1,20 m y los 2 últimos más estrechos."),
+("Ligero desnivel del lado este. ", "No estaba recogido; ahora hay sección y texto, y se corrige en la obra con nivel láser."),
+("Plano genérico y leyenda errónea. ", "«Banco interior: 1» con dos bancos; ahora hay planta, foto aérea anotada y secciones.")])}''')
+    pagina("Resumen de revisión · forma y pendiente", f'''<h2>Redacción y presentación</h2>{lista([
+("Página de equipos errónea. ", "Decía «0 skimmers» y «0 boquillas» y describía equipos excluidos; la piscina es desbordante. Eliminada."),
+("Datos erróneos. ", "«Profundidad de 1,70 a 1,70 m» y cifras duplicadas."),
+("Plazo y cronograma. ", "«Plazo de Orientativo 5 a 6 semanas»; rejuntado y llenado coincidían en la misma semana."),
+("Pagos contradictorios. ", "«Nunca adelanta más de lo que ya puede ver construido» frente a un 20 % a la aceptación. Reescrito por hitos."),
+("Prueba de llenado. ", "Quitada, y eliminadas las frases de «piscina llena y funcionando»."),
+("Forma. ", "Cliente genérico, contacto vacío, numeración desfasada y páginas casi vacías. Portada de marca en lugar de foto de archivo."),
+("Terraza. ", "Faltaban el mobiliario y la rejilla lineal y el pavimento colindante, ahora como partida condicionada.")])}
+<h2>Pendiente de confirmar</h2>{lista([
+("Escalera y banco. ", "Anchos exactos de los 2 peldaños estrechos y ancho real del banco (≈ 40 cm)."),
+("Aparatos en pared. ", "Número y posición de focos y boquillas; altura de las paredes del canal."),
+("Piezas Rosa Gres. ", "Combinación exacta, serie, color y número de piezas de peldaño (el presupuesto lleva 35; el despiece indica unas 20)."),
+("Coronación. ", "Precio y modelo reales; el reparto usa 60 €/ml como supuesto."),
+("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),
+("Junta. ", "Epoxi propuesto (apto para cloración salina) y color."),
+("Cliente. ", "Nombre, teléfono, datos de pago e IVA aplicable.")])}''')
+
 N = len(paginas) + 1
 corpo = ""
 for i, (t, c, _) in enumerate(paginas, start=2):
@@ -394,8 +433,11 @@ table{border-collapse:collapse;width:100%}
 .cover .glass small{display:block;font-size:6.6pt;letter-spacing:.24em;color:#8fd0e8;margin-bottom:1.5mm}.cover .glass b{display:block;font-size:12pt}.cover .glass span{font-size:8.4pt;opacity:.85}
 .cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;font-size:7.6pt;letter-spacing:.14em;opacity:.8;text-transform:uppercase}
 '''
+CSS += ".rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}\n"
+if MUESTRA:
+    CSS += ".page::before{content:'MUESTRA';position:absolute;top:118mm;left:0;right:0;text-align:center;font-size:110pt;font-weight:800;letter-spacing:.12em;color:rgba(31,78,121,.07);transform:rotate(-30deg);z-index:50;pointer-events:none}\n"
 doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto {DATOS["numero"]} · Brava Pool</title><style>{CSS}</style></head><body>{portada}{corpo}</body></html>'
-oh, op = AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf"
+oh, op = (AQUI / "presupuesto_127_muestra.html", AQUI / "Presupuesto_127_MUESTRA.pdf") if MUESTRA else (AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf")
 oh.write_text(doc, encoding="utf-8")
 chrome = next((p for p in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(p).exists() or subprocess.call(["which", p], stdout=subprocess.DEVNULL) == 0), None)
 if not chrome:
