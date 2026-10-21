@@ -48,7 +48,7 @@ P = {
 }
 
 # Peso de cada fase sobre el precio cerrado, según su importancia en el resultado (suman 100 %)
-PCT_FASE = {"1": 3.0, "2": 14.0, "3": 8.5, "4": 14.5, "5": 40.0, "6": 15.0, "7": 4.0, "8": 1.0}
+PCT_FASE = {"1": 3.0, "2": 11.0, "3": 11.5, "4": 14.5, "5": 40.0, "6": 15.0, "7": 4.0, "8": 1.0}
 assert abs(sum(PCT_FASE.values()) - 100) < 1e-9
 
 def pesos(precio):
