@@ -101,7 +101,7 @@ FASES = [
  ("6", "Coronación y labio de rebose", [
   ("6.1", "Suministro y colocación nivelada de coronación y piezas de rebose", 37, "ml", [
     "Coronación para el borde de la piscina y el muro exterior del canal, con pieza de coronación estándar para los tramos de 7,50 m y 4,00 m del labio de rebose.",
-    "Modelo y acabado a confirmar por escrito, a juego con la cerámica Rosa Gres.",
+    "Modelo y acabado a elegir con el cliente, a juego con la cerámica Rosa Gres.",
     "Colocación de las piezas de los extremos a la cota del láser y del resto al hilo, con nivelación pieza a pieza y tolerancia máxima de ±2 mm.",
     "Revisión final del nivel del labio de rebose a lo largo de todo el perímetro, con ajuste de cualquier pieza que lo requiera antes del rejuntado."])]),
  ("7", "Rejuntado y sellados", [
@@ -224,10 +224,10 @@ pagina("Cómo desborda el agua", f'''<p class="lead">El agua rebosa por el borde
 <p class="note">Secciones orientativas, sin escala. El desnivel está dibujado exagerado para que se aprecie; su valor real se mide con nivel láser antes de empezar (fases 1 y 3).</p>''')
 
 # piezas Rosa Gres
-piezas_inc = [("Baldosa de revestimiento", "serie del vaso (a confirmar)", "31 × 62,6 cm", "Solera, paredes del vaso y canal desbordante. Es la superficie principal de la piscina."),
+piezas_inc = [("Baldosa de revestimiento", "serie y color a elegir", "31 × 62,6 cm", "Solera, paredes del vaso y canal desbordante. Es la superficie principal de la piscina."),
               ("Peldaño-borde antideslizante", "L98", "97,8 × 31,7 × 3,8 cm", "Huella y canto de los peldaños anchos, y borde del banco. El acabado antideslizante da agarre en zona mojada."),
               ("Peldaño-borde antideslizante", "L62", "62,6 × 31,7 × 3,8 cm", "Peldaños más estrechos de la parte baja de la escalera."),
-              ("Pieza de coronación", "modelo a confirmar", "—", "Borde de la piscina, labio de rebose y muro exterior del canal.")]
+              ("Pieza de coronación", "modelo a elegir", "—", "Borde de la piscina, labio de rebose y muro exterior del canal.")]
 piezas_esp = [("Esquinas derecha / izquierda", "ED9 / EI9", "97,8 × 31,7 × 3,8 cm", "Remate de los extremos de peldaños y banco, donde el borde gira."),
               ("Borde desbordante", "647", "62,6 × 31 × 2,6 cm", "Pieza especial para el labio de rebose de los lados valle y este."),
               ("Otras piezas especiales", "según catálogo", "—", "Piezas laterales de peldaño y remates especiales, si el diseño las requiere.")]
@@ -237,7 +237,7 @@ pagina("Piezas Rosa Gres de su piscina", f'''<p class="lead">Una piscina así no
 <h2>Piezas del presupuesto</h2>{tabla_piezas(piezas_inc)}
 <h3>Cómo se reparten en su piscina</h3>
 <ul><li><b>Escalera:</b> 6 peldaños. Los 4 primeros miden 1,20 m y los 2 últimos son más estrechos, por lo que se combinan piezas de distinta anchura.</li><li><b>Banco:</b> 4,00 m de largo por unos 40 cm de ancho, en todo el ancho del extremo oeste.</li><li><b>Canal:</b> 80 cm de ancho en el lado valle y 30 cm en el lado este, revestido con la misma baldosa del vaso.</li></ul>
-<p class="note">Las referencias proceden del catálogo de piscinas de Rosa Gres y de distribuidores. La combinación exacta de piezas, la cantidad de cada una, la serie y el color se fijan con el despiece, antes del pedido.</p>''')
+<p class="note">Las referencias proceden del catálogo de piscinas de Rosa Gres y de distribuidores. La serie y el color se eligen con el cliente, a juego en todo el conjunto, y se confirman por escrito antes del pedido junto con el despiece.</p>''')
 
 # 3 · sistema constructivo y materiales
 capas = [("Soporte saneado y reparado (Morcemseal Todo 1 R4)", "#d9d4cb", "#2b3440"), ("Impermeabilización DryPool · 1.ª capa", "#2e6f9e", "#fff"),
@@ -248,11 +248,11 @@ capas_svg = '<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-
     f'<rect x="20" y="{10 + i * 33}" width="600" height="29" fill="{c}" stroke="#fff"/><text x="40" y="{29 + i * 33}" font-size="12.5" fill="{t}" font-weight="600">{i + 1}.  {e(n)}</text>' for i, (n, c, t) in enumerate(capas)) + '<text x="610" y="245" text-anchor="end" font-size="10" fill="#5b6b7b">Esquema de capas, de dentro hacia el agua · sin escala</text></svg>'
 mats = [("Reparación del soporte", "Grupo Puma", "Morcemseal Todo 1 R4 · mortero tixotrópico de alta resistencia"),
         ("Impermeabilización", "Grupo Puma", "Sistema DryPool · Morcem Dry SF Plus, malla Drypool y banda Bandtec"),
-        ("Revestimiento", "Rosa Gres", "Porcelánico 31 × 62,6 cm apto para inmersión (modelo y color a confirmar)"),
-        ("Bancos y escalera", "Rosa Gres", "Peldaño-borde antideslizante L98 y L62 (ver página de piezas; color a confirmar)"),
+        ("Revestimiento", "Rosa Gres", "Porcelánico 31 × 62,6 cm apto para inmersión (serie y color a elegir con el cliente)"),
+        ("Bancos y escalera", "Rosa Gres", "Peldaño-borde antideslizante L98 y L62 (ver página de piezas; mismo color que el revestimiento)"),
         ("Mortero-cola", "Grupo Puma", "Pegoland Flex C2 TE S1 (sistema DryPool)"),
         ("Rejuntado", "Grupo Puma", "Morcemcolor Epoxi RG/R2T, apto para piscinas con cloración salina (color a confirmar)"),
-        ("Coronación", "Por definir", "Modelo y acabado a confirmar por escrito"),
+        ("Coronación", "Por definir", "Modelo y acabado a elegir con el cliente"),
         ("Cloración salina (regalo)", "Bright Blue", "Pluma WP 15 con regulador de pH automático Sanus NG")]
 pagina("Sistema constructivo y materiales", f'''<p class="lead">La estanqueidad de una piscina depende del conjunto de capas, no de un solo producto. Este es el sistema previsto y su orden de ejecución.</p>
 <div class="plano">{capas_svg}</div>
@@ -361,7 +361,7 @@ if MUESTRA:
 <h2>Pendiente de confirmar</h2>{lista([
 ("Escalera y banco. ", "Anchos exactos de los 2 peldaños estrechos y ancho real del banco (≈ 40 cm)."),
 ("Aparatos en pared. ", "Número y posición de focos y boquillas; altura de las paredes del canal."),
-("Piezas Rosa Gres. ", "Combinación exacta, serie y color; el presupuesto lleva 28 piezas de peldaño y borde de banco."),
+("Serie y color Rosa Gres. ", "Se eligen con el cliente antes del pedido; el precio puede variar si la serie elegida es de gama superior."),
 ("Coronación. ", "Precio y modelo reales; el reparto usa 60 €/ml como supuesto."),
 ("Equipo de sal. ", "Modelo definitivo y que se instala sobre la depuración existente."),
 ("Junta. ", "Epoxi propuesto (apto para cloración salina) y color."),
