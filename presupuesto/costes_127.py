@@ -1,46 +1,60 @@
-"""Coste estándar por partida del presupuesto 127, con su origen.
+"""Reparto del precio cerrado del presupuesto 127 por partida.
 
-Base: Generador de precios CYPE (generadordeprecios.info), precios hora de oficial 1.ª
-24,83 €/h y ayudante 23,59 €/h, y tus precios de material del presupuesto 127
-(cerámica 34,48 €/m², peldaños 68,86 €/ud, DryPool 97,50 €/saco de 20 kg).
-Son costes directos sin gastos generales ni beneficio. Los marcados SUPUESTO no tienen fuente publicada.
+Cada partida = material a coste + mano de obra repartida según la importancia del trabajo.
+Así, si el cliente quita una partida, las demás conservan la misma relación coste/precio.
+
+Fuentes: Generador de precios CYPE (generadordeprecios.info): oficial 1.ª 24,83 €/h, ayudante 23,59 €/h,
+DryPool UPY120 (4,4 kg/m² de mortero, 0,376 h/m²) y gres UPT020 (1,264 h/m², cola, juntas RG);
+rendimiento de picado 8–12 m²/operario/día (piscinasdeobramadrid.com); tus precios de material del 127.
+Los marcados SUPUESTO no tienen fuente publicada.
 """
-OF, AY = 24.83, 23.59            # €/h
-JORN_EQ = 8 * OF + 8 * AY        # jornada de equipo oficial + ayudante
-JORN_AY = 8 * AY                 # jornada de ayudante
+OF, AY = 24.83, 23.59
+EQ = OF + AY
+JEQ, JAY = 8 * EQ, 8 * AY
 
-# DryPool (CYPE UPY120): 4,4 kg/m² de mortero + 0,2 m²/m² de malla + 0,376 h/m² de mano de obra
-SACO_KG, SACO_EUR = 20, 97.50
-dp_m2 = (4.4 * SACO_EUR / SACO_KG + 0.2 * 1.94 + 0.188 * OF + 0.188 * AY) * 1.02
-# Cerámica (CYPE UPT020): mano de obra 0,73 h oficial + 0,534 h ayudante; cola 6 kg/m² a 0,59 €/kg (doble encolado)
-ceram_m2 = (34.48 * 112 / 105 + 6 * 0.59 + 0.73 * OF + 0.534 * AY) * 1.03
-CORON_ML = (60 + 0.6 * (OF + AY))  # SUPUESTO: pieza 60 €/ml sin fuente + colocación 0,6 h de equipo/ml
+# material por m² (€): mortero DryPool 4,4 kg × 97,50/20 kg + malla ; cerámica 34,48 × 112/105 + cola 6 kg × 0,59
+MAT_DP = 4.4 * 97.50 / 20 + 0.2 * 1.94
+MAT_CE = 34.48 * 112 / 105 + 6 * 0.59
+MO_DP = 0.188 * OF + 0.188 * AY
+MO_CE = 0.73 * OF + 0.534 * AY
 
-# código: (coste estándar €, cómo se obtiene)
-COSTE = {
- "1.1": (8 * OF, "1 jornada de oficial (CYPE 24,83 €/h)"),
- "1.2": (4 * OF + 4 * AY, "4 h de oficial + 4 h de ayudante"),
- "1.3": (JORN_EQ, "1 jornada de equipo (oficial + ayudante)"),
- "2.1": (3.1 * JORN_EQ, "37 ml a ≈12 ml/jornada de equipo (SUPUESTO de rendimiento)"),
- "2.2": (105 / 10 * JORN_AY, "105 m² a 10 m²/jornada: rendimiento de picado 8–12 m²/operario/día (piscinasdeobramadrid.com)"),
- "2.3": (105 / 12 * JORN_AY, "105 m² a ≈12 m²/jornada (SUPUESTO)"),
- "2.4": (750, "≈3 contenedores y transporte a punto limpio (SUPUESTO)"),
- "3.1": (105 * 0.25 * AY + 105 * 0.3 * 3.6 * 1.58, "0,25 h/m² de ayudante + mortero reparador Morcemrest RF35 en el 30 % (CYPE: 3,6 kg/m² a 1,58 €/kg)"),
- "3.2": (16 * (OF + AY) / 2 + 60, "16 h de equipo + materiales (SUPUESTO)"),
- "3.3": (12.5 * 0.5 * (OF + AY) + 60, "0,5 h de equipo/ml + mortero (SUPUESTO)"),
- "3.4": (12 * OF + 80, "12 h de oficial con nivel láser + mortero (SUPUESTO)"),
- "4.1": (dp_m2 * 69, "CYPE UPY120: 4,4 kg/m² de mortero (tu saco de 97,50 €/20 kg) + malla + 0,376 h/m²"),
- "4.2": (dp_m2 * 27, "idem, canal"),
- "4.3": (dp_m2 * 9, "idem, bancos y escalera"),
- "5.1": (ceram_m2 * 69, "CYPE UPT020: tu cerámica 34,48 €/m² (112 m² para 105) + cola + 1,264 h/m² de alicatador"),
- "5.2": (ceram_m2 * 27, "idem, canal"),
- "5.3": (ceram_m2 * 9, "idem, bancos y escalera"),
- "5.4": (35 * (68.86 + 0.35 * OF) * 1.03, "tu peldaño 68,86 € + 0,35 h de oficial por pieza"),
- "6.1": (37 * CORON_ML, "SUPUESTO: pieza de coronación 60 €/ml, sin fuente; pedir precio al proveedor"),
- "6.2": (4 * (OF + AY), "4 h de equipo"),
- "7.1": (105 * 0.35 * 15.88, "CYPE UPT020: mortero de juntas RG 0,35 kg/m² a 15,88 €/kg"),
- "7.2": (150, "sellador y mano de obra (SUPUESTO)"),
- "8.1": (8 * AY, "1 jornada de ayudante"),
- "8.2": (4 * OF, "4 h de oficial"),
+# código: (material €, mano de obra estándar €, importancia, nota)
+IMPORTANCIA = {"critica": 1.25, "normal": 1.0, "baja": 0.6}
+P = {
+ "1.1": (0, 8 * OF, "normal", "1 jornada de oficial"),
+ "1.2": (0, 4 * EQ, "critica", "referencia de flotación: de ella depende la nivelación de la coronación"),
+ "1.3": (0, JEQ, "baja", "1 jornada de equipo"),
+ "2.1": (0, 3.1 * JEQ, "baja", "37 ml a ≈12 ml/jornada de equipo (SUPUESTO)"),
+ "2.2": (0, 105 / 10 * JAY, "baja", "105 m² a 10 m²/jornada (picado 8–12 m²/operario/día)"),
+ "2.3": (0, 105 / 12 * JAY, "baja", "105 m² a ≈12 m²/jornada (SUPUESTO)"),
+ "2.4": (750, 0, "baja", "contenedores y transporte a punto limpio, servicio de terceros (SUPUESTO)"),
+ "3.1": (105 * 0.3 * 3.6 * 1.58, 105 * 0.25 * AY, "normal", "mortero reparador Morcemrest RF35 en el 30 % + 0,25 h/m²"),
+ "3.2": (60, 8 * EQ, "critica", "pasamuros y puntos singulares: donde suelen producirse las fugas"),
+ "3.3": (60, 12.5 * 0.5 * EQ, "normal", "pendiente del canal (SUPUESTO)"),
+ "3.4": (80, 12 * OF, "critica", "replanteo con láser y regularización del muro de rebose"),
+ "4.1": (MAT_DP * 69, MO_DP * 69, "critica", "CYPE UPY120; mortero a tu precio de 97,50 €/saco de 20 kg"),
+ "4.2": (MAT_DP * 27, MO_DP * 27, "critica", "idem, canal"),
+ "4.3": (MAT_DP * 9, MO_DP * 9, "critica", "idem, bancos y escalera"),
+ "5.1": (MAT_CE * 69, MO_CE * 69, "critica", "CYPE UPT020; cerámica a tu precio de 34,48 €/m² (112 m² para 105)"),
+ "5.2": (MAT_CE * 27, MO_CE * 27, "critica", "idem, canal"),
+ "5.3": (MAT_CE * 9, MO_CE * 9, "critica", "idem, bancos y escalera"),
+ "5.4": (35 * 68.86, 35 * 0.35 * OF, "normal", "peldaño a tu precio de 68,86 €/ud + 0,35 h por pieza"),
+ "6.1": (37 * 60, 37 * 0.6 * EQ, "critica", "SUPUESTO: pieza de coronación a 60 €/ml, sin fuente; pedir precio al proveedor"),
+ "6.2": (0, 4 * EQ, "normal", "4 h de equipo"),
+ "7.1": (105 * 0.35 * 15.88, 105 * 0.05 * AY, "critica", "mortero de juntas RG 0,35 kg/m² (CYPE UPT020)"),
+ "7.2": (40, 110, "normal", "sellador y mano de obra (SUPUESTO)"),
+ "8.1": (0, 8 * AY, "baja", "1 jornada de ayudante"),
+ "8.2": (0, 4 * OF, "baja", "4 h de oficial"),
 }
-PESOS = {k: v[0] for k, v in COSTE.items()}
+
+def pesos(precio):
+    mat = sum(v[0] for v in P.values())
+    mo_pond = sum(v[1] * IMPORTANCIA[v[2]] for v in P.values())
+    c = (precio - mat) / mo_pond          # factor de mano de obra: fracción de la tarifa CYPE que se cobra
+    return {k: v[0] + v[1] * IMPORTANCIA[v[2]] * c for k, v in P.items()}, c
+
+def resumen(precio):
+    w, c = pesos(precio)
+    mat = sum(v[0] for v in P.values()); mo = sum(v[1] for v in P.values())
+    return {"material": mat, "mo_estandar": mo, "factor_mo": c, "mo_cobrada": precio - mat,
+            "horas": mo / ((OF + AY) / 2), "eur_hora": (precio - mat) / (mo / ((OF + AY) / 2))}

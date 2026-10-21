@@ -124,8 +124,9 @@ def eur(x): return n2(x) + " €"
 def qty(x): return (f"{x:g}").replace(".", ",")
 
 # ---------- cálculo ----------
-# Reparto del precio cerrado en proporción al coste estándar de cada partida.
-from costes_127 import PESOS   # coste estándar por partida (CYPE + tus precios de material), ver costes_127.py
+# Reparto del precio cerrado: material a coste + mano de obra ponderada por importancia.
+from costes_127 import pesos   # material a coste + mano de obra según importancia, ver costes_127.py
+PESOS, _FACTOR_MO = pesos(DATOS["precio_cerrado"])
 parcial = False
 base = round(DATOS["precio_cerrado"], 2)
 partidas = [x for _, _, ps in FASES for x in ps]
