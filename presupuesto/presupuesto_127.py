@@ -14,6 +14,7 @@ from pathlib import Path
 AQUI = Path(__file__).parent
 MUESTRA = "--muestra" in sys.argv
 MOVIL = "--movil" in sys.argv
+FONDO = next((a.split("=")[1] for a in sys.argv if a.startswith("--fondo=")), "")   # agua | azulejo
 CARTA = "--carta" in sys.argv            # diseño «Carta de obra»: identidad propia con los colores de la piscina        # versión de muestra: marca de agua y resumen de revisión al final
 
 DATOS = {
@@ -611,6 +612,9 @@ h3{color:var(--navy)}
 .kv td:first-child,.leyenda td:first-child{color:var(--terra)}
 .gc i{background:var(--navy)}.pg .gc span{background:var(--terra)}.pg td{color:var(--terra)}
 .mk2,.pin{background:var(--navy)}
+.page:not(.cover3):not(.cover2)::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none}
+.page>*{position:absolute;z-index:1}
+.page>.topo{z-index:0}
 .cover3{background:#fff;color:#0b2a45}
 .cover3 .top{position:absolute;left:0;right:0;top:0;height:640px;background:url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 78%,0 100%)}
 .cover3 .top::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35))}
@@ -639,13 +643,17 @@ h3{color:var(--navy)}
 .cover2 .ft{position:absolute;left:56px;right:56px;bottom:52px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;border-top:1px solid rgba(255,255,255,.3);padding-top:22px}
 .cover2 .ft small{display:block;font-size:9.5px;letter-spacing:.24em;color:#8fd0e8;margin-bottom:6px}.cover2 .ft b{font-size:18px}.cover2 .ft span{display:block;font-size:12px;opacity:.85;margin-top:3px}
 """
+if CARTA and FONDO == "agua":
+    CSS += ".page:not(.cover3):not(.cover2)::before{background:url(assets/portada.jpg) center/cover;opacity:.075;filter:saturate(.8)}\n.page:not(.cover3):not(.cover2)::after{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 30%,rgba(255,255,255,0) 70%,rgba(255,255,255,.4) 100%);pointer-events:none}\n"
+if CARTA and FONDO == "azulejo":
+    CSS += ".page:not(.cover3):not(.cover2)::before{background-image:linear-gradient(rgba(31,138,160,.11) .35mm,transparent .35mm),linear-gradient(90deg,rgba(31,138,160,.11) .35mm,transparent .35mm),linear-gradient(180deg,#f4fafc 0%,#ffffff 55%);background-size:31mm 62.6mm,31mm 62.6mm,100% 100%;background-position:8mm 5mm,8mm 5mm,0 0}\n"
 CSS += ".rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}\n"
 if MUESTRA:
     CSS += ".page::before{content:'MUESTRA';position:absolute;top:118mm;left:0;right:0;text-align:center;font-size:110pt;font-weight:800;letter-spacing:.12em;color:rgba(31,78,121,.07);transform:rotate(-30deg);z-index:50;pointer-events:none}\n"
 doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto {DATOS["numero"]} · Brava Pool</title><style>{CSS}</style></head><body>{portada}{corpo}</body></html>'
 oh, op = (AQUI / "presupuesto_127_muestra.html", AQUI / "Presupuesto_127_MUESTRA.pdf") if MUESTRA else (AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf")
 if CARTA:
-    oh, op = AQUI / "presupuesto_127_carta.html", AQUI / "Presupuesto_127_CARTA.pdf"
+    oh, op = AQUI / "presupuesto_127_carta.html", AQUI / (f"Presupuesto_127_CARTA_{FONDO}.pdf" if FONDO else "Presupuesto_127_CARTA.pdf")
 oh.write_text(doc, encoding="utf-8")
 chrome = next((p for p in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(p).exists() or subprocess.call(["which", p], stdout=subprocess.DEVNULL) == 0), None)
 if not chrome:
