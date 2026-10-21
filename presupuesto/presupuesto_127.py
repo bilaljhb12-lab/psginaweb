@@ -101,7 +101,11 @@ FASES = [
     "Limpieza final de obra y retirada de protecciones."])]),
 ]
 
-PROMO = ("Regalo promocional: equipo de electrólisis salina", "Equipo de sal para la piscina, incluido sin coste dentro de esta promoción. Marca, modelo e instalación: a confirmar por escrito.")
+PROMO = ("Regalo promocional: cloración salina y pH automático", [
+    "Equipo de cloración salina Bright Blue Pluma WP 15, con la célula de electrólisis instalada en bypass.",
+    "Regulador de pH automático Sanus NG, con sonda, bomba peristáltica, punto de inyección y depósito.",
+    "Suministro e instalación incluidos, sin ningún coste adicional. Puesta en marcha con la piscina llena, una vez realizado el llenado, y explicación del funcionamiento de los equipos.",
+    "La instalación se realiza sobre la depuración existente, previa comprobación en la inspección inicial."])
 
 e = html.escape
 def n2(x): return f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
@@ -154,7 +158,7 @@ pagina("Gracias por confiar en nosotros", f'''
 <div><b>Pagos por hitos</b>Cada pago se vincula a una fase terminada y el 20 % final queda retenido hasta la entrega.</div>
 <div><b>Garantía por escrito</b>3 años en el revestimiento y 2 años en los trabajos y la mano de obra, además de las garantías legales.</div>
 <div><b>Obra limpia</b>Retiramos todos los escombros a un punto limpio autorizado y entregamos la piscina y su entorno limpios.</div>
-<div><b>Regalo promocional</b>Equipo de electrólisis salina incluido sin coste en este presupuesto.</div></div>''')
+<div><b>Regalo promocional</b>Cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada sin coste.</div></div>''')
 
 fotos = [("foto_terraza.jpg", "Vista general desde la terraza", "Piscina desbordante en ladera, con vistas al valle, coronación de piezas de gran formato y rejilla lineal en el pavimento."),
          ("foto_canal.jpg", "Canal de desbordamiento", "Canal perimetral junto al lado del valle, con su muro exterior y coronación."),
@@ -220,7 +224,8 @@ mats = [("Impermeabilización", "Grupo Puma", "Sistema DryPool · mortero bicomp
         ("Bancos y escalera", "Rosa Gres", "Pieza de peldaño antideslizante (referencia a confirmar)"),
         ("Cemento cola", "Por definir", "Adhesivo cementoso C2 TE S1, apto para inmersión permanente"),
         ("Rejuntado", "Por definir", "Mortero de juntas para inmersión permanente (tipo y color a confirmar)"),
-        ("Coronación", "Por definir", "Modelo y acabado a confirmar por escrito")]
+        ("Coronación", "Por definir", "Modelo y acabado a confirmar por escrito"),
+        ("Cloración salina (regalo)", "Bright Blue", "Pluma WP 15 con regulador de pH automático Sanus NG")]
 pagina("Sistema constructivo y materiales", f'''<p class="lead">La estanqueidad de una piscina depende del conjunto de capas, no de un solo producto. Este es el sistema previsto y su orden de ejecución.</p>
 <div class="plano">{capas_svg}</div>
 <h2>Materiales y marcas</h2>
@@ -266,7 +271,7 @@ fdict = {f: (t, ps) for f, t, ps in FASES}
 for gi, g in enumerate(grupos):
     body = ''.join(fase_html(f, *fdict[f]) for f in g)
     if gi == len(grupos) - 1:
-        body += f'<tr class="fase promo"><td colspan="4"><span>+</span>PROMOCIÓN</td></tr><tr class="pt"><td class="cod">R.1</td><td><b>{e(PROMO[0])}</b><ul><li>{e(PROMO[1])}</li></ul></td><td class="n">1</td><td class="c">ud</td></tr>'
+        body += f'<tr class="fase promo"><td colspan="4"><span>+</span>PROMOCIÓN</td></tr><tr class="pt"><td class="cod">R.1</td><td><b>{e(PROMO[0])}</b><ul>{''.join(f'<li>{e(x)}</li>' for x in PROMO[1])}</ul></td><td class="n">1</td><td class="c">ud</td></tr>'
     pagina("Descripción de los trabajos" + ("" if gi == 0 else " (cont.)"), f'<table class="desc">{cab}<tbody>{body}</tbody></table>' + ('<p class="note">PA = partida alzada. Las mediciones son estimadas y se ajustan con las medidas tomadas en obra. El precio es cerrado e incluye materiales y mano de obra de todas las partidas.</p>' if gi == len(grupos) - 1 else ''))
 
 # 6 · resumen
@@ -277,7 +282,7 @@ pagina("Resumen de la inversión", f'''<p class="lead">Precio cerrado con todos 
 <tr class="sub"><td colspan="2">Base imponible</td><td class="n">{eur(base)}</td></tr>
 <tr><td colspan="2">IVA {DATOS["iva"]} %</td><td class="n">{eur(iva_imp)}</td></tr>
 <tr class="tot"><td colspan="2">Total presupuesto (IVA incl.)</td><td class="n">{eur(total)}</td></tr></tbody></table>
-<div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala un equipo de electrólisis salina para su piscina. Marca, modelo e instalación se confirmarán por escrito.</div>
+<div class="box"><b>Promoción.</b> Con este presupuesto, Brava Pool regala el equipo de cloración salina Bright Blue Pluma WP 15 con regulador de pH automático Sanus NG, instalado y sin ningún coste adicional.</div>
 <p class="note">El tipo de IVA aplicable depende de las condiciones de la vivienda y de la obra; se confirma al cerrar el presupuesto.</p>''')
 
 # 7 · garantías
