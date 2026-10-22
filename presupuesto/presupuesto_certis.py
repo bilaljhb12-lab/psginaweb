@@ -85,11 +85,11 @@ if "--tecnico" in sys.argv:
     VOL = round(sum(s[3] for s in SEC), 2)   # 30,74 m³ recalculado (el plano indica 34,24 m³)
     SUP = 53.51
     T = [("1", "Instalaciones enterradas", [
-          ("1.1", "Lecho de gravas para soporte de las instalaciones", 1, "PA", 4.5, ["Colocación del lecho de gravas sobre el que se apoyan las instalaciones."]),
+          ("1.1", "Lecho de gravas para soporte de las instalaciones", 1, "PA", 0.0, ["Colocación del lecho de gravas sobre el que se apoyan las instalaciones."]),
           ("1.2", "Conductos de fontanería", 1, "PA", 10.0, ["Colocación de los conductos de fontanería de la piscina, según el esquema de instalaciones del proyecto."])]),
          ("2", "Estructura del vaso", [
           ("2.1", "Malla electrosoldada", SUP, "m²", 5.5, ["Colocación de la malla electrosoldada en toda la superficie del vaso.", "Medición en planta: la superficie desarrollada, con las pendientes y los niveles, será mayor y se ajusta en obra."]),
-          ("2.2", "Hormigón gunitado en toda la superficie", SUP, "m²", 27.0, ["Proyección de hormigón gunitado en toda la superficie de la piscina, para crear un revestimiento continuo, resistente y estanco."])]),
+          ("2.2", "Gunitado del vaso, vía húmeda", SUP, "m²", 31.5, ["Proyección de hormigón gunitado por vía húmeda en toda la superficie de la piscina, para crear un revestimiento continuo, resistente y estanco.", "Gunita con 450 kg de cemento por m³ y fibras."])]),
          ("3", "Acabado de arena", [
           ("3.1", "Revestimiento de arena natural compactada fijada con resinas", SUP, "m²", 28.0, ["Arena natural compactada fijada con un sistema de resinas, de color similar al del sauló natural de la zona.", "Acabado continuo y antideslizante en toda la superficie de la piscina."])]),
          ("4", "Filtración, accesorios y tratamiento del agua", [
@@ -120,12 +120,14 @@ if "--tecnico" in sys.argv:
     NP = 7
     ftt = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / {NP:02d} · Presupuesto {D["numero"]}</span></footer>'
     hdt = lambda t: f'<div class="rail">PRESUPUESTO {D["numero"]} · PISCINA NATURALIZADA DE ARENA · {e(OBRA).upper()}</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓN DE PISCINAS</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
+    INCLUIDAS = {"1.1"}   # partidas sin precio propio, incluidas en otra
     SIN_PRECIO = {"4"}   # fases que muestran solo el total, sin precio por partida
     def fase_t(f, t, ps):
         r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(t).upper()}</td><td></td><td class="nn">{eur(SUB[f])}</td></tr>'
         for c, tt, q, u, w, b in ps:
-            gift = (w == 0)
-            hide = (f in SIN_PRECIO) and not gift
+            incl = c in INCLUIDAS
+            gift = (w == 0) and not incl
+            hide = ((f in SIN_PRECIO) and not gift) or incl
             r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(tt)}</b><ul>{"".join(f"<li>{e(x)}</li>" for x in b)}</ul></td><td class="nn">{qy(q)}</td><td class="c">{u}</td><td class="nn">{"—" if (gift or hide) else n2(PU[c]) + " €"}</td><td class="nn"><b>{"REGALO" if gift else ("Incluido" if hide else n2(IM[c]) + " €")}</b></td></tr>'
         return r
     cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:15mm">Cant.</th><th style="width:11mm">Ud.</th><th style="width:22mm">Precio</th><th style="width:24mm">Importe</th></tr></thead>'
