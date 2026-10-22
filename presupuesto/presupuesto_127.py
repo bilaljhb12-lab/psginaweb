@@ -14,8 +14,9 @@ from pathlib import Path
 AQUI = Path(__file__).parent
 MUESTRA = "--muestra" in sys.argv
 MOVIL = "--movil" in sys.argv
+RESUMEN = "--resumen" in sys.argv
 FONDO = next((a.split("=")[1] for a in sys.argv if a.startswith("--fondo=")), "")   # agua | azulejo
-CARTA = "--carta" in sys.argv            # diseño «Carta de obra»: identidad propia con los colores de la piscina        # versión de muestra: marca de agua y resumen de revisión al final
+CARTA = "--carta" in sys.argv or RESUMEN            # diseño «Carta de obra»: identidad propia con los colores de la piscina        # versión de muestra: marca de agua y resumen de revisión al final
 
 DATOS = {
     "numero": "127",
@@ -650,10 +651,77 @@ if CARTA and FONDO == "azulejo":
 CSS += ".rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}\n"
 if MUESTRA:
     CSS += ".page::before{content:'MUESTRA';position:absolute;top:118mm;left:0;right:0;text-align:center;font-size:110pt;font-weight:800;letter-spacing:.12em;color:rgba(31,78,121,.07);transform:rotate(-30deg);z-index:50;pointer-events:none}\n"
+if RESUMEN:
+    _fs = [("1", "Inspección y referencias de nivel", "Estado previo y toma de la línea de flotación."),
+           ("2", "Demoliciones", "Retirada de la cerámica, la coronación y la impermeabilización antiguas."),
+           ("3", "Reparación del soporte", "Saneado, canal, escalera y puntos singulares."),
+           ("4", "Impermeabilización DryPool", "Sistema Grupo Puma en dos capas con malla."),
+           ("5", "Cerámica y peldaños Rosa Gres", "Baldosa 31 × 62,6 cm y peldaños antideslizantes."),
+           ("6", "Coronación y labio de rebose", "Piezas nuevas con el labio nivelado con láser."),
+           ("7", "Rejuntado y sellados", "Junta epoxi apta para piscina con cloración salina."),
+           ("8", "Limpieza y entrega", "Revisión final con el cliente y acta de entrega.")]
+    _lf = ''.join(f'<div class="rf"><span>{f}</span><div><b>{e(t)}</b>{e(d)}</div></div>' for f, t, d in _fs)
+    _kp = [("7,50 × 4,00 m", "vaso · 1,70 m de profundidad"), ("12,5 ml", "canal desbordante en L"), ("≈ 105 m²", "cerámica Rosa Gres"), ("5 a 6 semanas", "plazo de ejecución")]
+    _kpi = ''.join(f'<div class="kp"><b>{a_}</b><small>{b_}</small></div>' for a_, b_ in _kp)
+    _mt = [("Impermeabilización", "Grupo Puma · sistema DryPool (Morcem Dry SF Plus, malla y banda Bandtec)"),
+           ("Reparación del soporte", "Grupo Puma · Morcemseal Todo 1 R4"),
+           ("Colocación", "Grupo Puma · mortero-cola Pegoland Flex C2 TE S1"),
+           ("Juntas", "Grupo Puma · Morcemcolor Epoxi, apto para cloración salina"),
+           ("Cerámica", "Rosa Gres 31 × 62,6 cm · serie y color a elegir"),
+           ("Peldaños y banco", "Rosa Gres antideslizante L98 y L62")]
+    _mtl = ''.join(f'<div class="rm"><small>{e(a_)}</small>{e(b_)}</div>' for a_, b_ in _mt)
+    _fl = ''.join(f'<tr><td class="c2">{f}</td><td>{e(t)}</td><td class="n">{eur(sub[f])}</td></tr>' for f, t, _ in FASES)
+    _pg = ''.join(f'<div class="pp"><b>{pct} %</b><i>{eur(im)}</i><span>{e(txt.split(" (")[0])}</span></div>' for pct, txt, im in PAGOS)
+    _ft = lambda n: f'<footer><span>Brava Pool · {e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</span><span class="fol"><b>{n:02d}</b> / 03 · Resumen del presupuesto {DATOS["numero"]}</span></footer>'
+    _hd = lambda t: f'<div class="rail">PRESUPUESTO {DATOS["numero"]} · RESUMEN</div><div class="topo"></div><header><div><div class="eyebrow"><span>41°51′ N · 3°05′ E</span><span>CALONGE · COSTA BRAVA</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
+    corpo = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png" alt="Brava Pool"><div class="hnum"><small>PRESUPUESTO</small><b>{DATOS["numero"]}</b></div>
+<div class="htit"><div class="chip3">RESUMEN · PROPUESTA DE REFORMA</div><h1>Rehabilitación integral <em>de piscina</em></h1></div>
+<div class="body" style="top:104mm"><div class="para"><small>PREPARADO PARA</small><b>{e(DATOS["cliente"])}</b> · {e(DATOS["direccion"])} · {DATOS["fecha"]}</div>
+<p class="lead2">Estimado Sr. Tanner: este es el resumen de nuestra propuesta. Retiramos todo lo antiguo, reparamos e impermeabilizamos el vaso y el canal con un sistema específico para piscinas, y colocamos cerámica, peldaños y coronación nuevos, revisando cada fase antes de pasar a la siguiente.</p>
+<div class="kpis">{_kpi}</div><h2>La obra, fase a fase</h2><div class="rfs">{_lf}</div></div>{_ft(1)}</section>
+<section class="page">{_hd("Materiales y compromisos")}<div class="body">
+<div class="two"><div class="phw"><img src="assets/foto_planta.jpg" alt=""></div><div><h2 style="margin-top:0">Materiales previstos</h2>{_mtl}</div></div>
+<div class="cols2" style="margin-top:3mm"><div><h2>Incluye</h2><ul class="tx"><li>Materiales, mano de obra, transporte y retirada de escombros.</li><li>Regalo: cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada.</li><li>Nivelación del labio de rebose con nivel láser (±2 mm).</li></ul></div>
+<div><h2>No incluye</h2><ul class="tx"><li>Daños estructurales o tuberías ocultas que aparezcan al desmontar.</li><li>Equipos de filtración y depuración, salvo el equipo de sal.</li><li>Licencias y tasas, agua y productos químicos.</li></ul></div></div>
+<h2>Nuestro compromiso</h2><div class="cards"><div><b>Plazo por escrito</b>5 a 6 semanas desde el inicio de obra, salvo causas climatológicas adversas.</div><div><b>Pagos por hitos</b>Cada pago se vincula a una fase terminada y el último 20 % se retiene hasta la entrega.</div><div><b>Garantía</b>Brava Pool garantiza su trabajo, el revestimiento y la mano de obra, además de las garantías legales.</div><div><b>Obra limpia</b>Retiramos los escombros y entregamos la piscina y su entorno limpios.</div></div>
+<p class="note" style="margin-top:4mm">Este resumen forma parte del presupuesto técnico completo, con planos, partidas y descripción detallada de cada trabajo, que le entregamos aparte.</p></div>{_ft(2)}</section>
+<section class="page">{_hd("Inversión y aceptación")}<div class="body">
+<table class="eco res"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th style="width:34mm;text-align:right">Importe</th></tr></thead><tbody>{_fl}
+<tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="n">{eur(base)}</td></tr></tbody></table>
+<div class="aviso" style="margin:3mm 0"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
+<h2>Forma de pago</h2><div class="pps">{_pg}</div>
+<table class="kv pago"><tr><td>Titular</td><td>{e(DATOS["emisor"])} · NIF {e(DATOS["nif_emisor"])}</td></tr><tr><td>Banco / IBAN</td><td><b>{e(DATOS["banco"])} · {e(DATOS["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {DATOS["numero"]}</td></tr></table>
+<div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente acepta el presupuesto n.º {DATOS["numero"]}, por un importe total de <b>{eur(base)}</b>, IVA no incluido, con sus condiciones y la forma de pago indicada. Válido hasta el {DATOS["valido_hasta"]}.</p>
+<div class="sig"><div><div class="line"></div><small>Nombre y apellidos · DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma del cliente</small></div></div></div>
+<div class="duda"><b>¿Alguna duda?</b> {e(DATOS["emisor"])} · {e(DATOS["telefono"])} · {e(DATOS["web"])}</div></div>{_ft(3)}</section>"""
+    portada = ""
+    CSS += """
+.page>footer{align-items:flex-end}
+.hero{left:0;right:0;top:0;height:94mm;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35)),url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 82%,0 100%)}
+.hline{left:0;right:0;top:0;height:98mm;background:#b8603c;clip-path:polygon(0 100%,100% 82%,100% 83.6%,0 101.6%);z-index:2!important}
+.hlogo{left:16mm;top:11mm;height:24mm;z-index:3!important}
+.hnum{right:16mm;top:12mm;text-align:right;color:#fff;z-index:3!important}.hnum small{display:block;font-size:6.5pt;letter-spacing:.3em;color:#8fd0e8}.hnum b{font-size:40pt;font-weight:900;line-height:.95}
+.htit{left:16mm;right:16mm;top:46mm;z-index:3!important}.chip3{display:inline-block;border:.3mm solid #fff;color:#fff;font-size:6.8pt;letter-spacing:.3em;padding:1.4mm 3.6mm;border-radius:6mm;margin-bottom:3mm}
+.htit h1{color:#fff;font-size:27pt;font-weight:800;line-height:1.05;letter-spacing:-.03em;margin:0}.htit h1 em{font-style:normal;color:#8fd0e8}
+.para{font-size:9pt;color:#444;margin-bottom:3mm}.para small{display:block;font-size:6.5pt;letter-spacing:.2em;color:var(--terra)}.para b{color:var(--navy)}
+.lead2{font-size:10pt;color:#222;margin-bottom:4mm}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}.kp{border-top:.7mm solid var(--terra);padding:2mm 0}.kp b{display:block;font-size:12.5pt;color:var(--navy);letter-spacing:-.02em}.kp small{font-size:7.3pt;color:#666}
+.rfs{margin-top:1mm}.rf{display:flex;gap:4mm;padding:2.3mm 0;border-bottom:.2mm solid var(--ln);font-size:8.6pt;color:#444}.rf>span{flex:none;width:8mm;font-size:15pt;font-weight:200;color:var(--terra);line-height:1}.rf b{display:block;color:var(--navy);font-size:9.6pt}
+.two{display:grid;grid-template-columns:62mm 1fr;gap:6mm}.two .phw img{width:100%;display:block}
+.rm{padding:1.8mm 0;border-bottom:.2mm solid var(--ln);font-size:8.6pt;color:#444}.rm small{display:block;font-size:6.6pt;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:700}
+ul.tx{margin:0;padding-left:4mm;font-size:8.8pt}ul.tx li{margin-bottom:1.4mm}
+.c2{color:var(--terra);font-weight:700}
+.pps{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:2mm}.pp{border-top:.7mm solid var(--navy);padding-top:2mm;font-size:8pt;color:#555}.pp b{display:block;font-size:13pt;color:var(--terra)}.pp i{display:block;font-style:normal;font-weight:700;color:#111;font-size:9.6pt}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-top:1mm}.sig .line{height:7mm!important}.sig .line.big{height:10mm!important}
+.acc{padding:3mm 5mm!important;margin-top:3mm!important}.acc p{margin-bottom:1mm}.res td{padding-top:1.4mm!important;padding-bottom:1.4mm!important}.duda{margin-top:3mm!important;padding:2mm 4mm!important}.pago td{padding:1mm 0!important}
+"""
+
 doc = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto {DATOS["numero"]} · Brava Pool</title><style>{CSS}</style></head><body>{portada}{corpo}</body></html>'
 oh, op = (AQUI / "presupuesto_127_muestra.html", AQUI / "Presupuesto_127_MUESTRA.pdf") if MUESTRA else (AQUI / "presupuesto_127.html", AQUI / "presupuesto_127.pdf")
 if CARTA:
     oh, op = AQUI / "presupuesto_127_carta.html", AQUI / (f"Presupuesto_127_CARTA_{FONDO}.pdf" if FONDO else "Presupuesto_127_CARTA.pdf")
+if RESUMEN:
+    oh, op = AQUI / "presupuesto_127_resumen.html", AQUI / "Presupuesto_127_RESUMEN.pdf"
 oh.write_text(doc, encoding="utf-8")
 chrome = next((p for p in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(p).exists() or subprocess.call(["which", p], stdout=subprocess.DEVNULL) == 0), None)
 if not chrome:

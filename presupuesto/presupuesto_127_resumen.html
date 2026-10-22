@@ -1,0 +1,167 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto 127 · Brava Pool</title><style>
+@page{size:A4;margin:0}*{box-sizing:border-box}
+:root{--navy:#1f4e79;--ink:#0a2540;--cy:#3fa4c8;--bg:#eef2f5;--mut:#5b6b7b;--ln:#dde3ea}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:#2b3440;font-size:9.4pt;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.page>header{position:absolute;top:12mm;left:16mm;right:16mm;height:22mm;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:.35mm solid var(--navy)}
+.page>header img{height:17mm;margin-top:-2mm}
+.eyebrow{font-size:7pt;letter-spacing:.2em;color:var(--cy);font-weight:600}
+h1{margin:.5mm 0 0;font-size:19pt;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+h2{font-size:7.8pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin:4.5mm 0 1.5mm;font-weight:700}
+h3{font-size:10.5pt;color:var(--navy);margin:0 0 1.5mm}
+.body{position:absolute;top:40mm;bottom:17mm;left:16mm;right:16mm}
+.page>footer{position:absolute;bottom:8mm;left:16mm;right:16mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--mut)}
+p{margin:0 0 2.6mm}ul{margin:0;padding-left:4mm}li{margin-bottom:.6mm}
+.lead{font-size:10pt;color:var(--ink)}.note{font-size:7.6pt;color:var(--mut)}.firma{margin-top:4mm}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8mm}.cols2{display:grid;grid-template-columns:1fr 1fr;gap:9mm}.cols2 h2{margin-top:0}
+.kv{width:100%;border-collapse:collapse;font-size:8.6pt}.kv td{padding:1.3mm 0;border-bottom:.2mm solid var(--ln);vertical-align:top}.kv td:first-child{color:var(--mut);width:40%}.kv td:last-child{text-align:right;font-weight:600;color:var(--ink)}
+.kv-wide{margin-top:1mm}
+.aviso{margin:5mm 0 3mm;border:.4mm solid #c9822b;background:#fbf3e6;padding:3mm 4mm;font-size:9pt;color:#5a3d0f}.aviso b{color:#8a5a14;letter-spacing:.06em;text-transform:uppercase}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm}.cards div{background:var(--bg);border-top:.7mm solid var(--cy);padding:2.2mm 3.5mm;font-size:8.1pt}.cards b{display:block;color:var(--navy);font-size:9pt;margin-bottom:.8mm}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.gal figure{margin:0}.gal img{width:100%;height:52mm;object-fit:cover;display:block}.gal figcaption{font-size:7.8pt;color:#44505d;padding:1.5mm 0 0;line-height:1.35}.gal b{display:block;color:var(--navy);font-size:8.6pt}
+.ann{display:grid;grid-template-columns:82mm 1fr;gap:7mm;margin-top:3mm}.phw{position:relative}.phw img{width:100%;display:block}.pin{position:absolute;transform:translate(-50%,-50%);width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;border:.45mm solid #fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 .3mm 1mm rgba(0,0,0,.4)}.lg{margin:0;padding:0;list-style:none}.lg li{display:flex;gap:3mm;margin-bottom:4mm;font-size:8.6pt}.lg b{display:block;color:var(--navy);font-size:9.4pt}.mk2{flex:none;width:6.4mm;height:6.4mm;border-radius:50%;background:#1f4e79;color:#fff;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center}
+.plano{border:.25mm solid var(--ln);padding:3mm;margin:3mm 0}.plano svg{width:100%;height:auto;display:block}
+.leyenda{width:100%;border-collapse:collapse;font-size:8.4pt;margin:3mm 0}.leyenda td{padding:1.4mm 0;border-bottom:.2mm solid var(--ln)}.leyenda td:first-child{width:38mm;color:var(--navy)}
+table{border-collapse:collapse;width:100%}
+.eco{font-size:8.4pt}.eco th{text-align:left;font-size:6.8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:2mm 1.5mm;border-bottom:.35mm solid var(--navy);border-top:.35mm solid var(--navy)}
+.eco td{padding:2.2mm 1.5mm;border-bottom:.2mm solid var(--ln);vertical-align:top}.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.c{text-align:center}
+.mk{color:var(--navy)}.pc{color:var(--cy);font-weight:700}
+.res .rn{color:var(--cy);font-weight:700}.res td{padding:2.6mm 1.5mm}.sub td{font-weight:600;background:var(--bg)}.tot td{background:var(--navy);color:#fff;font-weight:700;font-size:10.5pt;padding:3.4mm 3mm}
+.alert{border-left:1.2mm solid #c9822b;background:#fbf3e6;padding:3mm 4mm;margin-bottom:5mm;font-size:8.8pt;color:#5a3d0f}
+.desc{font-size:8.2pt}.desc th{text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding:1.5mm 1mm;border-bottom:.35mm solid var(--ln)}
+.desc td{padding:1.8mm 1mm;vertical-align:top}.desc .fase td.n{text-align:right}.desc .fase td{background:var(--navy);color:#fff;font-weight:700;letter-spacing:.06em;padding:2.2mm 2.5mm;font-size:7.8pt}.desc .fase td.n{font-size:8.4pt}
+.desc .fase.promo td{background:#c9822b}.desc .fase span{color:#8fd0e8;margin-right:3mm}.desc .pt td{border-bottom:.2mm solid var(--ln)}.desc .cod{color:var(--mut)}
+.desc ul{margin-top:.8mm;font-size:7.9pt;color:#44505d}.desc .pt{page-break-inside:avoid}
+.gt{font-size:8pt;margin:3mm 0}.gt th{border-bottom:.35mm solid var(--navy);text-align:left;font-size:6.8pt;letter-spacing:.12em;color:var(--mut);padding-bottom:1.5mm}
+.gt td{padding:2.2mm 1.5mm 2.2mm 0;border-bottom:.2mm solid var(--ln);vertical-align:middle}
+.wk{display:grid;grid-template-columns:repeat(6,1fr);text-align:center}.wk span{border-left:.2mm dashed var(--ln)}
+.gc div{position:relative;height:4.2mm;background:repeating-linear-gradient(90deg,transparent 0 16.6%,#e6ebf0 16.6% calc(16.6% + .2mm))}
+.gc i{position:absolute;top:0;bottom:0;background:var(--navy);border-radius:.6mm}.gc i.hat{background:repeating-linear-gradient(135deg,#c9822b 0 1mm,#f1d4a8 1mm 2mm)}
+.pg td{color:var(--cy);font-weight:700}.pg .gc div{height:5mm}.pg .gc span{position:absolute;top:0;font-size:6.8pt;background:var(--cy);color:#fff;border-radius:.8mm;padding:.2mm 1.3mm}
+.sw{display:inline-block;width:6mm;height:2.6mm;background:repeating-linear-gradient(135deg,#c9822b 0 1mm,#f1d4a8 1mm 2mm);vertical-align:middle;margin-right:1.5mm}
+.clau{border-left:.9mm solid var(--cy);padding:0 0 0 4mm;margin:0 0 6mm}.clau span{font-size:6.8pt;letter-spacing:.2em;color:var(--cy);font-weight:700}
+.acc{border:.35mm solid var(--navy);padding:5mm 6mm;margin-top:7mm}.sig{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:3mm}
+.line{border-bottom:.3mm solid #44505d;height:9mm}.line.big{height:13mm}.sig small{font-size:7pt;color:var(--mut);display:block;margin-bottom:1mm}
+.blk{display:inline-block;width:34mm;border-bottom:.25mm solid #6b7785;height:4mm;vertical-align:bottom}
+.duda{background:var(--bg);padding:3mm 4mm;margin-top:6mm;font-size:8.6pt}
+.cover{background:#071a30;color:#fff}.cover .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(1.15)}
+.cover .duo{position:absolute;inset:0;background:linear-gradient(160deg,rgba(7,26,48,.92) 0%,rgba(14,60,100,.55) 45%,rgba(7,26,48,.95) 100%)}
+.cover .waves{position:absolute;inset:0;width:100%;height:100%}
+.cover .slash{position:absolute;left:-30mm;top:178mm;width:290mm;height:3mm;background:#3fa4c8;transform:rotate(-14deg);box-shadow:0 0 18mm rgba(63,164,200,.7)}
+.cover .slash2{position:absolute;left:-30mm;top:186mm;width:290mm;height:.7mm;background:#8fd0e8;transform:rotate(-14deg);opacity:.7}
+.cover .logo{position:absolute;top:16mm;left:16mm}.cover .logo img{height:36mm}
+.cover .num{position:absolute;top:18mm;right:16mm;text-align:right}.cover .num small{display:block;font-size:7pt;letter-spacing:.3em;color:#8fd0e8}.cover .num b{display:block;font-size:54pt;line-height:1;font-weight:800;letter-spacing:-.03em;background:linear-gradient(180deg,#fff,#8fd0e8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .tt{position:absolute;left:16mm;right:16mm;top:86mm}.cover .chip{display:inline-block;border:.3mm solid #3fa4c8;color:#8fd0e8;font-size:7.6pt;letter-spacing:.3em;padding:1.6mm 4mm;border-radius:6mm;margin-bottom:7mm;background:rgba(63,164,200,.12)}
+.cover h1{color:#fff;font-size:50pt;line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:0}.cover h1 em{font-style:normal;color:#5cc0e0}
+.cover .rule{width:26mm;height:1.2mm;background:#3fa4c8;margin:8mm 0 6mm}.cover .tt p{font-size:11.5pt;font-weight:300;opacity:.92;line-height:1.5}
+.cover .glass{position:absolute;left:16mm;right:16mm;bottom:30mm;display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:6mm;padding:6mm 7mm;background:rgba(255,255,255,.10);border:.25mm solid rgba(255,255,255,.28);border-radius:3mm;backdrop-filter:blur(4px)}
+.cover .glass small{display:block;font-size:6.6pt;letter-spacing:.24em;color:#8fd0e8;margin-bottom:1.5mm}.cover .glass b{display:block;font-size:12pt}.cover .glass span{font-size:8.4pt;opacity:.85}
+.cover .foot{position:absolute;left:16mm;right:16mm;bottom:11mm;display:flex;justify-content:space-between;gap:4mm;font-size:6.8pt;letter-spacing:.06em;opacity:.8;text-transform:uppercase;white-space:nowrap}
+
+:root{--navy:#0b2a45;--cy:#1f8aa0;--bg:#efe7d6;--mut:#6b6455;--ln:#d9cfb8;--terra:#b8603c;--sand:#fff}
+body{color:#2a2f36}
+.page{background:var(--sand)}
+.page>header{left:16mm;right:16mm;top:12mm;border-bottom:.3mm solid var(--navy)}
+.eyebrow{display:flex;gap:6mm;color:var(--terra);font-size:6.6pt;letter-spacing:.22em;font-weight:600}
+h1{font-family:"Inter Display",Inter,Arial,sans-serif;font-weight:300;font-size:25pt;letter-spacing:-.03em;color:var(--navy)}
+h2{color:var(--terra);letter-spacing:.2em}
+h3{color:var(--navy)}
+.rail{position:absolute;left:7mm;top:0;bottom:0;width:6mm;display:flex;align-items:center;justify-content:center}
+.rail{writing-mode:vertical-rl;transform:rotate(180deg);font-size:6pt;letter-spacing:.34em;color:#a39a82;white-space:nowrap}
+.topo{position:absolute;right:-30mm;bottom:-24mm;width:120mm;height:120mm;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20240%20240%22%3E%3Cpath%20d%3D%22M27%20140%20C65%2074%2C144%2044%2C191%20105%20S162%20184%2C96%20168%20S16%20196%2C27%20140Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M34%20130%20C70%2068%2C138%2048%2C182%20100%20S154%20178%2C92%20160%20S22%20192%2C34%20130Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M41%20120%20C75%2062%2C132%2052%2C173%2095%20S146%20172%2C88%20152%20S28%20188%2C41%20120Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M48%20110%20C80%2056%2C126%2056%2C164%2090%20S138%20166%2C84%20144%20S34%20184%2C48%20110Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M55%20100%20C85%2050%2C120%2060%2C155%2085%20S130%20160%2C80%20136%20S40%20180%2C55%20100Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M62%2090%20C90%2044%2C114%2064%2C146%2080%20S122%20154%2C76%20128%20S46%20176%2C62%2090Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M69%2080%20C95%2038%2C108%2068%2C137%2075%20S114%20148%2C72%20120%20S52%20172%2C69%2080Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M76%2070%20C100%2032%2C102%2072%2C128%2070%20S106%20142%2C68%20112%20S58%20168%2C76%2070Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M83%2060%20C105%2026%2C96%2076%2C119%2065%20S98%20136%2C64%20104%20S64%20164%2C83%2060Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M90%2050%20C110%2020%2C90%2080%2C110%2060%20S90%20130%2C60%2096%20S70%20160%2C90%2050Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M97%2040%20C115%2014%2C84%2084%2C101%2055%20S82%20124%2C56%2088%20S76%20156%2C97%2040Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3Cpath%20d%3D%22M104%2030%20C120%208%2C78%2088%2C92%2050%20S74%20118%2C52%2080%20S82%20152%2C104%2030Z%22%20fill%3D%22none%22%20stroke%3D%22%23b8a98a%22%20stroke-width%3D%22.9%22/%3E%3C/svg%3E") center/contain no-repeat;opacity:.36;pointer-events:none}
+.page>footer{border-top:.3mm solid var(--ln)}
+.fol b{font-size:15pt;font-weight:200;color:var(--navy);letter-spacing:-.02em;margin-right:1mm}
+.page>footer{align-items:flex-end}
+.eco th{background:none;color:var(--navy);border-top:.45mm solid var(--navy);border-bottom:.2mm solid var(--navy)}
+.eco td{border-bottom:.2mm solid var(--ln)}
+.eco td:nth-child(n+4):not(.c){background:none}
+.sub td{background:#e7dcc4!important;color:var(--navy)}
+.tot td{background:var(--navy)!important}
+.res .rn,.pc,.desc .cod{color:var(--terra)}
+.desc .fase td{background:#e7dcc4;color:var(--navy);border-top:.45mm solid var(--navy)}
+.desc .fase span{color:var(--terra)}
+.desc .fase.promo td{background:var(--terra);color:#fff}.desc .fase.promo span{color:#f6d9c9}
+.desc th{color:var(--mut);border-bottom:.3mm solid var(--navy)}
+.cards div{background:#efe7d6;border-top:0;border-left:.9mm solid var(--terra)}
+.cards b{color:var(--navy)}
+.box{background:#efe7d6;border-left:1mm solid var(--terra)}
+.plano,.gal img{border-color:#cdbf9f}
+.plano{background:#fff}
+.clau{border-left:.9mm solid var(--terra)}.clau span{color:var(--terra)}
+.acc{border:.4mm solid var(--navy);background:#fff}
+.duda{background:#efe7d6}
+.aviso{border-color:var(--terra);background:#f6e4d9;color:#5b2a14}.aviso b{color:var(--terra)}
+.alert{border-left-color:var(--terra)}
+.kv td:first-child,.leyenda td:first-child{color:var(--terra)}
+.gc i{background:var(--navy)}.pg .gc span{background:var(--terra)}.pg td{color:var(--terra)}
+.mk2,.pin{background:var(--navy)}
+.page:not(.cover3):not(.cover2)::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none}
+.page>*{position:absolute;z-index:1}
+.page>.topo{z-index:0}
+.cover3{background:#fff;color:#0b2a45}
+.cover3 .top{position:absolute;left:0;right:0;top:0;height:640px;background:url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 78%,0 100%)}
+.cover3 .top::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35))}
+.cover3 .line{position:absolute;left:0;right:0;top:0;height:660px;background:#b8603c;clip-path:polygon(0 100%,100% 78%,100% 79.4%,0 101.4%);z-index:2}
+.cover3 .lg{position:absolute;left:56px;top:48px;z-index:3}.cover3 .lg img{height:128px}
+.cover3 .n{position:absolute;right:56px;top:56px;z-index:3;text-align:right;color:#fff}.cover3 .n small{display:block;font-size:11px;letter-spacing:.32em;color:#8fd0e8}.cover3 .n b{font-size:96px;font-weight:900;line-height:.95;letter-spacing:-3px}
+.cover3 .chip{position:absolute;left:56px;top:560px;z-index:3;border:1px solid #fff;color:#fff;font-size:11px;letter-spacing:.32em;padding:7px 16px;border-radius:30px}
+.cover3 h1{position:absolute;left:56px;top:690px;margin:0;font-size:58px;line-height:1;font-weight:800;letter-spacing:-2px;color:#0b2a45}.cover3 h1 em{font-style:normal;color:#1f8aa0}
+.cover3 .sb{position:absolute;left:56px;top:880px;width:520px;font-size:16.5px;line-height:1.5;color:#4a4a42;font-weight:300}
+.cover3 .sello{position:absolute;right:56px;top:860px;width:124px;height:124px;border-radius:50%;background:#0b2a45;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:10px;letter-spacing:.14em;box-shadow:0 8px 24px rgba(11,42,69,.3)}.cover3 .sello b{font-size:26px;letter-spacing:0;margin:2px 0;color:#e7b79e}
+.cover3 .ft{position:absolute;left:56px;right:56px;bottom:46px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;border-top:1px solid #d9cfb8;padding-top:18px}
+.cover3 .ft small{display:block;font-size:9.5px;letter-spacing:.24em;color:#b8603c;margin-bottom:5px}.cover3 .ft b{font-size:17px}.cover3 .ft span{display:block;font-size:12px;color:#6b6455;margin-top:2px}
+.cover2{background:#061a30;color:#fff}
+.cover2 .ph{position:absolute;inset:0;background:url(assets/portada.jpg) center/cover;opacity:.6;filter:saturate(1.2) contrast(1.1)}
+.cover2 .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,26,48,.55) 0%,rgba(10,48,84,.15) 38%,rgba(6,26,48,.88) 72%,#061a30 100%)}
+.cover2 .num{position:absolute;right:-30px;top:120px;font-size:520px;font-weight:900;line-height:.8;color:transparent;-webkit-text-stroke:2px rgba(143,208,232,.28);letter-spacing:-20px}
+.cover2 .lg{position:absolute;left:56px;top:50px}.cover2 .lg img{height:128px}
+.cover2 .tg{position:absolute;right:56px;top:62px;font-size:11px;letter-spacing:.32em;color:#8fd0e8}
+.cover2 .tt{position:absolute;left:56px;right:56px;top:500px}
+.cover2 .chip{display:inline-block;border:1px solid #d08a68;color:#e7b79e;font-size:11px;letter-spacing:.32em;padding:7px 16px;border-radius:30px;background:rgba(184,96,60,.14)}
+.cover2 h1{margin:22px 0 0;font-size:84px;line-height:.98;font-weight:800;letter-spacing:-2.5px;color:#fff}.cover2 h1 em{font-style:normal;color:#5cc0e0}
+.cover2 .sb{margin-top:22px;font-size:17px;font-weight:300;opacity:.92;line-height:1.45;max-width:560px}
+.cover2 .bar{width:92px;height:4px;background:#d08a68;margin:28px 0 0}
+.cover2 .sello{position:absolute;right:56px;top:440px;width:128px;height:128px;border-radius:50%;border:1.5px solid rgba(231,183,158,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:10px;letter-spacing:.14em;color:#e7b79e;background:rgba(184,96,60,.12)}
+.cover2 .sello b{font-size:22px;color:#fff;letter-spacing:0;margin:3px 0}
+.cover2 .ft{position:absolute;left:56px;right:56px;bottom:52px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;border-top:1px solid rgba(255,255,255,.3);padding-top:22px}
+.cover2 .ft small{display:block;font-size:9.5px;letter-spacing:.24em;color:#8fd0e8;margin-bottom:6px}.cover2 .ft b{font-size:18px}.cover2 .ft span{display:block;font-size:12px;opacity:.85;margin-top:3px}
+.rv{list-style:none;padding:0;margin:0 0 2mm;font-size:8.4pt}.rv li{padding:1.6mm 0;border-bottom:.2mm solid var(--ln)}.rv b{color:var(--navy)}
+
+.page>footer{align-items:flex-end}
+.hero{left:0;right:0;top:0;height:94mm;background:linear-gradient(160deg,rgba(6,26,48,.78),rgba(31,78,121,.35)),url(assets/portada.jpg) center/cover;clip-path:polygon(0 0,100% 0,100% 82%,0 100%)}
+.hline{left:0;right:0;top:0;height:98mm;background:#b8603c;clip-path:polygon(0 100%,100% 82%,100% 83.6%,0 101.6%);z-index:2!important}
+.hlogo{left:16mm;top:11mm;height:24mm;z-index:3!important}
+.hnum{right:16mm;top:12mm;text-align:right;color:#fff;z-index:3!important}.hnum small{display:block;font-size:6.5pt;letter-spacing:.3em;color:#8fd0e8}.hnum b{font-size:40pt;font-weight:900;line-height:.95}
+.htit{left:16mm;right:16mm;top:46mm;z-index:3!important}.chip3{display:inline-block;border:.3mm solid #fff;color:#fff;font-size:6.8pt;letter-spacing:.3em;padding:1.4mm 3.6mm;border-radius:6mm;margin-bottom:3mm}
+.htit h1{color:#fff;font-size:27pt;font-weight:800;line-height:1.05;letter-spacing:-.03em;margin:0}.htit h1 em{font-style:normal;color:#8fd0e8}
+.para{font-size:9pt;color:#444;margin-bottom:3mm}.para small{display:block;font-size:6.5pt;letter-spacing:.2em;color:var(--terra)}.para b{color:var(--navy)}
+.lead2{font-size:10pt;color:#222;margin-bottom:4mm}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm}.kp{border-top:.7mm solid var(--terra);padding:2mm 0}.kp b{display:block;font-size:12.5pt;color:var(--navy);letter-spacing:-.02em}.kp small{font-size:7.3pt;color:#666}
+.rfs{margin-top:1mm}.rf{display:flex;gap:4mm;padding:2.3mm 0;border-bottom:.2mm solid var(--ln);font-size:8.6pt;color:#444}.rf>span{flex:none;width:8mm;font-size:15pt;font-weight:200;color:var(--terra);line-height:1}.rf b{display:block;color:var(--navy);font-size:9.6pt}
+.two{display:grid;grid-template-columns:62mm 1fr;gap:6mm}.two .phw img{width:100%;display:block}
+.rm{padding:1.8mm 0;border-bottom:.2mm solid var(--ln);font-size:8.6pt;color:#444}.rm small{display:block;font-size:6.6pt;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:700}
+ul.tx{margin:0;padding-left:4mm;font-size:8.8pt}ul.tx li{margin-bottom:1.4mm}
+.c2{color:var(--terra);font-weight:700}
+.pps{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:2mm}.pp{border-top:.7mm solid var(--navy);padding-top:2mm;font-size:8pt;color:#555}.pp b{display:block;font-size:13pt;color:var(--terra)}.pp i{display:block;font-style:normal;font-weight:700;color:#111;font-size:9.6pt}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-top:1mm}.sig .line{height:7mm!important}.sig .line.big{height:10mm!important}
+.acc{padding:3mm 5mm!important;margin-top:3mm!important}.acc p{margin-bottom:1mm}.res td{padding-top:1.4mm!important;padding-bottom:1.4mm!important}.duda{margin-top:3mm!important;padding:2mm 4mm!important}.pago td{padding:1mm 0!important}
+</style></head><body><section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png" alt="Brava Pool"><div class="hnum"><small>PRESUPUESTO</small><b>127</b></div>
+<div class="htit"><div class="chip3">RESUMEN · PROPUESTA DE REFORMA</div><h1>Rehabilitación integral <em>de piscina</em></h1></div>
+<div class="body" style="top:104mm"><div class="para"><small>PREPARADO PARA</small><b>Sr. Phillipe Tanner</b> · Carrer Anoia, 14 · 17251 Calonge (Girona) · 21/10/2026</div>
+<p class="lead2">Estimado Sr. Tanner: este es el resumen de nuestra propuesta. Retiramos todo lo antiguo, reparamos e impermeabilizamos el vaso y el canal con un sistema específico para piscinas, y colocamos cerámica, peldaños y coronación nuevos, revisando cada fase antes de pasar a la siguiente.</p>
+<div class="kpis"><div class="kp"><b>7,50 × 4,00 m</b><small>vaso · 1,70 m de profundidad</small></div><div class="kp"><b>12,5 ml</b><small>canal desbordante en L</small></div><div class="kp"><b>≈ 105 m²</b><small>cerámica Rosa Gres</small></div><div class="kp"><b>5 a 6 semanas</b><small>plazo de ejecución</small></div></div><h2>La obra, fase a fase</h2><div class="rfs"><div class="rf"><span>1</span><div><b>Inspección y referencias de nivel</b>Estado previo y toma de la línea de flotación.</div></div><div class="rf"><span>2</span><div><b>Demoliciones</b>Retirada de la cerámica, la coronación y la impermeabilización antiguas.</div></div><div class="rf"><span>3</span><div><b>Reparación del soporte</b>Saneado, canal, escalera y puntos singulares.</div></div><div class="rf"><span>4</span><div><b>Impermeabilización DryPool</b>Sistema Grupo Puma en dos capas con malla.</div></div><div class="rf"><span>5</span><div><b>Cerámica y peldaños Rosa Gres</b>Baldosa 31 × 62,6 cm y peldaños antideslizantes.</div></div><div class="rf"><span>6</span><div><b>Coronación y labio de rebose</b>Piezas nuevas con el labio nivelado con láser.</div></div><div class="rf"><span>7</span><div><b>Rejuntado y sellados</b>Junta epoxi apta para piscina con cloración salina.</div></div><div class="rf"><span>8</span><div><b>Limpieza y entrega</b>Revisión final con el cliente y acta de entrega.</div></div></div></div><footer><span>Brava Pool · Bilal El Jouhari El Bahraoui · NIF 42366327M</span><span class="fol"><b>01</b> / 03 · Resumen del presupuesto 127</span></footer></section>
+<section class="page"><div class="rail">PRESUPUESTO 127 · RESUMEN</div><div class="topo"></div><header><div><div class="eyebrow"><span>41°51′ N · 3°05′ E</span><span>CALONGE · COSTA BRAVA</span></div><h1>Materiales y compromisos</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">
+<div class="two"><div class="phw"><img src="assets/foto_planta.jpg" alt=""></div><div><h2 style="margin-top:0">Materiales previstos</h2><div class="rm"><small>Impermeabilización</small>Grupo Puma · sistema DryPool (Morcem Dry SF Plus, malla y banda Bandtec)</div><div class="rm"><small>Reparación del soporte</small>Grupo Puma · Morcemseal Todo 1 R4</div><div class="rm"><small>Colocación</small>Grupo Puma · mortero-cola Pegoland Flex C2 TE S1</div><div class="rm"><small>Juntas</small>Grupo Puma · Morcemcolor Epoxi, apto para cloración salina</div><div class="rm"><small>Cerámica</small>Rosa Gres 31 × 62,6 cm · serie y color a elegir</div><div class="rm"><small>Peldaños y banco</small>Rosa Gres antideslizante L98 y L62</div></div></div>
+<div class="cols2" style="margin-top:3mm"><div><h2>Incluye</h2><ul class="tx"><li>Materiales, mano de obra, transporte y retirada de escombros.</li><li>Regalo: cloración salina Bright Blue Pluma WP 15 con pH automático Sanus NG, instalada.</li><li>Nivelación del labio de rebose con nivel láser (±2 mm).</li></ul></div>
+<div><h2>No incluye</h2><ul class="tx"><li>Daños estructurales o tuberías ocultas que aparezcan al desmontar.</li><li>Equipos de filtración y depuración, salvo el equipo de sal.</li><li>Licencias y tasas, agua y productos químicos.</li></ul></div></div>
+<h2>Nuestro compromiso</h2><div class="cards"><div><b>Plazo por escrito</b>5 a 6 semanas desde el inicio de obra, salvo causas climatológicas adversas.</div><div><b>Pagos por hitos</b>Cada pago se vincula a una fase terminada y el último 20 % se retiene hasta la entrega.</div><div><b>Garantía</b>Brava Pool garantiza su trabajo, el revestimiento y la mano de obra, además de las garantías legales.</div><div><b>Obra limpia</b>Retiramos los escombros y entregamos la piscina y su entorno limpios.</div></div>
+<p class="note" style="margin-top:4mm">Este resumen forma parte del presupuesto técnico completo, con planos, partidas y descripción detallada de cada trabajo, que le entregamos aparte.</p></div><footer><span>Brava Pool · Bilal El Jouhari El Bahraoui · NIF 42366327M</span><span class="fol"><b>02</b> / 03 · Resumen del presupuesto 127</span></footer></section>
+<section class="page"><div class="rail">PRESUPUESTO 127 · RESUMEN</div><div class="topo"></div><header><div><div class="eyebrow"><span>41°51′ N · 3°05′ E</span><span>CALONGE · COSTA BRAVA</span></div><h1>Inversión y aceptación</h1></div><img src="assets/logo.png" alt="Brava Pool"></header><div class="body">
+<table class="eco res"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th style="width:34mm;text-align:right">Importe</th></tr></thead><tbody><tr><td class="c2">1</td><td>Inspección, referencias y vaciado</td><td class="n">716,09 €</td></tr><tr><td class="c2">2</td><td>Demoliciones</td><td class="n">2.624,93 €</td></tr><tr><td class="c2">3</td><td>Reparación y preparación del soporte</td><td class="n">2.745,10 €</td></tr><tr><td class="c2">4</td><td>Impermeabilización · sistema DryPool de Grupo Puma</td><td class="n">3.460,80 €</td></tr><tr><td class="c2">5</td><td>Revestimiento cerámico Rosa Gres</td><td class="n">9.548,42 €</td></tr><tr><td class="c2">6</td><td>Coronación y labio de rebose</td><td class="n">3.580,49 €</td></tr><tr><td class="c2">7</td><td>Rejuntado y sellados</td><td class="n">954,58 €</td></tr><tr><td class="c2">8</td><td>Entrega</td><td class="n">239,59 €</td></tr>
+<tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="n">23.870,00 €</td></tr></tbody></table>
+<div class="aviso" style="margin:3mm 0"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
+<h2>Forma de pago</h2><div class="pps"><div class="pp"><b>20 %</b><i>4.774,00 €</i><span>A la aceptación del presupuesto</span></div><div class="pp"><b>30 %</b><i>7.161,00 €</i><span>Al terminar la Fase 3, antes de impermeabilizar</span></div><div class="pp"><b>30 %</b><i>7.161,00 €</i><span>Al terminar la Fase 4, antes de colocar la cerámica</span></div><div class="pp"><b>20 %</b><i>4.774,00 €</i><span>Retención final: a la entrega de la obra terminada</span></div></div>
+<table class="kv pago"><tr><td>Titular</td><td>Bilal El Jouhari El Bahraoui · NIF 42366327M</td></tr><tr><td>Banco / IBAN</td><td><b>CaixaBank (La Caixa) · ES49 2100 0597 1701 0079 4886</b></td></tr><tr><td>Concepto</td><td>Presupuesto 127</td></tr></table>
+<div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente acepta el presupuesto n.º 127, por un importe total de <b>23.870,00 €</b>, IVA no incluido, con sus condiciones y la forma de pago indicada. Válido hasta el 20/11/2026.</p>
+<div class="sig"><div><div class="line"></div><small>Nombre y apellidos · DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma del cliente</small></div></div></div>
+<div class="duda"><b>¿Alguna duda?</b> Bilal El Jouhari El Bahraoui · 692 490 066 · www.bravapool.com</div></div><footer><span>Brava Pool · Bilal El Jouhari El Bahraoui · NIF 42366327M</span><span class="fol"><b>03</b> / 03 · Resumen del presupuesto 127</span></footer></section></body></html>
