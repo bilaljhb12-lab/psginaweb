@@ -120,11 +120,13 @@ if "--tecnico" in sys.argv:
     NP = 7
     ftt = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / {NP:02d} · Presupuesto {D["numero"]}</span></footer>'
     hdt = lambda t: f'<div class="rail">PRESUPUESTO {D["numero"]} · PISCINA NATURALIZADA DE ARENA · {e(OBRA).upper()}</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓN DE PISCINAS</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
+    SIN_PRECIO = {"4"}   # fases que muestran solo el total, sin precio por partida
     def fase_t(f, t, ps):
         r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(t).upper()}</td><td></td><td class="nn">{eur(SUB[f])}</td></tr>'
         for c, tt, q, u, w, b in ps:
             gift = (w == 0)
-            r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(tt)}</b><ul>{"".join(f"<li>{e(x)}</li>" for x in b)}</ul></td><td class="nn">{qy(q)}</td><td class="c">{u}</td><td class="nn">{"—" if gift else n2(PU[c]) + " €"}</td><td class="nn"><b>{"REGALO" if gift else n2(IM[c]) + " €"}</b></td></tr>'
+            hide = (f in SIN_PRECIO) and not gift
+            r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(tt)}</b><ul>{"".join(f"<li>{e(x)}</li>" for x in b)}</ul></td><td class="nn">{qy(q)}</td><td class="c">{u}</td><td class="nn">{"—" if (gift or hide) else n2(PU[c]) + " €"}</td><td class="nn"><b>{"REGALO" if gift else ("Incluido" if hide else n2(IM[c]) + " €")}</b></td></tr>'
         return r
     cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:15mm">Cant.</th><th style="width:11mm">Ud.</th><th style="width:22mm">Precio</th><th style="width:24mm">Importe</th></tr></thead>'
     d1 = ''.join(fase_t(f, t, ps) for f, t, ps in T[:3]); d2 = ''.join(fase_t(f, t, ps) for f, t, ps in T[3:])
@@ -145,7 +147,7 @@ if "--tecnico" in sys.argv:
 <table class="eco vt"><thead><tr><th>Tramo</th><th class="r">Sección inicial</th><th class="r">Sección final</th><th class="r">Separación</th><th class="r">Volumen</th></tr></thead><tbody>{vt}<tr class="tot"><td colspan="4">Total recalculado</td><td class="nn">{n2(VOL)} m³</td></tr></tbody></table>
 <div class="box"><b>Nota sobre la medición.</b> El plano indica 34,24 m³ porque suma 11,13 m³ en el tramo B–C. Con las secciones del propio plano (3,50 y 4,13 m², separadas 2,00 m) ese tramo da 7,63 m³ y el total es {n2(VOL)} m³. Este presupuesto usa el valor recalculado; conviene confirmarlo con la dirección facultativa.</div></div>{ftt(3)}</section>
 <section class="page">{hdt("Descripción de los trabajos")}<div class="body"><table class="desc">{cab}<tbody>{d1}</tbody></table></div>{ftt(4)}</section>
-<section class="page">{hdt("Descripción de los trabajos (cont.)")}<div class="body"><table class="desc">{cab}<tbody>{d2}</tbody></table><p class="note" style="margin-top:3mm">PA = partida alzada. El precio es cerrado, con materiales y mano de obra; el reparto por partidas es orientativo. Las mediciones son las del proyecto y se ajustan en obra.</p></div>{ftt(5)}</section>
+<section class="page">{hdt("Descripción de los trabajos (cont.)")}<div class="body"><table class="desc">{cab}<tbody>{d2}</tbody></table><p class="note" style="margin-top:3mm">PA = partida alzada. El precio es cerrado, con materiales y mano de obra; el reparto por partidas es orientativo. En la fase 4 se indica solo el total de la fase, que incluye todas sus partidas. Las mediciones son las del proyecto y se ajustan en obra.</p></div>{ftt(5)}</section>
 <section class="page">{hdt("Inversión y forma de pago")}<div class="body"><table class="eco"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th class="r" style="width:36mm">Importe</th></tr></thead><tbody>{res}<tr><td class="c2">+</td><td>Regalo: equipo de cloración salina de 30 g/h</td><td class="nn">Incluido</td></tr><tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="nn">{eur(BASE)}</td></tr></tbody></table>
 <div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <h2>Forma de pago</h2><div class="pps">{pps}</div>
