@@ -16,17 +16,18 @@ D = {"numero": "128", "fecha": "22/10/2026", "valido": "21/11/2026",
      "emisor": "Bilal El Jouhari El Bahraoui", "nif": "42366327M", "dir": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
      "tel": "692 490 066", "web": "www.bravapool.com", "banco": "CaixaBank (La Caixa)", "iban": "ES49 2100 0597 1701 0079 4886"}
 BASE = 44000.00
-LINEAS = [("Piscina de arena 8 × 5 m (aprox.)", "Construcción completa: vaso de hormigón proyectado, revestimiento continuo de cuarzo con acabado arena, coronación, instalación hidráulica y equipos.", 44000.00)]
+LINEAS = [("Piscina de arena naturalizada", "Construcción de piscina naturalizada, de tipología arena, con formas orgánicas en planta y desniveles, con materiales naturales y acabado de arena natural fijada con un sistema de resinas. Incluye cloración salina, regulación automática de pH, filtración y cuadro eléctrico.", 44000.00)]
 assert abs(sum(x[2] for x in LINEAS) - BASE) < .005
-PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar el ferrallado y el encofrado del vaso"), (30, "Al terminar la proyección del vaso"), (20, "A la entrega de la obra terminada (retención final)")]
+PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar la estructura del vaso"), (30, "Al terminar la instalación de equipos"), (20, "A la entrega de la obra terminada (retención final)")]
 pg = []; acc = 0.0
 for i, (pct, t) in enumerate(PAGOS):
     im = round(BASE * pct / 100, 2) if i < len(PAGOS) - 1 else round(BASE - acc, 2); acc += im; pg.append((pct, t, im))
 
 ALCANCE = [
- ("Vaso y estructura", ["Encofrado perimetral y montaje de la armadura con varilla de 10 mm en malla de 15 × 15 cm, con separadores y zunchos de 6 mm.", "Vaso de hormigón proyectado (gunita, vía húmeda).", "Solera de hormigón preparado en planta, con 400 kg de cemento por m³, servido en obra con camión hormigonera."]),
- ("Revestimiento y coronación", ["Revestimiento continuo de cuarzo con acabado arena en todo el vaso.", "Coronación con el mismo revestimiento continuo."]),
- ("Instalación hidráulica y equipos", ["Fontanería en tubería de PVC de 50 mm para 10 atmósferas.", "2 skimmers y 3 impulsores.", "1 toma para el limpiafondos y 2 sumideros.", "Sistema de autollenado de la piscina.", "Filtro de 600 con vidrio filtrante.", "Bomba autoaspirante de 1 HP de velocidad variable.", "Cuadro eléctrico temporizado.", "2 focos LED."])]
+ ("Construcción de la piscina", ["Piscina naturalizada, de tipología arena, con formas orgánicas en planta y desniveles, según proyecto.", "Construida con materiales naturales.", "Superficie aproximada de 8 × 5 m, a confirmar con las mediciones del proyecto."]),
+ ("Acabado", ["Arena natural fijada con un sistema de resinas.", "Color similar al del sauló natural de la zona."]),
+ ("Cloración y control del agua", ["Sistema de cloración por electrólisis de sal, con unidad central de control y célula electrolítica autolimpiable (ref. SAL-25GR). Incluye el suministro de sal.", "Sistema de regulación automática de pH, con unidad central de control y sonda."]),
+ ("Filtración y cuadro eléctrico", ["Filtro de poliéster reforzado con fibra de vidrio, con presión de prueba de 5 kg/cm².", "Carga de sílex microcalibrado, de granulometría 03/07, y válvula selectora de 6 posiciones en material anticorrosivo, con accesorios de enlace.", "Cuadro eléctrico en armario con doble protección, con contadores, relé térmico, diferencial, pilotos de señalización y rearme exterior."])]
 NOINC = ["Excavación, movimiento y retirada de tierras (salvo acuerdo expreso).", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Pavimento exterior y vallado perimetral.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]
 COND = ["Los importes no incluyen IVA, que se añadirá a la factura al tipo vigente.", "Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El color y el acabado del revestimiento se eligen con el cliente y se confirman por escrito antes de empezar.", "El inicio y el plazo de ejecución se fijan de común acuerdo tras la aceptación, y dependen de las condiciones climatológicas.", "Las medidas son aproximadas y se ajustan en el replanteo.", f"Este presupuesto es válido hasta el {D['valido']}."]
 
@@ -34,17 +35,17 @@ alc = ''.join(f'<div class="al"><h3>{e(t)}</h3><ul>{"".join(f"<li>{e(x)}</li>" f
 lin = ''.join(f'<tr><td><b>{e(t)}</b><span>{e(d)}</span></td><td class="n">{eur(v)}</td></tr>' for t, d, v in LINEAS)
 pps = ''.join(f'<div class="pp"><b>{p} %</b><i>{eur(im)}</i><span>{e(t)}</span></div>' for p, t, im in pg)
 foot = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / 04 · Presupuesto {D["numero"]}</span></footer>'
-hd = lambda t: f'<div class="rail">PRESUPUESTO {D["numero"]} · PISCINA DE ARENA 8 × 5 M</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓN DE PISCINAS</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
+hd = lambda t: f'<div class="rail">PRESUPUESTO {D["numero"]} · PISCINA NATURALIZADA DE ARENA</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓN DE PISCINAS</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
 cli = f'{e(D["cliente"])} · {e(D["tipo_cliente"])}'
 blank = lambda v, w="55mm": e(v) if v else f'<i class="blk" style="width:{w}"></i>'
 DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png"><div class="hnum"><small>PRESUPUESTO</small><b>{D["numero"]}</b></div>
-<div class="htit"><div class="chip3">PROPUESTA DE CONSTRUCCIÓN</div><h1>Piscina de arena <em>8 × 5 m</em></h1></div>
+<div class="htit"><div class="chip3">PROPUESTA DE CONSTRUCCIÓN</div><h1>Piscina naturalizada <em>de arena</em></h1></div>
 <div class="body" style="top:112mm"><div class="para"><small>PREPARADO PARA</small><b>{cli}</b><br>CIF: {blank(D["nif_cliente"],"34mm")} · Dirección: {blank(D["dir_cliente"],"70mm")}<br>Obra: {blank(D["obra"],"95mm")}</div>
-<p class="lead2">Le presentamos nuestra propuesta para la construcción de una piscina de arena de 8 × 5 m aproximadamente. Incluye la estructura de hormigón proyectado, el revestimiento continuo de cuarzo con acabado arena y la instalación hidráulica con sus equipos.</p>
-<div class="kpis"><div class="kp"><b>8 × 5 m</b><small>vaso aproximado</small></div><div class="kp"><b>Hormigón proyectado</b><small>vaso por gunita</small></div><div class="kp"><b>Acabado arena</b><small>cuarzo continuo</small></div><div class="kp"><b>Llave en mano</b><small>con equipos</small></div></div>
+<p class="lead2">Le presentamos nuestra propuesta para la construcción de la piscina naturalizada de tipología arena prevista en el proyecto, de formas orgánicas y desniveles, construida con materiales naturales y con acabado de arena natural fijada con resinas. Incluye la cloración salina, la regulación automática de pH, la filtración y el cuadro eléctrico.</p>
+<div class="kpis"><div class="kp"><b>≈ 8 × 5 m</b><small>superficie aproximada</small></div><div class="kp"><b>Formas orgánicas</b><small>con desniveles</small></div><div class="kp"><b>Arena natural</b><small>fijada con resinas</small></div><div class="kp"><b>Con equipos</b><small>sal, pH y filtración</small></div></div>
 <div class="para" style="margin-top:6mm"><small>FECHA · VÁLIDO HASTA</small><b>{D["fecha"]} · {D["valido"]}</b></div></div>{foot(1)}</section>
-<section class="page">{hd("Alcance de la obra")}<div class="body"><p class="lead3">Esto es lo que incluye la obra. Las medidas y el equipamiento se confirman en el replanteo.</p><div class="als">{alc}</div>
-<div class="box"><b>Especificaciones técnicas.</b> Las características del armado, el hormigón y los equipos son las del alcance de referencia para esta piscina y se validan con la dirección técnica de la obra antes de empezar.</div></div>{foot(2)}</section>
+<section class="page">{hd("Alcance de la obra")}<div class="body"><p class="lead3">Esto es lo que incluye la obra, según la descripción del proyecto. Las medidas se confirman en el replanteo.</p><div class="als">{alc}</div>
+<div class="box"><b>Según proyecto.</b> Este alcance sigue la descripción del proyecto facilitada por la dirección facultativa. Las mediciones, las formas, los desniveles y los materiales se confirman con los planos antes de empezar.</div></div>{foot(2)}</section>
 <section class="page">{hd("Inversión y forma de pago")}<div class="body"><table class="eco"><thead><tr><th>Concepto</th><th style="width:36mm;text-align:right">Importe</th></tr></thead><tbody>{lin}<tr class="tot"><td>Total presupuesto · IVA no incluido</td><td class="n">{eur(BASE)}</td></tr></tbody></table>
 <div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <h2>Forma de pago</h2><div class="pps">{pps}</div>
