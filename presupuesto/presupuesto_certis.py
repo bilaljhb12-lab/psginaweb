@@ -12,7 +12,7 @@ e = html.escape
 def eur(x): return f"{x:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
 
 D = {"numero": "128", "fecha": "22/10/2026", "valido": "21/11/2026",
-     "cliente": "Certis", "tipo_cliente": "Constructora", "nif_cliente": "", "dir_cliente": "", "obra": "",
+     "cliente": "Certis", "tipo_cliente": "Constructora", "nif_cliente": "A61126629", "dir_cliente": "", "obra": "",
      "emisor": "Bilal El Jouhari El Bahraoui", "nif": "42366327M", "dir": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
      "tel": "692 490 066", "web": "www.bravapool.com", "banco": "CaixaBank (La Caixa)", "iban": "ES49 2100 0597 1701 0079 4886"}
 BASE = 47320.00 if "--tecnico" in sys.argv else 44000.00
@@ -135,10 +135,10 @@ if "--tecnico" in sys.argv:
     vt = ''.join(f'<tr><td>{a_}</td><td class="nn">{n2(x_)} m²</td><td class="nn">{n2(y_)} m²</td><td class="nn">2,00 m</td><td class="nn"><b>{n2(v_)} m³</b></td></tr>' for a_, x_, y_, v_ in SEC for x_, y_ in [(x_, y_)]) if False else ''.join(f'<tr><td>{a_}</td><td class="nn">{n2(s1)} m²</td><td class="nn">{n2(s2)} m²</td><td class="nn">2,00 m</td><td class="nn"><b>{n2(v_)} m³</b></td></tr>' for a_, s1, s2, v_ in SEC)
     res = ''.join(f'<tr><td class="c2">{f}</td><td>{e(t)}</td><td class="nn">{eur(SUB[f])}</td></tr>' for f, t, _ in T)
     NOINC = ["Excavación del vaso, carga y transporte de tierras a vertedero.", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Iluminación de la piscina, que no figura en la descripción del proyecto.", "Pavimento exterior, vallado y jardinería del entorno.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]
-    cli2 = f'{e(D["cliente"])} · {e(D["tipo_cliente"])}'
+    cli2 = "Certis Constructora OIS, S.A. · Constructora"
     DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png"><div class="hnum"><small>PRESUPUESTO</small><b>{D["numero"]}</b></div>
 <div class="htit"><div class="chip3">PRESUPUESTO TÉCNICO · CONSTRUCCIÓN</div><h1>Piscina naturalizada <em>de arena</em></h1></div>
-<div class="body" style="top:112mm"><div class="para"><small>PREPARADO PARA</small><b>{cli2}</b><br>CIF: {blank(D["nif_cliente"],"34mm")} · Dirección: {blank(D["dir_cliente"],"70mm")}<br><small style="margin-top:2mm">OBRA</small><b>{e(OBRA)}</b> · bloque de 24 viviendas<br>Según plano A-057, revisión 02 (squaremmkm · 11/06/26)</div>
+<div class="body" style="top:112mm"><div class="para"><small>PREPARADO PARA</small><b>{cli2}</b><br>CIF: {e(D["nif_cliente"])}<br><small style="margin-top:2mm">OBRA</small><b>{e(OBRA)}</b> · bloque de 24 viviendas<br>Según plano A-057, revisión 02 (squaremmkm · 11/06/26)</div>
 <p class="lead2">Le presentamos nuestra propuesta técnica y económica para la construcción de la piscina naturalizada de arena prevista en el proyecto, de formas orgánicas y entrada tipo playa, con tratamiento de agua salina.</p>
 <div class="kpis"><div class="kp"><b>≈ 10,2 m</b><small>largo máximo</small></div><div class="kp"><b>≈ 8,0 m</b><small>ancho máximo</small></div><div class="kp"><b>53,51 m²</b><small>superficie en planta</small></div><div class="kp"><b>−1,40 m</b><small>profundidad máxima</small></div></div>
 <div class="para" style="margin-top:6mm"><small>FECHA · VÁLIDO HASTA</small><b>{D["fecha"]} · {D["valido"]}</b></div></div>{ftt(1)}</section>
