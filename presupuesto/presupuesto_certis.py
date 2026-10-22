@@ -16,8 +16,7 @@ D = {"numero": "128", "fecha": "22/10/2026", "valido": "21/11/2026",
      "emisor": "Bilal El Jouhari El Bahraoui", "nif": "42366327M", "dir": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
      "tel": "692 490 066", "web": "www.bravapool.com", "banco": "CaixaBank (La Caixa)", "iban": "ES49 2100 0597 1701 0079 4886"}
 BASE = 44000.00
-LINEAS = [("Piscina de arena 8 × 5 m (aprox.)", "Construcción completa: vaso de hormigón proyectado, revestimiento continuo de cuarzo con acabado arena, coronación, instalación hidráulica y equipos.", 41800.00),
-          ("Banco con jacuzzi", "Banco con boquillas de aire (soplantes) y pulsador piezoeléctrico temporizado conectado al cuadro.", 2200.00)]
+LINEAS = [("Piscina de arena 8 × 5 m (aprox.)", "Construcción completa: vaso de hormigón proyectado, revestimiento continuo de cuarzo con acabado arena, coronación, instalación hidráulica y equipos.", 44000.00)]
 assert abs(sum(x[2] for x in LINEAS) - BASE) < .005
 PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar el ferrallado y el encofrado del vaso"), (30, "Al terminar la proyección del vaso"), (20, "A la entrega de la obra terminada (retención final)")]
 pg = []; acc = 0.0
@@ -27,8 +26,7 @@ for i, (pct, t) in enumerate(PAGOS):
 ALCANCE = [
  ("Vaso y estructura", ["Encofrado perimetral y montaje de la armadura con varilla de 10 mm en malla de 15 × 15 cm, con separadores y zunchos de 6 mm.", "Vaso de hormigón proyectado (gunita, vía húmeda).", "Solera de hormigón preparado en planta, con 400 kg de cemento por m³, servido en obra con camión hormigonera."]),
  ("Revestimiento y coronación", ["Revestimiento continuo de cuarzo con acabado arena en todo el vaso.", "Coronación con el mismo revestimiento continuo."]),
- ("Instalación hidráulica y equipos", ["Fontanería en tubería de PVC de 50 mm para 10 atmósferas.", "2 skimmers y 3 impulsores.", "1 toma para el limpiafondos y 2 sumideros.", "Sistema de autollenado de la piscina.", "Filtro de 600 con vidrio filtrante.", "Bomba autoaspirante de 1 HP de velocidad variable.", "Cuadro eléctrico temporizado.", "2 focos LED."]),
- ("Banco con jacuzzi", ["Banco con boquillas de aire (soplantes).", "Pulsador piezoeléctrico temporizado, conectado al cuadro."])]
+ ("Instalación hidráulica y equipos", ["Fontanería en tubería de PVC de 50 mm para 10 atmósferas.", "2 skimmers y 3 impulsores.", "1 toma para el limpiafondos y 2 sumideros.", "Sistema de autollenado de la piscina.", "Filtro de 600 con vidrio filtrante.", "Bomba autoaspirante de 1 HP de velocidad variable.", "Cuadro eléctrico temporizado.", "2 focos LED."])]
 NOINC = ["Excavación, movimiento y retirada de tierras (salvo acuerdo expreso).", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Pavimento exterior y vallado perimetral.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]
 COND = ["Los importes no incluyen IVA, que se añadirá a la factura al tipo vigente.", "Cualquier trabajo no descrito en este presupuesto se presupuestará aparte y por escrito antes de realizarlo.", "El color y el acabado del revestimiento se eligen con el cliente y se confirman por escrito antes de empezar.", "El inicio y el plazo de ejecución se fijan de común acuerdo tras la aceptación, y dependen de las condiciones climatológicas.", "Las medidas son aproximadas y se ajustan en el replanteo.", f"Este presupuesto es válido hasta el {D['valido']}."]
 
@@ -42,7 +40,7 @@ blank = lambda v, w="55mm": e(v) if v else f'<i class="blk" style="width:{w}"></
 DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png"><div class="hnum"><small>PRESUPUESTO</small><b>{D["numero"]}</b></div>
 <div class="htit"><div class="chip3">PROPUESTA DE CONSTRUCCIÓN</div><h1>Piscina de arena <em>8 × 5 m</em></h1></div>
 <div class="body" style="top:112mm"><div class="para"><small>PREPARADO PARA</small><b>{cli}</b><br>CIF: {blank(D["nif_cliente"],"34mm")} · Dirección: {blank(D["dir_cliente"],"70mm")}<br>Obra: {blank(D["obra"],"95mm")}</div>
-<p class="lead2">Le presentamos nuestra propuesta para la construcción de una piscina de arena de 8 × 5 m aproximadamente. Incluye la estructura de hormigón proyectado, el revestimiento continuo de cuarzo con acabado arena, la instalación hidráulica con sus equipos y un banco con jacuzzi.</p>
+<p class="lead2">Le presentamos nuestra propuesta para la construcción de una piscina de arena de 8 × 5 m aproximadamente. Incluye la estructura de hormigón proyectado, el revestimiento continuo de cuarzo con acabado arena y la instalación hidráulica con sus equipos.</p>
 <div class="kpis"><div class="kp"><b>8 × 5 m</b><small>vaso aproximado</small></div><div class="kp"><b>Hormigón proyectado</b><small>vaso por gunita</small></div><div class="kp"><b>Acabado arena</b><small>cuarzo continuo</small></div><div class="kp"><b>Llave en mano</b><small>con equipos</small></div></div>
 <div class="para" style="margin-top:6mm"><small>FECHA · VÁLIDO HASTA</small><b>{D["fecha"]} · {D["valido"]}</b></div></div>{foot(1)}</section>
 <section class="page">{hd("Alcance de la obra")}<div class="body"><p class="lead3">Esto es lo que incluye la obra. Las medidas y el equipamiento se confirman en el replanteo.</p><div class="als">{alc}</div>
