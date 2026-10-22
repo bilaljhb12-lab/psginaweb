@@ -15,8 +15,8 @@ D = {"numero": "128", "fecha": "22/10/2026", "valido": "21/11/2026",
      "cliente": "Certis", "tipo_cliente": "Constructora", "nif_cliente": "", "dir_cliente": "", "obra": "",
      "emisor": "Bilal El Jouhari El Bahraoui", "nif": "42366327M", "dir": "C/ Hernán Cortés 5 · Sant Feliu de Guíxols",
      "tel": "692 490 066", "web": "www.bravapool.com", "banco": "CaixaBank (La Caixa)", "iban": "ES49 2100 0597 1701 0079 4886"}
-BASE = 44000.00
-LINEAS = [("Piscina de arena naturalizada", "Construcción de piscina naturalizada, de tipología arena, con formas orgánicas en planta y desniveles, con materiales naturales y acabado de arena natural fijada con un sistema de resinas. Incluye cloración salina, regulación automática de pH, filtración y cuadro eléctrico.", 44000.00)]
+BASE = 47320.00 if "--tecnico" in sys.argv else 44000.00
+LINEAS = [("Piscina de arena naturalizada", "Construcción de piscina naturalizada, de tipología arena, con formas orgánicas en planta y desniveles, con materiales naturales y acabado de arena natural fijada con un sistema de resinas. Incluye cloración salina, regulación automática de pH, filtración y cuadro eléctrico.", BASE)]
 assert abs(sum(x[2] for x in LINEAS) - BASE) < .005
 PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar la estructura del vaso"), (30, "Al terminar la instalación de equipos"), (20, "A la entrega de la obra terminada (retención final)")]
 pg = []; acc = 0.0
@@ -84,23 +84,21 @@ if "--tecnico" in sys.argv:
     SEC = [("A–B", 0.00, 3.50, 3.50), ("B–C", 3.50, 4.13, 7.63), ("C–D", 4.13, 4.60, 8.73), ("D–E", 4.60, 3.14, 7.74), ("E–F", 3.14, 0.00, 3.14)]
     VOL = round(sum(s[3] for s in SEC), 2)   # 30,74 m³ recalculado (el plano indica 34,24 m³)
     SUP = 53.51
-    T = [("1", "Movimiento de tierras", [
-          ("1.1", "Replanteo y excavación del vaso", VOL, "m³", 6.0, ["Excavación del vaso de la piscina según el plano A-057, con su geometría orgánica y los niveles de profundidad 0,00; −0,35; −0,70; −1,05 y −1,40 m.", "Volumen recalculado a partir de las secciones del plano (el plano indica 34,24 m³)."]),
-          ("1.2", "Carga y transporte de las tierras a vertedero autorizado", VOL, "m³", 3.5, ["Carga de las tierras excavadas y transporte a vertedero autorizado."])]),
-         ("2", "Instalaciones enterradas", [
-          ("2.1", "Lecho de gravas para soporte de las instalaciones", 1, "PA", 3.0, ["Colocación del lecho de gravas sobre el que se apoyan las instalaciones."]),
-          ("2.2", "Conductos de fontanería", 1, "PA", 7.5, ["Colocación de los conductos de fontanería de la piscina, según el esquema de instalaciones del proyecto."])]),
-         ("3", "Estructura del vaso", [
-          ("3.1", "Malla electrosoldada", SUP, "m²", 4.5, ["Colocación de la malla electrosoldada en toda la superficie del vaso.", "Medición en planta: la superficie desarrollada, con las pendientes y los niveles, será mayor y se ajusta en obra."]),
-          ("3.2", "Hormigón gunitado en toda la superficie", SUP, "m²", 26.0, ["Proyección de hormigón gunitado en toda la superficie de la piscina, para crear un revestimiento continuo, resistente y estanco."])]),
-         ("4", "Acabado de arena", [
-          ("4.1", "Revestimiento de arena natural compactada fijada con resinas", SUP, "m²", 27.0, ["Arena natural compactada fijada con un sistema de resinas, de color similar al del sauló natural de la zona.", "Acabado continuo y antideslizante en toda la superficie de la piscina."])]),
-         ("5", "Equipos de tratamiento y cuadro eléctrico", [
-          ("5.1", "Sistema de cloración por electrólisis de sal", 1, "ud", 8.0, ["Unidad central de control y célula electrolítica autolimpiable, ref. SAL-25GR.", "Incluye el suministro de sal."]),
-          ("5.2", "Sistema de regulación automática de pH", 1, "ud", 4.5, ["Unidad central de control y sonda de pH."]),
-          ("5.3", "Filtración", 1, "ud", 5.5, ["Filtro de poliéster reforzado con fibra de vidrio, con presión de prueba de 5 kg/cm².", "Carga de sílex microcalibrado, granulometría 03/07, y válvula selectora de 6 posiciones en material anticorrosivo, con accesorios de enlace."]),
-          ("5.4", "Cuadro eléctrico", 1, "ud", 3.5, ["Armario con doble protección, con contadores, relé térmico, diferencial, pilotos de señalización y rearme exterior."])]),
-         ("6", "Entrega", [("6.1", "Limpieza final y entrega de la obra", 1, "PA", 1.0, ["Limpieza de la zona de obra y entrega de la piscina."])])]
+    T = [("1", "Instalaciones enterradas", [
+          ("1.1", "Lecho de gravas para soporte de las instalaciones", 1, "PA", 4.5, ["Colocación del lecho de gravas sobre el que se apoyan las instalaciones."]),
+          ("1.2", "Conductos de fontanería", 1, "PA", 10.0, ["Colocación de los conductos de fontanería de la piscina, según el esquema de instalaciones del proyecto."])]),
+         ("2", "Estructura del vaso", [
+          ("2.1", "Malla electrosoldada", SUP, "m²", 5.5, ["Colocación de la malla electrosoldada en toda la superficie del vaso.", "Medición en planta: la superficie desarrollada, con las pendientes y los niveles, será mayor y se ajusta en obra."]),
+          ("2.2", "Hormigón gunitado en toda la superficie", SUP, "m²", 29.0, ["Proyección de hormigón gunitado en toda la superficie de la piscina, para crear un revestimiento continuo, resistente y estanco."])]),
+         ("3", "Acabado de arena", [
+          ("3.1", "Revestimiento de arena natural compactada fijada con resinas", SUP, "m²", 30.0, ["Arena natural compactada fijada con un sistema de resinas, de color similar al del sauló natural de la zona.", "Acabado continuo y antideslizante en toda la superficie de la piscina."])]),
+         ("4", "Equipos de filtración y tratamiento del agua", [
+          ("4.1", "Bomba de recirculación AstralPool de 1,5 CV", 1, "ud", 5.5, ["Motobomba de la marca AstralPool, de 1,5 CV de potencia."]),
+          ("4.2", "Filtro AstralPool 750", 1, "ud", 8.0, ["Filtro AstralPool 750 de poliéster reforzado con fibra de vidrio, con presión de prueba de 5 kg/cm².", "Carga de sílex microcalibrado, granulometría 03/07, y válvula selectora de 6 posiciones en material anticorrosivo, con accesorios de enlace."]),
+          ("4.3", "Sistema de regulación automática de pH", 1, "ud", 5.0, ["Unidad central de control y sonda de pH."]),
+          ("4.4", "Cuadro eléctrico · REGALO", 1, "ud", 0.0, ["Armario con doble protección, con contadores, relé térmico, diferencial, pilotos de señalización y rearme exterior.", "Regalo de Brava Pool: suministro e instalación sin coste."]),
+          ("4.5", "Equipo de cloración salina de 30 g/h · REGALO", 1, "ud", 0.0, ["Equipo de cloración por electrólisis de sal Bright Blue de 30 g/h, con unidad central de control y célula electrolítica autolimpiable (modelo exacto a confirmar).", "Incluye el suministro de sal. Regalo de Brava Pool: suministro e instalación sin coste."])]),
+         ("5", "Entrega", [("5.1", "Limpieza final y entrega de la obra", 1, "PA", 2.5, ["Limpieza de la zona de obra y entrega de la piscina."])])]
     assert abs(sum(x[4] for _, _, ps in T for x in ps) - 100) < 1e-9
     part = [(c, t, q, u, b) for _, _, ps in T for (c, t, q, u, w, b) in ps]
     amt = {c: round(BASE * w / 100, 2) for _, _, ps in T for (c, t, q, u, w, b) in ps}
@@ -112,7 +110,7 @@ if "--tecnico" in sys.argv:
     SUB = {f: round(sum(IM[x[0]] for x in ps), 2) for f, _, ps in T}
     n2 = lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
     qy = lambda x: f"{x:g}".replace(".", ",")
-    PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar la excavación y las instalaciones enterradas"), (30, "Al terminar el gunitado del vaso"), (20, "A la entrega de la obra terminada (retención final)")]
+    PAGOS = [(20, "A la aceptación del presupuesto"), (30, "Al terminar las instalaciones enterradas y la malla electrosoldada"), (30, "Al terminar el gunitado del vaso"), (20, "A la entrega de la obra terminada (retención final)")]
     pg = []; acc = 0.0
     for i, (pct, t) in enumerate(PAGOS):
         im = round(BASE * pct / 100, 2) if i < len(PAGOS) - 1 else round(BASE - acc, 2); acc += im; pg.append((pct, t, im))
@@ -124,28 +122,30 @@ if "--tecnico" in sys.argv:
     def fase_t(f, t, ps):
         r = f'<tr class="fase"><td colspan="4"><span>{int(f):02d}</span>FASE {f} · {e(t).upper()}</td><td></td><td class="nn">{eur(SUB[f])}</td></tr>'
         for c, tt, q, u, w, b in ps:
-            r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(tt)}</b><ul>{"".join(f"<li>{e(x)}</li>" for x in b)}</ul></td><td class="nn">{qy(q)}</td><td class="c">{u}</td><td class="nn">{n2(PU[c])} €</td><td class="nn"><b>{n2(IM[c])} €</b></td></tr>'
+            gift = (w == 0)
+            r += f'<tr class="pt"><td class="cod">{c}</td><td><b>{e(tt)}</b><ul>{"".join(f"<li>{e(x)}</li>" for x in b)}</ul></td><td class="nn">{qy(q)}</td><td class="c">{u}</td><td class="nn">{"—" if gift else n2(PU[c]) + " €"}</td><td class="nn"><b>{"REGALO" if gift else n2(IM[c]) + " €"}</b></td></tr>'
         return r
     cab = '<thead><tr><th style="width:9mm">Nº</th><th>Descripción</th><th style="width:15mm">Cant.</th><th style="width:11mm">Ud.</th><th style="width:22mm">Precio</th><th style="width:24mm">Importe</th></tr></thead>'
     d1 = ''.join(fase_t(f, t, ps) for f, t, ps in T[:3]); d2 = ''.join(fase_t(f, t, ps) for f, t, ps in T[3:])
     vt = ''.join(f'<tr><td>{a_}</td><td class="nn">{n2(x_)} m²</td><td class="nn">{n2(y_)} m²</td><td class="nn">2,00 m</td><td class="nn"><b>{n2(v_)} m³</b></td></tr>' for a_, x_, y_, v_ in SEC for x_, y_ in [(x_, y_)]) if False else ''.join(f'<tr><td>{a_}</td><td class="nn">{n2(s1)} m²</td><td class="nn">{n2(s2)} m²</td><td class="nn">2,00 m</td><td class="nn"><b>{n2(v_)} m³</b></td></tr>' for a_, s1, s2, v_ in SEC)
     res = ''.join(f'<tr><td class="c2">{f}</td><td>{e(t)}</td><td class="nn">{eur(SUB[f])}</td></tr>' for f, t, _ in T)
+    NOINC = ["Excavación del vaso, carga y transporte de tierras a vertedero.", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Boquillas, sumideros e iluminación, que no figuran en la descripción del proyecto.", "Pavimento exterior, vallado y jardinería del entorno.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]
     cli2 = f'{e(D["cliente"])} · {e(D["tipo_cliente"])}'
     DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png"><div class="hnum"><small>PRESUPUESTO</small><b>{D["numero"]}</b></div>
 <div class="htit"><div class="chip3">PRESUPUESTO TÉCNICO · CONSTRUCCIÓN</div><h1>Piscina naturalizada <em>de arena</em></h1></div>
 <div class="body" style="top:112mm"><div class="para"><small>PREPARADO PARA</small><b>{cli2}</b><br>CIF: {blank(D["nif_cliente"],"34mm")} · Dirección: {blank(D["dir_cliente"],"70mm")}<br><small style="margin-top:2mm">OBRA</small><b>{e(OBRA)}</b> · bloque de 24 viviendas<br>Según plano A-057, revisión 02 (squaremmkm · 11/06/26)</div>
 <p class="lead2">Le presentamos nuestra propuesta técnica y económica para la construcción de la piscina naturalizada de arena prevista en el proyecto, de formas orgánicas y entrada tipo playa, con tratamiento de agua salina.</p>
-<div class="kpis"><div class="kp"><b>53,51 m²</b><small>superficie en planta</small></div><div class="kp"><b>30,74 m³</b><small>volumen del vaso</small></div><div class="kp"><b>−1,40 m</b><small>profundidad máxima</small></div><div class="kp"><b>5 niveles</b><small>0,00 a −1,40 m</small></div></div>
+<div class="kpis"><div class="kp"><b>≈ 10,2 m</b><small>largo máximo</small></div><div class="kp"><b>≈ 8,0 m</b><small>ancho máximo</small></div><div class="kp"><b>53,51 m²</b><small>superficie en planta</small></div><div class="kp"><b>−1,40 m</b><small>profundidad máxima</small></div></div>
 <div class="para" style="margin-top:6mm"><small>FECHA · VÁLIDO HASTA</small><b>{D["fecha"]} · {D["valido"]}</b></div></div>{ftt(1)}</section>
 <section class="page">{hdt("El proyecto")}<div class="body"><div class="two2"><div><img class="plan" src="assets/plano_certis_planta.png" alt=""><p class="note">Planta de la piscina. Plano A-057, squaremmkm.</p></div>
-<div><h2 style="margin-top:0">Datos del plano</h2><table class="kv"><tr><td>Proyecto</td><td>La Reserva · Palamós</td></tr><tr><td>Promotor</td><td>La Reserva Pinus Mare</td></tr><tr><td>Arquitectura</td><td>squaremmkm</td></tr><tr><td>Plano</td><td>A-057 · rev. 02</td></tr><tr><td>Superficie</td><td>53,51 m²</td></tr><tr><td>Profundidad</td><td>0,00 a −1,40 m</td></tr></table>
+<div><h2 style="margin-top:0">Datos del plano</h2><table class="kv"><tr><td>Proyecto</td><td>La Reserva · Palamós</td></tr><tr><td>Promotor</td><td>La Reserva Pinus Mare</td></tr><tr><td>Arquitectura</td><td>squaremmkm</td></tr><tr><td>Plano</td><td>A-057 · rev. 02</td></tr><tr><td>Largo máximo</td><td>≈ 10,2 m</td></tr><tr><td>Ancho máximo</td><td>≈ 8,0 m</td></tr><tr><td>Ancho medio</td><td>≈ 5,2 m</td></tr><tr><td>Superficie</td><td>53,51 m²</td></tr><tr><td>Profundidad</td><td>0,00 a −1,40 m</td></tr></table><p class="note">Medidas leídas sobre el plano, con un margen de unos 10 a 20 cm. Las cotas 9,79 × 11,60 m del plano corresponden al contorno exterior.</p>
 <h2>Proceso de ejecución</h2><ol class="proc"><li>Excavación del vaso de la piscina.</li><li>Lecho de gravas para soporte de las instalaciones.</li><li>Conductos de fontanería.</li><li>Malla electrosoldada.</li><li>Hormigón gunitado en toda la superficie.</li><li>Arena natural compactada fijada con resinas.</li></ol></div></div></div>{ftt(2)}</section>
-<section class="page">{hdt("Secciones y volúmenes")}<div class="body"><img class="sec" src="assets/plano_certis_secciones.png" alt=""><h2>Cálculo del volumen del vaso</h2>
+<section class="page">{hdt("Secciones y volúmenes")}<div class="body"><img class="sec" src="assets/plano_certis_secciones.png" alt=""><h2>Volumen del vaso (informativo)</h2>
 <table class="eco vt"><thead><tr><th>Tramo</th><th class="r">Sección inicial</th><th class="r">Sección final</th><th class="r">Separación</th><th class="r">Volumen</th></tr></thead><tbody>{vt}<tr class="tot"><td colspan="4">Total recalculado</td><td class="nn">{n2(VOL)} m³</td></tr></tbody></table>
 <div class="box"><b>Nota sobre la medición.</b> El plano indica 34,24 m³ porque suma 11,13 m³ en el tramo B–C. Con las secciones del propio plano (3,50 y 4,13 m², separadas 2,00 m) ese tramo da 7,63 m³ y el total es {n2(VOL)} m³. Este presupuesto usa el valor recalculado; conviene confirmarlo con la dirección facultativa.</div></div>{ftt(3)}</section>
 <section class="page">{hdt("Descripción de los trabajos")}<div class="body"><table class="desc">{cab}<tbody>{d1}</tbody></table></div>{ftt(4)}</section>
 <section class="page">{hdt("Descripción de los trabajos (cont.)")}<div class="body"><table class="desc">{cab}<tbody>{d2}</tbody></table><p class="note" style="margin-top:3mm">PA = partida alzada. El precio es cerrado, con materiales y mano de obra; el reparto por partidas es orientativo. Las mediciones son las del proyecto y se ajustan en obra.</p></div>{ftt(5)}</section>
-<section class="page">{hdt("Inversión y forma de pago")}<div class="body"><table class="eco"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th class="r" style="width:36mm">Importe</th></tr></thead><tbody>{res}<tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="nn">{eur(BASE)}</td></tr></tbody></table>
+<section class="page">{hdt("Inversión y forma de pago")}<div class="body"><table class="eco"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th class="r" style="width:36mm">Importe</th></tr></thead><tbody>{res}<tr><td class="c2">+</td><td>Regalo: cuadro eléctrico y equipo de cloración salina de 30 g/h</td><td class="nn">Incluido</td></tr><tr class="tot"><td colspan="2">Total presupuesto · IVA no incluido</td><td class="nn">{eur(BASE)}</td></tr></tbody></table>
 <div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <h2>Forma de pago</h2><div class="pps">{pps}</div>
 <table class="kv pago"><tr><td>Titular</td><td>{e(D["emisor"])} · NIF {e(D["nif"])}</td></tr><tr><td>Banco / IBAN</td><td><b>{e(D["banco"])} · {e(D["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {D["numero"]}</td></tr></table>
@@ -154,8 +154,6 @@ if "--tecnico" in sys.argv:
 <div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente acepta el presupuesto n.º {D["numero"]}, por un importe total de <b>{eur(BASE)}</b>, IVA no incluido, con sus condiciones y la forma de pago indicada.</p><div class="sig"><div><div class="line"></div><small>Nombre y cargo · DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma y sello del cliente</small></div></div></div>
 <div class="aviso" style="margin-top:4mm"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
 <div class="duda"><b>Brava Pool</b> · {e(D["emisor"])} · NIF {e(D["nif"])} · {e(D["dir"])}<br><b>Contacto:</b> {e(D["tel"])} · {e(D["web"])}</div></div>{ftt(7)}</section>"""
-    NOINC = ["Reparación o sustitución del terreno de la excavación si presentara condiciones no previstas en el proyecto.", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Bomba de recirculación, boquillas, sumideros e iluminación, que no figuran en la descripción del proyecto.", "Pavimento exterior, vallado y jardinería del entorno.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]
-    DOC = DOC.replace('<ul class="tx">' + "".join(f"<li>{e(x)}</li>" for x in ["Excavación, movimiento y retirada de tierras (salvo acuerdo expreso).", "Proyecto técnico, dirección facultativa, licencias y tasas.", "Acometidas de agua y electricidad hasta el punto de conexión de la obra.", "Pavimento exterior y vallado perimetral.", "Agua de llenado y productos químicos de puesta en marcha.", "Cualquier trabajo no descrito en este presupuesto."]) + '</ul>', '<ul class="tx">' + "".join(f"<li>{e(x)}</li>" for x in NOINC) + '</ul>')
     CSS += """.two2{display:grid;grid-template-columns:92mm 1fr;gap:7mm}.plan{width:100%;display:block;border:.2mm solid var(--ln)}.sec{width:100%;max-height:100mm;object-fit:contain;display:block;border:.2mm solid var(--ln)}
 .proc{margin:0;padding-left:5mm;font-size:9.4pt}.proc li{margin-bottom:2mm}.note{font-size:7.6pt;color:var(--mut);margin-top:1.5mm}
 .r,.nn{text-align:right}.nn{white-space:nowrap;font-variant-numeric:tabular-nums}.c2{color:var(--terra);font-weight:700}.c{text-align:center}
