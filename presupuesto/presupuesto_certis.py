@@ -168,10 +168,29 @@ if "--tecnico" in sys.argv:
 .eco .r{text-align:right}.tot .nn{font-size:10.5pt}.vt td{padding:2.2mm 1.5mm!important}.vt .tot td{padding:2.6mm 3mm!important}
 """
 
+if "--resumen" in sys.argv and "--tecnico" in sys.argv:
+    ftt = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / 03 · Presupuesto {D["numero"]} · Resumen</span></footer>'
+    cover = DOC.split('</section>')[0].replace("PRESUPUESTO TÉCNICO · CONSTRUCCIÓN", "RESUMEN DEL PRESUPUESTO").replace("{ftt(1)}", "")
+    cover = cover.rsplit('<footer>', 1)[0] + ftt(1)
+    inc = ''.join(f'<li>{e(x)}</li>' for x in ["Instalaciones enterradas: lecho de gravas y conductos de fontanería.", "Vaso: malla electrosoldada y hormigón gunitado por vía húmeda en toda la superficie.", "Acabado de arena natural compactada fijada con resinas.", "Bomba AstralPool 1,5 CV, filtro AstralPool 750, accesorios hidráulicos, regulación de pH y cuadro eléctrico.", "Regalo: equipo de cloración salina de 30 g/h."])
+    CSS += """.two2{grid-template-columns:60mm 1fr!important}.eco td{padding:1.6mm 2mm!important}.tx{columns:2;column-gap:8mm;font-size:8.6pt}.tx li{break-inside:avoid;margin-bottom:1mm}.sig .line{margin-top:6mm}.acc{margin-top:4mm}"""
+    DOC = cover + f"""</section>
+<section class="page">{hdt("El proyecto y el alcance")}<div class="body"><div class="two2"><div><img class="plan" src="assets/plano_certis_planta.png" alt=""><p class="note">Planta de la piscina. Plano A-057, squaremmkm.</p></div>
+<div><h2 style="margin-top:0">Datos clave</h2><table class="kv"><tr><td>Obra</td><td>La Reserva · Palamós</td></tr><tr><td>Largo / ancho</td><td>≈ 10,2 m / ≈ 8,0 m</td></tr><tr><td>Superficie</td><td>53,51 m²</td></tr><tr><td>Profundidad</td><td>0,00 a −1,40 m</td></tr><tr><td>Volumen</td><td>{n2(VOL)} m³</td></tr></table><p class="note">Medidas leídas sobre el plano. Se confirman en el replanteo.</p></div></div>
+<h2>Qué incluye</h2><ul class="tx">{inc}</ul>
+<h2>Resumen por fases</h2><table class="eco"><thead><tr><th style="width:12mm">Fase</th><th>Concepto</th><th class="r" style="width:36mm">Importe</th></tr></thead><tbody>{res}</tbody></table>
+<p class="note">Este resumen forma parte del presupuesto técnico completo, con partidas y descripción detallada, que se entrega aparte.</p></div>{ftt(2)}</section>
+<section class="page">{hdt("Inversión y aceptación")}<div class="body"><table class="eco"><tbody><tr class="tot"><td>Total presupuesto · IVA no incluido</td><td class="nn">{eur(BASE)}</td></tr></tbody></table>
+<div class="aviso"><b>Aviso:</b> este presupuesto no incluye IVA. El IVA se añadirá a la factura al tipo vigente.</div>
+<h2>Forma de pago</h2><div class="pps">{pps}</div>
+<table class="kv pago"><tr><td>Titular</td><td>{e(D["emisor"])} · NIF {e(D["nif"])}</td></tr><tr><td>Banco / IBAN</td><td><b>{e(D["banco"])} · {e(D["iban"])}</b></td></tr><tr><td>Concepto</td><td>Presupuesto {D["numero"]}</td></tr></table>
+<h2>No incluye</h2><ul class="tx">{"".join(f"<li>{e(x)}</li>" for x in NOINC)}</ul><p class="note" style="font-size:9pt;margin-top:3mm"><b>Garantía:</b> Brava Pool garantiza su trabajo y la mano de obra, además de las garantías legales.</p>
+<div class="acc"><h3>Aceptación del presupuesto</h3><p>El cliente acepta el presupuesto n.º {D["numero"]}, por un importe total de <b>{eur(BASE)}</b>, IVA no incluido, con sus condiciones y la forma de pago indicada.</p><div class="sig"><div><div class="line"></div><small>Nombre y cargo · DNI / NIF</small><div class="line"></div><small>Lugar y fecha</small></div><div><div class="line big"></div><small>Firma y sello del cliente</small></div></div></div></div>{ftt(3)}</section>"""
+
 OUT_H = "presupuesto_128_certis_tecnico.html" if "--tecnico" in sys.argv else "presupuesto_128_certis.html"
 out = AQUI / OUT_H
 out.write_text(f'<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Presupuesto 128 · Brava Pool</title><style>{CSS}</style></head><body>{DOC}</body></html>', encoding="utf-8")
-pdf = AQUI / ("Presupuesto_128_Certis_La_Reserva_TECNICO.pdf" if "--tecnico" in sys.argv else "Presupuesto_128_Certis_Piscina_Arena_8x5.pdf")
+pdf = AQUI / (("Presupuesto_128_Certis_RESUMEN.pdf" if "--resumen" in sys.argv else "Presupuesto_128_Certis_La_Reserva_TECNICO.pdf") if "--tecnico" in sys.argv else "Presupuesto_128_Certis_Piscina_Arena_8x5.pdf")
 ch = next((x for x in ["/opt/pw-browsers/chromium", "chromium", "google-chrome"] if Path(x).exists()), None)
 subprocess.run([ch, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={pdf}", out.as_uri()], check=True, stderr=subprocess.DEVNULL)
 print("OK", pdf, "| base", eur(BASE), "| pagos", [eur(x[2]) for x in pg], "| suma", eur(sum(x[2] for x in pg)))
