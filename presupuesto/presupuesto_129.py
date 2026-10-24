@@ -27,7 +27,7 @@ T = [
      "Armat del vas amb malles electrosoldades 15 × 15 Ø 5, barres Ø 10 i Ø 8 i cèrcols de 8 × 11 Ø 8.",
      "Formigó projectat (gunita) per via humida, amb una dosificació de 450 kg/m³, amb un gruix aproximat de 15 cm a les parets i 20 cm a la llosa, amb acabat rugós."])]),
  ("2", "Escala i banc d'obra", [("2.1", "Construcció d'escala interior i banc", 1, "ut", 921.00, [
-     "Esglaonat d'escala recta de 3 graons i una bancada per al vas, fets amb encofrat perdut de totxana i reblerts amb graves.",
+     "Esglaonat d'escala recta de 5 graons i una bancada per al vas, fets amb encofrat perdut de totxana i reblerts amb graves.",
      "Es deixa tot a punt per a la col·locació del revestiment."])]),
  ("3", "Impermeabilització", [("3.1", "Impermeabilització del vas", 1, "PA", 1090.00, [
      "Impermeabilització amb morter flexible monocomponent Grupo Puma Morcem Dry Fix, de 3 mm de gruix, aplicat en capes i armat amb malla Drypool.",
@@ -83,8 +83,8 @@ x0, y0 = 70, 40; W, H = 6 * K, 2.5 * K
 planta = f'''<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" font-size="11">
 <rect x="{x0-22}" y="{y0-22}" width="{W+44}" height="{H+44}" fill="#e9eef1" stroke="#0b2a45" stroke-width="1"/>
 <rect x="{x0}" y="{y0}" width="{W}" height="{H}" fill="#dff0f5" stroke="#0b2a45" stroke-width="2"/>
-<g fill="#c4e1ea" stroke="#0b2a45" stroke-width=".8"><rect x="{x0}" y="{y0}" width="24" height="96"/><rect x="{x0+24}" y="{y0}" width="24" height="96"/><rect x="{x0+48}" y="{y0}" width="24" height="96"/><rect x="{x0}" y="{y0+96}" width="32" height="{H-96}"/></g>
-<text x="{x0+36}" y="{y0+52}" text-anchor="middle" fill="#0b2a45" font-weight="700">E</text><text x="{x0+16}" y="{y0+150}" text-anchor="middle" fill="#0b2a45" font-weight="700">B</text>
+<g fill="#c4e1ea" stroke="#0b2a45" stroke-width=".8"><rect x="{x0+0}" y="{y0}" width="20" height="96"/><rect x="{x0+20}" y="{y0}" width="20" height="96"/><rect x="{x0+40}" y="{y0}" width="20" height="96"/><rect x="{x0+60}" y="{y0}" width="20" height="96"/><rect x="{x0+80}" y="{y0}" width="20" height="96"/><rect x="{x0}" y="{y0+96}" width="32" height="{H-96}"/></g>
+<text x="{x0+50}" y="{y0+52}" text-anchor="middle" fill="#0b2a45" font-weight="700">E</text><text x="{x0+16}" y="{y0+150}" text-anchor="middle" fill="#0b2a45" font-weight="700">B</text>
 <line x1="{x0}" y1="{y0-30}" x2="{x0+W}" y2="{y0-30}" stroke="#0b2a45"/><text x="{x0+W/2}" y="{y0-34}" text-anchor="middle" font-weight="700" fill="#0b2a45">6,00 m</text>
 <text x="{x0-30}" y="{y0+H/2}" transform="rotate(-90 {x0-30} {y0+H/2})" text-anchor="middle" font-weight="700" fill="#0b2a45">2,50 m</text>
 <line x1="{x0+150}" y1="{y0+100}" x2="{x0+300}" y2="{y0+100}" stroke="#1f8aa0" stroke-dasharray="5 4" marker-end="url(#a)"/><text x="{x0+225}" y="{y0+92}" text-anchor="middle" fill="#1f8aa0" font-weight="600">Pendent del fons</text>
@@ -106,12 +106,12 @@ seccio = f'''<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-
 <polygon points="{sx},{sy+6} {sx+W},{sy+6} {sx+W},{sy+6+d160} {sx},{sy+6+d120}" fill="#dff0f5"/>
 <polygon points="{sx-12},{sy+6} {sx},{sy+6} {sx},{sy+6+d120} {sx+W},{sy+6+d160} {sx+W},{sy+6} {sx+W+12},{sy+6} {sx+W+12},{sy+6+d160+14} {sx-12},{sy+6+d120+14}" fill="#c9cfd4" stroke="#0b2a45" stroke-width="1"/>
 <polygon points="{sx},{sy+6} {sx},{sy+6+d120} {sx+W},{sy+6+d160} {sx+W},{sy+6}" fill="#dff0f5"/>
-<g fill="#aeb6bc" stroke="#0b2a45" stroke-width=".8"><rect x="{sx}" y="{sy+30}" width="24" height="{d120-24+0}"/><rect x="{sx+24}" y="{sy+54}" width="24" height="{d120-48+0}"/><rect x="{sx+48}" y="{sy+78}" width="24" height="{d120-72+4}"/></g>
+<g fill="#aeb6bc" stroke="#0b2a45" stroke-width=".8"><rect x="{sx+0}" y="{sy+6+1*d120/6}" width="20" height="{d120-1*d120/6+1.3}"/><rect x="{sx+20}" y="{sy+6+2*d120/6}" width="20" height="{d120-2*d120/6+2.6}"/><rect x="{sx+40}" y="{sy+6+3*d120/6}" width="20" height="{d120-3*d120/6+3.9}"/><rect x="{sx+60}" y="{sy+6+4*d120/6}" width="20" height="{d120-4*d120/6+5.2}"/><rect x="{sx+80}" y="{sy+6+5*d120/6}" width="20" height="{d120-5*d120/6+6.5}"/></g>
 <text x="{sx+W/2}" y="{sy+40}" text-anchor="middle" fill="#1f8aa0" font-weight="700">Làmina d'aigua</text>
 <text x="{sx+W/2}" y="{sy+d160+40}" text-anchor="middle" fill="#555" font-size="10">Vas de gunita: parets 15 cm · fons 20 cm · impermeabilitzat i revestit</text>
 <text x="{sx+165}" y="{sy+6+d120-8}" fill="#0b2a45" font-weight="700">1,20 m</text><text x="{sx+W-60}" y="{sy+6+d160-8}" fill="#0b2a45" font-weight="700">1,60 m</text>
 </svg>'''
-LEG = [("S", "Skimmer", 1), ("I", "Broquet d'impulsió", 3), ("F", "Focus LED", 2), ("A", "Presa de netejafons", 1), ("D", "Sumider de fons", 1), ("E", "Escala d'obra, 3 graons", 1), ("B", "Banc interior", 1)]
+LEG = [("S", "Skimmer", 1), ("I", "Broquet d'impulsió", 3), ("F", "Focus LED", 2), ("A", "Presa de netejafons", 1), ("D", "Sumider de fons", 1), ("E", "Escala d'obra, 5 graons", 1), ("B", "Banc interior", 1)]
 leg = ''.join(f'<div class="lg"><i>{a}</i><span>{e(b)}</span><b>{c}</b></div>' for a, b, c in LEG)
 
 # ---- funcionamiento ----
