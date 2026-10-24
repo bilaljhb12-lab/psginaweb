@@ -63,7 +63,7 @@ COND = ["Els preus d'aquest pressupost no inclouen l'IVA, que s'aplicarà a la f
 
 n2 = lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 NP = 9
-EXC = None   # importe (sin IVA) de la excavación si la hace Brava Pool; None = pendiente de confirmar
+EXC = 2100.00   # importe (sin IVA) de la excavación si la hace Brava Pool
 ftt = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / {NP:02d} · Pressupost {D["numero"]}</span></footer>'
 hdt = lambda t: f'<div class="rail">PRESSUPOST {D["numero"]} · PISCINA D\'OBRA 6 × 2,5 M · PLATJA D\'ARO</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓ DE PISCINES</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
 pps = ''.join(f'<div class="pp"><b>{p_} %</b><i>{eur(im)}</i><span>{e(t)}</span></div>' for p_, t, im in pg)
