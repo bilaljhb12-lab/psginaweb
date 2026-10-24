@@ -62,7 +62,8 @@ COND = ["Els preus d'aquest pressupost no inclouen l'IVA, que s'aplicarà a la f
         "Les mides i la posició dels elements es confirmen amb el client en el replantejament.", f"Aquest pressupost és vàlid fins al {D['valido']}."]
 
 n2 = lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-NP = 8
+NP = 9
+EXC = None   # importe (sin IVA) de la excavación si la hace Brava Pool; None = pendiente de confirmar
 ftt = lambda n: f'<footer><span>Brava Pool · {e(D["emisor"])} · NIF {e(D["nif"])}</span><span class="fol"><b>{n:02d}</b> / {NP:02d} · Pressupost {D["numero"]}</span></footer>'
 hdt = lambda t: f'<div class="rail">PRESSUPOST {D["numero"]} · PISCINA D\'OBRA 6 × 2,5 M · PLATJA D\'ARO</div><header><div><div class="eyebrow"><span>CONSTRUCCIÓ DE PISCINES</span><span>BRAVA POOL</span></div><h1>{e(t)}</h1></div><img src="assets/logo.png" alt="Brava Pool"></header>'
 pps = ''.join(f'<div class="pp"><b>{p_} %</b><i>{eur(im)}</i><span>{e(t)}</span></div>' for p_, t, im in pg)
@@ -129,6 +130,18 @@ mat = ''.join(f'<tr><td>{e(a)}</td><td><b>{e(b)}</b></td><td>{e(c)}</td></tr>' f
 GANTT = [("Construcció del vas i gunita", [1, 1, 0, 0]), ("Escala i banc", [0, 1, 0, 0]), ("Impermeabilització", [0, 0, 1, 0]), ("Revestiment i coronament", [0, 0, 1, 1]), ("Filtració i equips", [0, 0, 1, 1]), ("Ompliment i posada en marxa", [0, 0, 0, 1])]
 gt = '<table class="gt"><thead><tr><th>FASE</th>' + ''.join(f'<th>S{i}</th>' for i in range(1, 5)) + '</tr></thead><tbody>' + ''.join(f'<tr><td>{e(a)}</td>' + ''.join(f'<td class="{"on" if x else ""}"></td>' for x in r) + '</tr>' for a, r in GANTT) + '<tr class="pg"><td>Pagaments</td><td>20 %</td><td>30 %</td><td></td><td>30 % · 20 %</td></tr></tbody></table>'
 
+if EXC is None:
+    exc_row = '<tr><td>Excavació del vas i càrrega de terres a camió</td><td class="nn">Import a confirmar</td></tr>'
+    exc_tot = ''
+else:
+    exc_row = f'<tr><td>Excavació del vas i càrrega de terres a camió</td><td class="nn">{eur(EXC)}</td></tr>'
+    exc_tot = f'<tr class="tot"><td>Total amb excavació · IVA no inclòs</td><td class="nn">{eur(BASE + EXC)}</td></tr>'
+EXCPAG = f"""<section class="page">{hdt("Excavació del terreny (opcional)")}<div class="body"><p class="lead3" style="font-size:10pt">L'excavació no està inclosa al pressupost. El client pot contractar-la pel seu compte o encarregar-la a Brava Pool; en tots dos casos ha d'estar acabada abans de començar la construcció del vas.</p>
+<div class="cols2"><div class="opt"><h3>Opció A · La contracta el client</h3><ul class="tx1"><li>El client contracta l'excavació amb l'empresa que triï.</li><li>Brava Pool facilita les dimensions de l'excavació en el replantejament.</li><li>L'excavació inclou la càrrega i la retirada de les terres sobrants.</li><li>Si apareix pedra o roca, el sobrecost és a càrrec del client.</li></ul></div>
+<div class="opt"><h3>Opció B · La fa Brava Pool</h3><ul class="tx1"><li>Brava Pool encarrega i coordina l'excavació, amb càrrega de les terres a camió.</li><li>L'import s'afegeix al pressupost com a partida opcional, sense IVA.</li><li>Si apareix pedra o roca, les hores de martell picador es cobren a part, amb l'import comunicat al client per escrit abans de fer-les.</li></ul></div></div>
+<h2>Import de l'opció B</h2><table class="eco"><thead><tr><th>Concepte</th><th class="r" style="width:40mm">Import</th></tr></thead><tbody><tr><td>Total pressupost (sense excavació) · IVA no inclòs</td><td class="nn">{eur(BASE)}</td></tr>{exc_row}{exc_tot}</tbody></table>
+<h2>Dades de referència</h2><table class="kv"><tr><td>Piscina interior</td><td>6,00 × 2,50 m</td></tr><tr><td>Profunditat</td><td>1,20 a 1,60 m</td></tr><tr><td>Mides definitives de l'excavació</td><td>Es confirmen en el replantejament</td></tr></table>
+<div class="acc"><h3>Opció escollida pel client</h3><p><span class="ck"></span> Opció A: contracto l'excavació pel meu compte.&nbsp;&nbsp;&nbsp;&nbsp;<span class="ck"></span> Opció B: encarrego l'excavació a Brava Pool.</p><div class="sig"><div><div class="line"></div><small>Nom i cognoms · DNI / NIF</small></div><div><div class="line big"></div><small>Signatura del client</small></div></div></div></div>{ftt(9)}</section>"""
 DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div><img class="hlogo" src="assets/logo_blanco.png"><div class="hnum"><small>PRESSUPOST</small><b>{D["numero"]}</b></div>
 <div class="htit"><div class="chip3">PROPOSTA DE CONSTRUCCIÓ</div><h1>Piscina d'obra <em>6 × 2,5 m</em></h1></div>
 <div class="body" style="top:112mm"><div class="para"><small>PREPARAT PER A</small><b>{e(D["cliente"])}</b><br>{e(D["lugar"])}<br><small style="margin-top:2mm">DATA · VÀLID FINS AL</small><b>{D["fecha"]} · {D["valido"]}</b></div>
@@ -148,7 +161,7 @@ DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div
 <section class="page">{hdt("Descripció dels treballs")}<div class="body"><table class="desc">{cab}<tbody>{desc}</tbody></table><p class="note" style="margin-top:3mm">PA = partida alçada. Preu tancat, amb materials i mà d'obra. En el capítol 5 s'indica només el total del capítol, que inclou tots els seus elements.</p></div>{ftt(6)}</section>
 <section class="page">{hdt("Inversió i forma de pagament")}<div class="body"><table class="eco"><thead><tr><th style="width:12mm">Cap.</th><th>Concepte</th><th class="r" style="width:36mm">Import</th></tr></thead><tbody>{res}<tr class="tot"><td colspan="2">Total pressupost · IVA no inclòs</td><td class="nn">{eur(BASE)}</td></tr></tbody></table>
 <div class="aviso"><b>Avís:</b> aquest pressupost no inclou l'IVA. L'IVA s'afegirà a la factura al tipus vigent.</div>
-<div class="aviso"><b>Avís:</b> l'excavació no està inclosa, i els treballs extres es pressuposten a part i per escrit (vegi la pàgina 8).</div>
+<div class="aviso"><b>Avís:</b> l'excavació no està inclosa, i els treballs extres es pressuposten a part i per escrit (vegi les pàgines 8 i 9).</div>
 <h2>Forma de pagament</h2><div class="pps">{pps}</div>
 <table class="kv pago"><tr><td>Titular</td><td>{e(D["emisor"])} · NIF {e(D["nif"])}</td></tr><tr><td>Banc / IBAN</td><td><b>{e(D["banco"])} · {e(D["iban"])}</b></td></tr><tr><td>Concepte</td><td>Pressupost {D["numero"]}</td></tr></table>
 <div class="cards"><div><b>Pagaments per fites</b>Cada pagament es vincula a una fase acabada i l'últim 20 % es reté fins al lliurament de la piscina plena, amb l'aigua tractada i els equips en marxa.</div><div><b>Garantia</b>Brava Pool garanteix l'estanquitat del vas durant 10 anys davant de defectes de construcció, i els equips i materials durant 3 anys segons la garantia de cada fabricant.</div></div></div>{ftt(7)}</section>
@@ -157,7 +170,8 @@ DOC = f"""<section class="page"><div class="hero"></div><div class="hline"></div
 <div class="acc"><h3>Acceptació del pressupost</h3><p>El client declara conèixer i acceptar el present pressupost núm. {D["numero"]}, per un import total de <b>{eur(BASE)}</b>, IVA no inclòs, les seves condicions i la forma de pagament indicada.</p><div class="sig"><div><div class="line"></div><small>Nom i cognoms · DNI / NIF</small><div class="line"></div><small>Lloc i data</small></div><div><div class="line big"></div><small>Signatura del client</small></div></div></div>
 <div class="duda"><b>Brava Pool</b> · {e(D["emisor"])} · NIF {e(D["nif"])} · {e(D["dir"])}<br><b>Contacte:</b> {e(D["tel"])} · {e(D["web"])}</div></div>{ftt(8)}</section>"""
 
-CSS += """.svgbox{border:.2mm solid var(--ln);padding:3mm 4mm}.svgbox small{display:block;font-size:6.6pt;letter-spacing:.2em;color:var(--mut);margin:2mm 0 1mm;font-weight:700}.svgbox svg{width:100%;display:block}
+DOC += EXCPAG
+CSS += """.opt h3{font-size:10.4pt;margin-bottom:2mm}.ck{display:inline-block;width:4mm;height:4mm;border:.3mm solid var(--navy);vertical-align:-1mm;margin-right:1.5mm}.svgbox{border:.2mm solid var(--ln);padding:3mm 4mm}.svgbox small{display:block;font-size:6.6pt;letter-spacing:.2em;color:var(--mut);margin:2mm 0 1mm;font-weight:700}.svgbox svg{width:100%;display:block}
 .lgs{display:grid;grid-template-columns:1fr 1fr;gap:0 9mm;margin:4mm 0 2mm}.lg{display:flex;align-items:center;gap:3mm;padding:1.8mm 0;border-bottom:.2mm solid var(--ln);font-size:9pt}.lg i{width:5.5mm;height:5.5mm;border:.3mm solid var(--navy);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:7pt;font-weight:700;color:var(--navy)}.lg span{flex:1}.lg b{color:var(--navy)}
 .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm 5mm;margin:4mm 0 6mm}.st{border-top:.5mm solid var(--navy);padding-top:2.4mm;position:relative}.st i{font-style:normal;color:var(--terra);font-weight:700;font-size:15pt;font-weight:300;display:block}.st b{display:block;color:var(--navy);font-size:10.4pt;margin:.5mm 0 1.5mm}.st span{font-size:8.8pt;color:#44505d;line-height:1.5}
 .mt td{padding:2.6mm 2mm!important;font-size:8.8pt}.mt td:nth-child(1){color:var(--mut)}.gt{font-size:8.4pt;margin-top:2mm;table-layout:fixed}.gt th:not(:first-child),.gt td:not(:first-child){width:25mm}.gt th{text-align:center;font-size:6.8pt;letter-spacing:.14em;color:var(--mut);padding:1.4mm;border-bottom:.3mm solid var(--navy)}.gt th:first-child,.gt td:first-child{text-align:left;width:50mm}
